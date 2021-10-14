@@ -1,0 +1,154 @@
+/*===============================
+=            Modules            =
+===============================*/
+
+@use 'sass:map';
+@use 'sass:list';
+@use './../library/config';
+@use './../library/utils';
+@use './../library/setup';
+
+/*=================================
+=            Variables            =
+=================================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_sizeNames: utils.getSizeNames(setup.$scales);
+$_weightNames: utils.getWeightNames(config.$fonts);
+
+/*=============================
+=            Rules            =
+=============================*/
+
+cap-text {
+  --cap-text-lineHeightModifier: 0px;
+
+  display: block;
+  font-family: var(--cap-text-fontFamily, var(--cap-fontFamily-#{config.$defaultFont}));
+  font-feature-settings: var(
+    --cap-text-fontFeatureSettings,
+    var(--cap-fontFeatureSettings-#{config.$defaultFont})
+  );
+  font-kerning: normal;
+  font-weight: var(--cap-text-fontWeight);
+  font-size: var(--cap-text-fontSize);
+  line-height: calc(var(--cap-text-lineHeight) + var(--cap-text-lineHeightModifier));
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: var(--cap-text-letterSpacing);
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: none;
+
+  > * {
+    margin: 0;
+    display: block;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  & {
+    padding-bottom: 1px;
+    padding-top: 1px;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  &:before {
+    margin-top: calc(
+      (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
+    );
+  }
+
+  &:after {
+    margin-bottom: calc(
+      (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
+    );
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $fontName, $fontProps in config.$fonts {
+    &[family='#{$fontName}'] {
+      --cap-text-fontFamily: var(--cap-fontFamily-#{$fontName});
+      --cap-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$fontName});
+
+      @each $sizeName in $_sizeNames {
+        --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
+        --cap-text-letterSpacing-#{$sizeName}: var(--cap-letterSpacing-#{$sizeName}-#{$fontName});
+      }
+    }
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $sizeName in $_sizeNames {
+    &[size='#{$sizeName}'] {
+      --cap-text-fontSize: var(--cap-fontSize-#{$sizeName});
+      --cap-text-lineHeight: var(--cap-lineHeight-#{$sizeName});
+      --cap-text-offset: var(
+        --cap-text-offset-#{$sizeName},
+        var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
+      );
+      --cap-text-letterSpacing: var(
+        --cap-text-letterSpacing-#{$sizeName},
+        var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
+      );
+    }
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $weightName in $_weightNames {
+    &[weight='#{$weightName}'] {
+      --cap-text-fontWeight: var(
+        --cap-text-fontWeight-#{$weightName},
+        var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
+      );
+
+      @each $fontName, $fontProps in config.$fonts {
+        --cap-text-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
+      }
+    }
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $lineHeightModifierName, $lineHeightModifier in config.$lineHeightModifiers {
+    &[line='#{$lineHeightModifierName}'] {
+      --cap-text-lineHeightModifier: #{$lineHeightModifier};
+    }
+  }
+}

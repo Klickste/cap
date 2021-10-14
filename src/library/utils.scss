@@ -1,0 +1,104 @@
+/*===============================
+=            Modules            =
+===============================*/
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+
+/*=================================
+=            Functions            =
+=================================*/
+
+/**
+ *
+ * Description...
+ *
+ * Inpired by the "Dynamic Metrics" section on the Inter typeface family website:
+ * https://rsms.me/inter/dynmetrics/
+ *
+ */
+
+@function getRatio($fontSize, $a, $b, $c) {
+  $d: math.div($fontSize, 1px);
+
+  @return ($a + ($b * math.pow(math.$e, $c * $d)));
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getLetterSpacing($fontSize, $spacingFactor) {
+  $ratio: getRatio($fontSize, -0.0223 * $spacingFactor, 0.185, -0.1745);
+
+  @return $ratio * 1em;
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getLineHeight($fontSize) {
+  $ratio: getRatio($fontSize, 1.2, 1.8, -0.14);
+
+  @return math.round(math.div($fontSize * $ratio, 2)) * 2;
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getFontSize($fontSizeBase, $scaleFactor, $scaleIndex) {
+  @return math.round($fontSizeBase * math.pow($scaleFactor, $scaleIndex));
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getOffset($fontSize, $lineHeight, $upm, $capHeight) {
+  $boxHeight: 2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2));
+
+  @return math.div(($lineHeight - $boxHeight), 2);
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getSizeNames($scales) {
+  $sizes: ();
+
+  @each $scale in $scales {
+    $sizes: map.merge($sizes, $scale);
+  }
+
+  @return map.keys($sizes);
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@function getWeightNames($fonts) {
+  $weights: ();
+
+  @each $font in map.values($fonts) {
+    $weights: map.merge($weights, map.get($font, 'weights'));
+  }
+
+  @return map.keys($weights);
+}

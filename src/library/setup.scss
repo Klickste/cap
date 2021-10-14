@@ -1,0 +1,167 @@
+/*===============================
+=            Modules            =
+===============================*/
+
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use './config';
+@use './utils';
+
+/*=================================
+=            Variables            =
+=================================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$scales: ();
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@each $scaleBase in config.$scaleBases {
+  $scaleIndex: list.index(config.$scaleBases, $scaleBase);
+  $sizes: ();
+
+  @for $sizeIndex from (config.$scalesDown * -1) to (config.$scalesUp + 1) {
+    $sizeName: list.nth(config.$sizeNames, config.$sizeNamesBaseIndex + $sizeIndex);
+    $fontSize: utils.getFontSize($scaleBase, config.$scaleFactor, $sizeIndex);
+    $lineHeight: utils.getLineHeight($fontSize);
+    $sizes: map.merge(
+      $sizes,
+      (
+        '#{$sizeName}': (
+          'fontSize': $fontSize,
+          'lineHeight': $lineHeight,
+        ),
+      )
+    );
+  }
+
+  $scales: list.append($scales, $sizes);
+}
+
+/*==============================
+=            Mixins            =
+==============================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareSizes($scale) {
+  @each $sizeName, $sizeProps in $scale {
+    $fontSize: map.get($sizeProps, 'fontSize');
+    $lineHeight: map.get($sizeProps, 'lineHeight');
+
+    --cap-fontSize-#{$sizeName}: #{$fontSize};
+    --cap-lineHeight-#{$sizeName}: #{$lineHeight};
+
+    @each $fontName, $fontProps in config.$fonts {
+      $upm: map.get($fontProps, 'upm');
+      $capHeight: map.get($fontProps, 'capHeight');
+      $offset: utils.getOffset($fontSize, $lineHeight, $upm, $capHeight);
+      $letterSpacingFactor: map.get($fontProps, 'spacing');
+      $letterSpacing: if(
+        $letterSpacingFactor != null,
+        utils.getLetterSpacing($fontSize, $letterSpacingFactor),
+        normal
+      );
+
+      --cap-offset-#{$sizeName}-#{$fontName}: #{$offset};
+
+      /* FIXME: single 'normal' output for $letterSpacingFactor == null */
+      --cap-letterSpacing-#{$sizeName}-#{$fontName}: #{$letterSpacing};
+    }
+  }
+}
+
+/*=============================
+=            Rules            =
+=============================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@each $fontName, $fontProps in config.$fonts {
+  $fontFamily: map.get($fontProps, 'family');
+  $fontStyles: map.get($fontProps, 'styles');
+  $fontWeights: map.get($fontProps, 'weights');
+  $fontWeightsValues: map.values($fontWeights);
+  $fontWeightMin: math.min($fontWeightsValues...);
+  $fontWeightMax: math.max($fontWeightsValues...);
+
+  @if $fontStyles != null {
+    @each $fontStyle, $SrcUrl in $fontStyles {
+      @font-face {
+        font-display: swap;
+        font-family: string.unquote($fontFamily);
+        font-style: string.unquote($fontStyle);
+        font-weight: $fontWeightMin $fontWeightMax;
+        src: url($SrcUrl) format('woff2');
+      }
+    }
+  }
+}
+
+#{config.$root} {
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $fontName, $fontProps in config.$fonts {
+    $fontFamily: map.get($fontProps, 'family');
+    $fontFamilyFallback: if(
+      map.has-key($fontProps, 'fallback'),
+      map.get($fontProps, 'fallback'),
+      null
+    );
+    $capHeight: map.get($fontProps, 'capHeight');
+    $upm: map.get($fontProps, 'upm');
+    $fontFeatureSettings: map.get($fontProps, 'features');
+
+    --cap-fontFamily-#{$fontName}: #{$fontFamily +
+      if($fontFamilyFallback, ', #{$fontFamilyFallback}', '')};
+    --cap-capHeight-#{$fontName}: #{$capHeight};
+    --cap-fontFeatureSettings-#{$fontName}: #{$fontFeatureSettings};
+    --cap-upm-#{$fontName}: #{$upm};
+
+    @each $fontWeightName, $fontWeight in map.get($fontProps, 'weights') {
+      --cap-fontWeight-#{$fontWeightName}-#{$fontName}: #{$fontWeight};
+    }
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
+  @each $scale in $scales {
+    $index: list.index($scales, $scale);
+
+    @if $index > 1 {
+      @media (pointer: coarse) {
+        @include declareSizes($scale);
+      }
+    } @else {
+      @include declareSizes($scale);
+    }
+  }
+}

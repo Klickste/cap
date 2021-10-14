@@ -1,0 +1,147 @@
+/*===============================
+=            Modules            =
+===============================*/
+
+@use 'sass:list';
+@use 'sass:map';
+
+/*================================================
+=            Variables - configurable            =
+================================================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$debug: false !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$root: ':root' !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$fonts: (
+  'default': (
+    'family': 'sans-serif',
+    'weights': (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    'styles': null,
+    'upm': 3000,
+    'capHeight': 2000,
+    'features': normal,
+    'spacing': null,
+  ),
+) !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$defaultFont: 'sans' !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$defaultWeight: 'soft' !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$scalesUp: 8 !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$scalesDown: 2 !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$scaleFactor: 1.2 !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$scaleBases: (15px) !default;
+
+/*====================================================
+=            Variables - non configurable            =
+====================================================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$sizeNames: (
+  '8xs',
+  '7xs',
+  '6xs',
+  '5xs',
+  '4xs',
+  '3xs',
+  '2xs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+  '8xl'
+);
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$sizeNamesBaseIndex: list.index($sizeNames, 'md');
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$lineHeightModifiers: (
+  'tight': -2px,
+  'loose': 2px,
+);

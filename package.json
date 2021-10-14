@@ -1,0 +1,39 @@
+{
+  "name": "@klickste/cap",
+  "version": "1.0.0-beta.1",
+  "description": "Adaptive typography for the web.",
+  "license": "MIT",
+  "author": "klickste",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klickste/cap.git"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "dev": "mix",
+    "prod": "mix --production",
+    "start": "mix watch",
+    "format": "prettier \"**/*.{scss,js,json,md,html}\" --write",
+    "font-metrics": "node tools/font-metrics.js"
+  },
+  "dependencies": {
+    "sass": "^1.43.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "fontkit": "^1.8.1",
+    "laravel-mix": "^6.0.34",
+    "prettier": "^2.4.1",
+    "resolve-url-loader": "^4.0.0",
+    "sass-loader": "^12.2.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "htmlWhitespaceSensitivity": "strict"
+  }
+}
