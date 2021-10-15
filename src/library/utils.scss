@@ -5,6 +5,7 @@
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
+@use './config';
 
 /*=================================
 =            Functions            =
@@ -46,7 +47,11 @@
 @function getLineHeight($fontSize) {
   $ratio: getRatio($fontSize, 1.2, 1.8, -0.14);
 
-  @return math.round(math.div($fontSize * $ratio, 2)) * 2;
+  @if config.$roundEven {
+    @return math.round(math.div($fontSize * $ratio, 2)) * 2;
+  } @else {
+    @return math.round($fontSize * $ratio);
+  }
 }
 
 /**
@@ -66,7 +71,13 @@
  */
 
 @function getOffset($fontSize, $lineHeight, $upm, $capHeight) {
-  $boxHeight: 2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2));
+  $boxHeight: 0px;
+
+  @if config.$roundEven {
+    $boxHeight: 2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2));
+  } @else {
+    $boxHeight: math.round(math.div($capHeight, $upm) * $fontSize);
+  }
 
   @return math.div(($lineHeight - $boxHeight), 2);
 }
