@@ -28,11 +28,11 @@ $scales: ();
  *
  */
 
-@each $scaleBase in config.$scaleBases {
-  $scaleIndex: list.index(config.$scaleBases, $scaleBase);
+@each $scaleBase in config.$baseScales {
+  $scaleIndex: list.index(config.$baseScales, $scaleBase);
   $sizes: ();
 
-  @for $sizeIndex from (config.$scalesDown * -1) to (config.$scalesUp + 1) {
+  @for $sizeIndex from (config.$downScales * -1) to (config.$upScales + 1) {
     $sizeName: list.nth(config.$sizeNames, config.$sizeNamesBaseIndex + $sizeIndex);
     $fontSize: utils.getFontSize($scaleBase, config.$scaleFactor, $sizeIndex);
     $lineHeight: utils.getLineHeight($fontSize);

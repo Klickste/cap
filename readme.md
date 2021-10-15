@@ -13,11 +13,12 @@ Use & configure the Sass module:
 ```scss
 @use './src/cap' with
   (
-    $scaleBases: (
+    $defaultWeight: 'soft',
+    $defaultFont: 'sans',
+    $baseScales: (
       15px,
       17px,
     ),
-    $defaultWeight: 'soft',
     $fonts: (
       'sans': (
         'family': '"Inter"',

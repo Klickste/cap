@@ -1,9 +1,9 @@
 @use './src/cap' with
   (
     $debug: false,
-    $scaleBases: (
+    $baseScales: (
       15px,
-      17px,
+      18px,
     ),
     $defaultWeight: 'soft',
     $fonts: (
