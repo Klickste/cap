@@ -18,14 +18,29 @@
  *
  */
 
+$selector: 'cap-text' !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
 $_sizeNames: utils.getSizeNames(setup.$scales);
+
+/**
+ *
+ * Description...
+ *
+ */
+
 $_weightNames: utils.getWeightNames(config.$fonts);
 
 /*=============================
 =            Rules            =
 =============================*/
 
-cap-text {
+#{$selector} {
   --cap-text-lineHeightModifier: 0px;
 
   display: block;
