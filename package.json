@@ -12,9 +12,11 @@
     "src/"
   ],
   "scripts": {
-    "dev": "mix",
-    "prod": "mix --production",
-    "start": "mix watch",
+    "sass.dev": "node_modules/.bin/sass style.scss dist/style.css",
+    "sass.prod": "node_modules/.bin/sass style.scss dist/style.css --style=compressed --no-source-map ",
+    "sass.watch": "node_modules/.bin/sass style.scss dist/style.css --watch",
+    "browser-sync": "browser-sync start --server --files \"dist/style.css, index.html\"",
+    "start": "concurrently \"npm:sass.watch\" \"npm:browser-sync\"",
     "format": "prettier \"**/*.{scss,js,json,md,html}\" --write",
     "font-metrics": "node tools/font-metrics.js"
   },
@@ -23,12 +25,9 @@
   },
   "devDependencies": {
     "browser-sync": "^2.27.5",
-    "browser-sync-webpack-plugin": "^2.3.0",
+    "concurrently": "^6.3.0",
     "fontkit": "^1.8.1",
-    "laravel-mix": "^6.0.34",
-    "prettier": "^2.4.1",
-    "resolve-url-loader": "^4.0.0",
-    "sass-loader": "^12.2.0"
+    "prettier": "^2.4.1"
   },
   "prettier": {
     "printWidth": 100,
