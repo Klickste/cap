@@ -237,7 +237,7 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    *
    */
 
-  @each $lineHeightModifierName, $lineHeightModifier in config.$lineHeightModifiers {
+  @each $lineHeightModifierName, $lineHeightModifier in config.$lineModifiers {
     @if $shadow {
       @at-root {
         ::part(cap-line-height-modifier-#{$lineHeightModifierName}) {

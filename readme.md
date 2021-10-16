@@ -11,7 +11,7 @@ Run `npm i @klickste/cap` in your project directory.
 Use & configure the Sass module:
 
 ```scss
-@use '@klickste/cap/src/cap' with
+@use '@klickste/cap/cap' with
   (
     $defaultWeight: 'soft',
     $defaultFont: 'sans',
@@ -62,7 +62,7 @@ Use & configure the Sass module:
 Use the components module:
 
 ```scss
-@use './src/components/text';
+@use '@klickste/cap/components/text';
 ```
 
 Use the components elements in your HTML:

@@ -103,6 +103,17 @@ $baseScales: (15px) !default;
 
 $roundEven: true !default;
 
+/**
+ *
+ * Description...
+ *
+ */
+
+$lineModifiers: (
+  'tight': -2px,
+  'loose': 2px,
+) !default;
+
 /*====================================================
 =            Variables - non configurable            =
 ====================================================*/
@@ -142,14 +153,3 @@ $sizeNames: (
  */
 
 $sizeNamesBaseIndex: list.index($sizeNames, 'md');
-
-/**
- *
- * Description...
- *
- */
-
-$lineHeightModifiers: (
-  'tight': -2px,
-  'loose': 2px,
-);

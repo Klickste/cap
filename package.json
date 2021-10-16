@@ -9,7 +9,7 @@
     "url": "https://github.com/klickste/cap.git"
   },
   "files": [
-    "src/"
+    "src/**/*"
   ],
   "scripts": {
     "sass.dev": "node_modules/.bin/sass style.scss dist/style.css",
