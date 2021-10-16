@@ -3,6 +3,7 @@
 ===============================*/
 
 @use 'sass:math';
+@use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
 @use './config';
@@ -89,13 +90,14 @@
  */
 
 @function getSizeNames($scales) {
-  $sizes: ();
+  $names: ();
 
-  @each $scale in $scales {
-    $sizes: map.merge($sizes, $scale);
+  @each $sizeKey in map.keys(list.nth($scales, 1)) {
+    $name: map.get(config.$sizeKeys, $sizeKey);
+    $names: list.append($names, $name);
   }
 
-  @return map.keys($sizes);
+  @return $names;
 }
 
 /**

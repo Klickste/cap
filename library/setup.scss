@@ -28,13 +28,13 @@ $scales: ();
  *
  */
 
-@each $scaleBase in config.$baseScales {
-  $scaleIndex: list.index(config.$baseScales, $scaleBase);
+@each $baseSize in config.$baseSizes {
+  $scaleIndex: list.index(config.$baseSizes, $baseSize);
   $sizes: ();
 
   @for $sizeIndex from (config.$downScales * -1) to (config.$upScales + 1) {
-    $sizeName: list.nth(config.$sizeNames, config.$sizeNamesBaseIndex + $sizeIndex);
-    $fontSize: utils.getFontSize($scaleBase, config.$scaleFactor, $sizeIndex);
+    $sizeName: list.nth(list.nth(config.$sizeKeys, config.$baseSizeIndex + $sizeIndex), 1);
+    $fontSize: utils.getFontSize($baseSize, config.$scaleFactor, $sizeIndex);
     $lineHeight: utils.getLineHeight($fontSize);
     $sizes: map.merge(
       $sizes,
@@ -61,7 +61,8 @@ $scales: ();
  */
 
 @mixin declareSizes($scale) {
-  @each $sizeName, $sizeProps in $scale {
+  @each $sizeKey, $sizeProps in $scale {
+    $sizeName: map.get(config.$sizeKeys, $sizeKey);
     $fontSize: map.get($sizeProps, 'fontSize');
     $lineHeight: map.get($sizeProps, 'lineHeight');
 

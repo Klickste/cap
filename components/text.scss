@@ -4,6 +4,7 @@
 
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:string';
 @use './../library/config';
 @use './../library/utils';
 @use './../library/setup';
@@ -27,6 +28,14 @@ $shadow: false !default;
  */
 
 $_selector: if($shadow, '::part(cap-text)', 'cap-text');
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_sizeKeys: map.keys(list.nth(setup.$scales, 1));
 
 /**
  *
@@ -197,15 +206,18 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    *
    */
 
-  @each $sizeName in $_sizeNames {
+  @each $sizeKey in $_sizeKeys {
+    $sizeName: map.get(config.$sizeKeys, $sizeKey);
+    $isPositive: string.index($sizeKey, '+') == 1;
+
     @if $shadow {
       @at-root {
-        ::part(cap-size-#{$sizeName}) {
+        ::part(cap-size-#{if($isPositive, '\\#{$sizeKey}', $sizeKey)}) {
           @include declareSize($sizeName);
         }
       }
     } @else {
-      &[size='#{$sizeName}'] {
+      &[size='#{$sizeKey}'] {
         @include declareSize($sizeName);
       }
     }
