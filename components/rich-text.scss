@@ -2,12 +2,133 @@
 =            Modules            =
 ===============================*/
 
+@use 'sass:map';
+@use 'sass:list';
 @use './../library/config';
+@use './../library/utils';
+@use './../library/setup';
+
+/*=================================
+=            Variables            =
+=================================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$shadow: false !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_selector: if($shadow, '::part(cap-rich-text)', 'cap-rich-text');
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_sizeNames: utils.getSizeNames(setup.$scales);
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_weightNames: utils.getWeightNames(config.$fonts);
+
+/*==============================
+=            Mixins            =
+==============================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareFont($fontName) {
+  --cap-richText-fontFamily: var(--cap-fontFamily-#{$fontName});
+  --cap-richText-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$fontName});
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareParagraphSize($sizeName) {
+  --cap-richText-paragraph-fontSize: var(--cap-fontSize-#{$sizeName});
+  --cap-richText-paragraph-lineHeight: var(--cap-lineHeight-#{$sizeName});
+  // --cap-richText-paragraph-offset: var(--cap-richText-paragraph-offset-#{$sizeName}, var(--cap-offset-#{$sizeName}-#{config.$defaultFont}));
+  // --cap-richText-paragraph-letterSpacing: var(--cap-text-letterSpacing-#{$sizeName}, var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont}));
+}
 
 /*=============================
 =            Rules            =
 =============================*/
 
-cap-rich-text {
+#{$_selector} {
+  --cap-richText-lineHeightModifier: 0px;
+
   display: block;
+  font-family: var(--cap-richText-fontFamily, var(--cap-fontFamily-#{config.$defaultFont}));
+  font-feature-settings: var(
+    --cap-richText-fontFeatureSettings,
+    var(--cap-fontFeatureSettings-#{config.$defaultFont})
+  );
+  font-kerning: normal;
+  font-weight: var(--cap-richText-fontWeight);
+
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: var(--cap-richText-letterSpacing);
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: none;
+
+  > * {
+    font-size: var(--cap-richText-fontSize);
+    line-height: calc(var(--cap-richText-lineHeight) + var(--cap-richText-lineHeightModifier));
+  }
+
+  @each $fontName, $fontProps in config.$fonts {
+    @if $shadow {
+      @at-root {
+        ::part(cap-family-#{$fontName}) {
+          @include declareFont($fontName);
+        }
+      }
+    } @else {
+      &[family='#{$fontName}'] {
+        @include declareFont($fontName);
+      }
+    }
+  }
+
+  @each $sizeName in ('sm', 'md', 'lg') {
+    @if $shadow {
+      @at-root {
+        ::part(cap-size-#{$sizeName}) {
+          @include declareParagraphSize($sizeName);
+        }
+      }
+    } @else {
+      &[size='#{$sizeName}'] {
+        @include declareParagraphSize($sizeName);
+      }
+    }
+  }
+
+  p, ul, ol {
+    --cap-richText-fontSize: var(--cap-richText-paragraph-fontSize);
+    --cap-richText-lineHeight: var(--cap-richText-paragraph-lineHeight);
+  }
 }
