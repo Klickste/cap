@@ -18,7 +18,15 @@
  *
  */
 
-$selector: 'cap-text' !default;
+$shadow: false !default;
+
+/**
+ *
+ * Description...
+ *
+ */
+
+$_selector: if($shadow, '::part(cap-text)', 'cap-text');
 
 /**
  *
@@ -36,11 +44,77 @@ $_sizeNames: utils.getSizeNames(setup.$scales);
 
 $_weightNames: utils.getWeightNames(config.$fonts);
 
+/*==============================
+=            Mixins            =
+==============================*/
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareFont($fontName) {
+  --cap-text-fontFamily: var(--cap-fontFamily-#{$fontName});
+  --cap-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$fontName});
+
+  @each $sizeName in $_sizeNames {
+    --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
+    --cap-text-letterSpacing-#{$sizeName}: var(--cap-letterSpacing-#{$sizeName}-#{$fontName});
+  }
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareSize($sizeName) {
+  --cap-text-fontSize: var(--cap-fontSize-#{$sizeName});
+  --cap-text-lineHeight: var(--cap-lineHeight-#{$sizeName});
+  --cap-text-offset: var(
+    --cap-text-offset-#{$sizeName},
+    var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
+  );
+  --cap-text-letterSpacing: var(
+    --cap-text-letterSpacing-#{$sizeName},
+    var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
+  );
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareWeight($weightName) {
+  --cap-text-fontWeight: var(
+    --cap-text-fontWeight-#{$weightName},
+    var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
+  );
+
+  @each $fontName, $fontProps in config.$fonts {
+    --cap-text-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
+  }
+}
+
+/**
+ *
+ * Description...
+ *
+ */
+
+@mixin declareLineHeightModifier($lineHeightModifier) {
+  --cap-text-lineHeightModifier: #{$lineHeightModifier};
+}
+
 /*=============================
 =            Rules            =
 =============================*/
 
-#{$selector} {
+#{$_selector} {
   --cap-text-lineHeightModifier: 0px;
 
   display: block;
@@ -104,13 +178,15 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    */
 
   @each $fontName, $fontProps in config.$fonts {
-    &[family='#{$fontName}'] {
-      --cap-text-fontFamily: var(--cap-fontFamily-#{$fontName});
-      --cap-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$fontName});
-
-      @each $sizeName in $_sizeNames {
-        --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
-        --cap-text-letterSpacing-#{$sizeName}: var(--cap-letterSpacing-#{$sizeName}-#{$fontName});
+    @if $shadow {
+      @at-root {
+        ::part(cap-family-#{$fontName}) {
+          @include declareFont($fontName);
+        }
+      }
+    } @else {
+      &[family='#{$fontName}'] {
+        @include declareFont($fontName);
       }
     }
   }
@@ -122,17 +198,16 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    */
 
   @each $sizeName in $_sizeNames {
-    &[size='#{$sizeName}'] {
-      --cap-text-fontSize: var(--cap-fontSize-#{$sizeName});
-      --cap-text-lineHeight: var(--cap-lineHeight-#{$sizeName});
-      --cap-text-offset: var(
-        --cap-text-offset-#{$sizeName},
-        var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
-      );
-      --cap-text-letterSpacing: var(
-        --cap-text-letterSpacing-#{$sizeName},
-        var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
-      );
+    @if $shadow {
+      @at-root {
+        ::part(cap-size-#{$sizeName}) {
+          @include declareSize($sizeName);
+        }
+      }
+    } @else {
+      &[size='#{$sizeName}'] {
+        @include declareSize($sizeName);
+      }
     }
   }
 
@@ -143,14 +218,15 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    */
 
   @each $weightName in $_weightNames {
-    &[weight='#{$weightName}'] {
-      --cap-text-fontWeight: var(
-        --cap-text-fontWeight-#{$weightName},
-        var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
-      );
-
-      @each $fontName, $fontProps in config.$fonts {
-        --cap-text-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
+    @if $shadow {
+      @at-root {
+        ::part(cap-weight-#{$weightName}) {
+          @include declareWeight($weightName);
+        }
+      }
+    } @else {
+      &[weight='#{$weightName}'] {
+        @include declareWeight($weightName);
       }
     }
   }
@@ -162,8 +238,16 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    */
 
   @each $lineHeightModifierName, $lineHeightModifier in config.$lineHeightModifiers {
-    &[line='#{$lineHeightModifierName}'] {
-      --cap-text-lineHeightModifier: #{$lineHeightModifier};
+    @if $shadow {
+      @at-root {
+        ::part(cap-line-height-modifier-#{$lineHeightModifierName}) {
+          @include declareLineHeightModifier($lineHeightModifier);
+        }
+      }
+    } @else {
+      &[line='#{$lineHeightModifierName}'] {
+        @include declareLineHeightModifier($lineHeightModifier);
+      }
     }
   }
 }
