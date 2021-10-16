@@ -1,4 +1,4 @@
-@use './src/cap' with
+@use './cap' with
   (
     $baseScales: (
       15px,
@@ -43,5 +43,5 @@
     )
   );
 
-@use './src/components/text';
-@use './src/components/rich-text';
+@use './components/text';
+@use './components/rich-text';
