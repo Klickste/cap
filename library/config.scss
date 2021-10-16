@@ -93,7 +93,7 @@ $scaleFactor: 1.2 !default;
  *
  */
 
-$baseScales: (15px) !default;
+$baseSizes: (15px) !default;
 
 /**
  *
@@ -124,26 +124,24 @@ $lineModifiers: (
  *
  */
 
-$sizeNames: (
-  '8xs',
-  '7xs',
-  '6xs',
-  '5xs',
-  '4xs',
-  '3xs',
-  '2xs',
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  '2xl',
-  '3xl',
-  '4xl',
-  '5xl',
-  '6xl',
-  '7xl',
-  '8xl'
+$sizeKeys: (
+  '-8': '7xs',
+  '-7': '6xs',
+  '-6': '5xs',
+  '-5': '4xs',
+  '-4': '3xs',
+  '-3': '2xs',
+  '-2': 'xs',
+  '-1': 'sm',
+  '0': 'md',
+  '+1': 'lg',
+  '+2': 'xl',
+  '+3': '2xl',
+  '+4': '3xl',
+  '+5': '4xl',
+  '+6': '5xl',
+  '+7': '6xl',
+  '+8': '7xl',
 );
 
 /**
@@ -152,4 +150,4 @@ $sizeNames: (
  *
  */
 
-$sizeNamesBaseIndex: list.index($sizeNames, 'md');
+$baseSizeIndex: list.index(map.keys($sizeKeys), '0');

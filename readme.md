@@ -15,7 +15,7 @@ Use & configure the Sass module:
   (
     $defaultWeight: 'soft',
     $defaultFont: 'sans',
-    $baseScales: (
+    $baseSizes: (
       15px,
       17px,
     ),
@@ -69,7 +69,7 @@ Use the components elements in your HTML:
 
 ```html
 <!-- All attributes are optional, except of 'size' -->
-<cap-text size="lg" font="serif" weight="heavy" line="loose">
+<cap-text size="+2" font="serif" weight="heavy" line="loose">
   Qui numquam odit dolores et in dolor rerum. Et natus et vero rerum ut in. Voluptates quas quidem
   minima eveniet optio quis quibusdam.
 </cap-text>
