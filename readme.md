@@ -59,10 +59,11 @@ Use & configure the Sass module:
   );
 ```
 
-Use the components module:
+Use the component modules:
 
 ```scss
 @use '@klickste/cap/components/text';
+@use '@klickste/cap/components/rich-text';
 ```
 
 Use the components elements in your HTML:

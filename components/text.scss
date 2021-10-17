@@ -141,6 +141,8 @@ $_weightNames: utils.getWeightNames(config.$fonts);
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: none;
+  padding-bottom: 1px;
+  padding-top: 1px;
 
   > * {
     margin: 0;
@@ -156,11 +158,6 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    *
    */
 
-  & {
-    padding-bottom: 1px;
-    padding-top: 1px;
-  }
-
   &::before,
   &::after {
     content: '';
@@ -168,13 +165,13 @@ $_weightNames: utils.getWeightNames(config.$fonts);
     height: 0;
   }
 
-  &:before {
+  &::before {
     margin-top: calc(
       (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
     );
   }
 
-  &:after {
+  &::after {
     margin-bottom: calc(
       (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
     );

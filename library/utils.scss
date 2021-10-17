@@ -46,7 +46,7 @@
  */
 
 @function getLineHeight($fontSize) {
-  $ratio: getRatio($fontSize, 1.2, 1.8, -0.14);
+  $ratio: getRatio($fontSize, 1.2, 1.8, -0.12);
 
   @if config.$roundEven {
     @return math.round(math.div($fontSize * $ratio, 2)) * 2;
