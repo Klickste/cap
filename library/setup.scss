@@ -70,9 +70,6 @@ $scales: ();
     --cap-lineHeight-#{$sizeName}: #{$lineHeight};
 
     @each $fontName, $fontProps in config.$fonts {
-      $upm: map.get($fontProps, 'upm');
-      $capHeight: map.get($fontProps, 'capHeight');
-      $offset: utils.getOffset($fontSize, $lineHeight, $upm, $capHeight);
       $letterSpacingFactor: map.get($fontProps, 'spacing');
       $letterSpacing: if(
         $letterSpacingFactor != null,
@@ -80,10 +77,16 @@ $scales: ();
         normal
       );
 
-      --cap-offset-#{$sizeName}-#{$fontName}: #{$offset};
-
       /* FIXME: single 'normal' output for $letterSpacingFactor == null */
       --cap-letterSpacing-#{$sizeName}-#{$fontName}: #{$letterSpacing};
+
+      @if config.$trim {
+        $upm: map.get($fontProps, 'upm');
+        $capHeight: map.get($fontProps, 'capHeight');
+        $offset: utils.getOffset($fontSize, $lineHeight, $upm, $capHeight);
+
+        --cap-offset-#{$sizeName}-#{$fontName}: #{$offset};
+      }
     }
   }
 }
@@ -133,15 +136,11 @@ $scales: ();
       map.get($fontProps, 'fallback'),
       null
     );
-    $capHeight: map.get($fontProps, 'capHeight');
-    $upm: map.get($fontProps, 'upm');
     $fontFeatureSettings: map.get($fontProps, 'features');
 
     --cap-fontFamily-#{$fontName}: #{$fontFamily +
       if($fontFamilyFallback, ', #{$fontFamilyFallback}', '')};
-    --cap-capHeight-#{$fontName}: #{$capHeight};
     --cap-fontFeatureSettings-#{$fontName}: #{$fontFeatureSettings};
-    --cap-upm-#{$fontName}: #{$upm};
 
     @each $fontWeightName, $fontWeight in map.get($fontProps, 'weights') {
       --cap-fontWeight-#{$fontWeightName}-#{$fontName}: #{$fontWeight};

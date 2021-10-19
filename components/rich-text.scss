@@ -58,26 +58,29 @@ cap-rich-text {
     line-height: calc(var(--cap-richText-lineHeight) + var(--cap-richText-lineHeightModifier));
     letter-spacing: var(--cap-richText-letterSpacing);
     margin: 0;
-    padding-bottom: 1px;
-    padding-top: 1px;
 
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      height: 0;
-    }
+    @if config.$trim {
+      padding-bottom: 1px;
+      padding-top: 1px;
 
-    &::before {
-      margin-top: calc(
-        (var(--cap-richText-offset) + (var(--cap-richText-lineHeightModifier) / 2) + 1px) * -1
-      );
-    }
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        height: 0;
+      }
 
-    &::after {
-      margin-bottom: calc(
-        (var(--cap-richText-offset) + (var(--cap-richText-lineHeightModifier) / 2) + 1px) * -1
-      );
+      &::before {
+        margin-top: calc(
+          (var(--cap-richText-offset) + (var(--cap-richText-lineHeightModifier) / 2) + 1px) * -1
+        );
+      }
+
+      &::after {
+        margin-bottom: calc(
+          (var(--cap-richText-offset) + (var(--cap-richText-lineHeightModifier) / 2) + 1px) * -1
+        );
+      }
     }
   }
 
@@ -95,21 +98,27 @@ cap-rich-text {
       @each $sizeKey, $sizeName in $_sizes {
         $sizeIndex: list.index(map.keys(config.$sizeKeys), $sizeKey);
 
-        --cap-richText-paragraph-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
         --cap-richText-paragraph-letterSpacing-#{$sizeName}: var(
           --cap-letterSpacing-#{$sizeName}-#{$fontName}
         );
+
+        @if config.$trim {
+          --cap-richText-paragraph-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
+        }
 
         @for $headingLevel from 1 through 6 {
           $sizeUpIndex: ($sizeIndex) + (6 - $headingLevel);
           $sizeUpName: list.nth(list.nth(config.$sizeKeys, $sizeUpIndex), 2);
 
-          --cap-richText-heading-#{$headingLevel}-offset-#{$sizeUpName}: var(
-            --cap-offset-#{$sizeUpName}-#{$fontName}
-          );
           --cap-richText-heading-#{$headingLevel}-letterSpacing-#{$sizeUpName}: var(
             --cap-letterSpacing-#{$sizeUpName}-#{$fontName}
           );
+
+          @if config.$trim {
+            --cap-richText-heading-#{$headingLevel}-offset-#{$sizeUpName}: var(
+              --cap-offset-#{$sizeUpName}-#{$fontName}
+            );
+          }
         }
       }
     }
@@ -127,14 +136,17 @@ cap-rich-text {
 
       --cap-richText-paragraph-fontSize: var(--cap-fontSize-#{$sizeName});
       --cap-richText-paragraph-lineHeight: var(--cap-lineHeight-#{$sizeName});
-      --cap-richText-paragraph-offset: var(
-        --cap-richText-paragraph-offset-#{$sizeName},
-        var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
-      );
       --cap-richText-paragraph-letterSpacing: var(
         --cap-richText-paragraph-letterSpacing-#{$sizeName},
         var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
       );
+
+      @if config.$trim {
+        --cap-richText-paragraph-offset: var(
+          --cap-richText-paragraph-offset-#{$sizeName},
+          var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
+        );
+      }
 
       @for $headingLevel from 1 through 6 {
         $sizeUpIndex: ($sizeIndex) + (6 - $headingLevel);
@@ -142,14 +154,17 @@ cap-rich-text {
 
         --cap-richText-heading-#{$headingLevel}-fontSize: var(--cap-fontSize-#{$sizeUpName});
         --cap-richText-heading-#{$headingLevel}-lineHeight: var(--cap-lineHeight-#{$sizeUpName});
-        --cap-richText-heading-#{$headingLevel}-offset: var(
-          --cap-richText-heading-#{$headingLevel}-offset-#{$sizeUpName},
-          var(--cap-offset-#{$sizeUpName}-#{config.$defaultFont})
-        );
         --cap-richText-heading-#{$headingLevel}-letterSpacing: var(
           --cap-richText-heading-#{$headingLevel}-letterSpacing-#{$sizeUpName},
           var(--cap-letterSpacing-#{$sizeUpName}-#{config.$defaultFont})
         );
+
+        @if config.$trim {
+          --cap-richText-heading-#{$headingLevel}-offset: var(
+            --cap-richText-heading-#{$headingLevel}-offset-#{$sizeUpName},
+            var(--cap-offset-#{$sizeUpName}-#{config.$defaultFont})
+          );
+        }
       }
     }
   }
@@ -177,16 +192,22 @@ cap-rich-text {
   ol {
     --cap-richText-fontSize: var(--cap-richText-paragraph-fontSize);
     --cap-richText-lineHeight: var(--cap-richText-paragraph-lineHeight);
-    --cap-richText-offset: var(--cap-richText-paragraph-offset);
     --cap-richText-letterSpacing: var(--cap-richText-paragraph-letterSpacing);
+
+    @if config.$trim {
+      --cap-richText-offset: var(--cap-richText-paragraph-offset);
+    }
   }
 
   @for $headingLevel from 1 through 6 {
     h#{$headingLevel} {
       --cap-richText-fontSize: var(--cap-richText-heading-#{$headingLevel}-fontSize);
       --cap-richText-lineHeight: var(--cap-richText-heading-#{$headingLevel}-lineHeight);
-      --cap-richText-offset: var(--cap-richText-heading-#{$headingLevel}-offset);
       --cap-richText-letterSpacing: var(--cap-richText-heading-#{$headingLevel}-letterSpacing);
+
+      @if config.$trim {
+        --cap-richText-offset: var(--cap-richText-heading-#{$headingLevel}-offset);
+      }
     }
   }
 

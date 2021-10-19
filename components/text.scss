@@ -68,8 +68,11 @@ $_weightNames: utils.getWeightNames(config.$fonts);
   --cap-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$fontName});
 
   @each $sizeName in $_sizeNames {
-    --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
     --cap-text-letterSpacing-#{$sizeName}: var(--cap-letterSpacing-#{$sizeName}-#{$fontName});
+
+    @if config.$trim {
+      --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
+    }
   }
 }
 
@@ -82,14 +85,17 @@ $_weightNames: utils.getWeightNames(config.$fonts);
 @mixin declareSize($sizeName) {
   --cap-text-fontSize: var(--cap-fontSize-#{$sizeName});
   --cap-text-lineHeight: var(--cap-lineHeight-#{$sizeName});
-  --cap-text-offset: var(
-    --cap-text-offset-#{$sizeName},
-    var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
-  );
   --cap-text-letterSpacing: var(
     --cap-text-letterSpacing-#{$sizeName},
     var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
   );
+
+  @if config.$trim {
+    --cap-text-offset: var(
+      --cap-text-offset-#{$sizeName},
+      var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
+    );
+  }
 }
 
 /**
@@ -141,8 +147,6 @@ $_weightNames: utils.getWeightNames(config.$fonts);
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: none;
-  padding-bottom: 1px;
-  padding-top: 1px;
 
   > * {
     margin: 0;
@@ -158,23 +162,28 @@ $_weightNames: utils.getWeightNames(config.$fonts);
    *
    */
 
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    height: 0;
-  }
+  @if config.$trim {
+    padding-bottom: 1px;
+    padding-top: 1px;
 
-  &::before {
-    margin-top: calc(
-      (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
-    );
-  }
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 0;
+    }
 
-  &::after {
-    margin-bottom: calc(
-      (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
-    );
+    &::before {
+      margin-top: calc(
+        (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
+      );
+    }
+
+    &::after {
+      margin-bottom: calc(
+        (var(--cap-text-offset) + (var(--cap-text-lineHeightModifier) / 2) + 1px) * -1
+      );
+    }
   }
 
   /**
