@@ -53,7 +53,15 @@ cap-rich-text {
   display: grid;
   gap: var(--cap-richText-gap, 32px);
 
-  > * {
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
+  > p,
+  > ul,
+  > ol {
     font-size: var(--cap-richText-fontSize);
     line-height: calc(var(--cap-richText-lineHeight) + var(--cap-richText-lineHeightModifier));
     letter-spacing: var(--cap-richText-letterSpacing);
