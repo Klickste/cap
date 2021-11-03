@@ -44,9 +44,7 @@ cap-rich-text {
     var(--cap-fontFeatureSettings-#{config.$defaultFont})
   );
   font-kerning: normal;
-  font-weight: var(--cap-richText-fontWeight);
   -webkit-font-smoothing: antialiased;
-  letter-spacing: var(--cap-richText-letterSpacing);
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: none;
@@ -63,6 +61,10 @@ cap-rich-text {
   > ul,
   > ol {
     font-size: var(--cap-richText-fontSize);
+    font-weight: var(
+      --cap-richText-fontWeight,
+      var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
+    );
     line-height: calc(var(--cap-richText-lineHeight) + var(--cap-richText-lineHeightModifier));
     letter-spacing: var(--cap-richText-letterSpacing);
     margin: 0;
@@ -106,12 +108,12 @@ cap-rich-text {
       @each $sizeKey, $sizeName in $_sizes {
         $sizeIndex: list.index(map.keys(config.$sizeKeys), $sizeKey);
 
-        --cap-richText-paragraph-letterSpacing-#{$sizeName}: var(
+        --cap-richText-body-letterSpacing-#{$sizeName}: var(
           --cap-letterSpacing-#{$sizeName}-#{$fontName}
         );
 
         @if config.$trim {
-          --cap-richText-paragraph-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
+          --cap-richText-body-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
         }
 
         @for $headingLevel from 1 through 6 {
@@ -129,6 +131,10 @@ cap-rich-text {
           }
         }
       }
+
+      @each $weightName in $_weightNames {
+        --cap-richText-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
+      }
     }
   }
 
@@ -142,16 +148,16 @@ cap-rich-text {
     &[size='#{$sizeKey}'] {
       $sizeIndex: list.index(map.keys(config.$sizeKeys), $sizeKey);
 
-      --cap-richText-paragraph-fontSize: var(--cap-fontSize-#{$sizeName});
-      --cap-richText-paragraph-lineHeight: var(--cap-lineHeight-#{$sizeName});
-      --cap-richText-paragraph-letterSpacing: var(
-        --cap-richText-paragraph-letterSpacing-#{$sizeName},
+      --cap-richText-body-fontSize: var(--cap-fontSize-#{$sizeName});
+      --cap-richText-body-lineHeight: var(--cap-lineHeight-#{$sizeName});
+      --cap-richText-body-letterSpacing: var(
+        --cap-richText-body-letterSpacing-#{$sizeName},
         var(--cap-letterSpacing-#{$sizeName}-#{config.$defaultFont})
       );
 
       @if config.$trim {
-        --cap-richText-paragraph-offset: var(
-          --cap-richText-paragraph-offset-#{$sizeName},
+        --cap-richText-body-offset: var(
+          --cap-richText-body-offset-#{$sizeName},
           var(--cap-offset-#{$sizeName}-#{config.$defaultFont})
         );
       }
@@ -183,6 +189,28 @@ cap-rich-text {
    *
    */
 
+  @each $weightName in $_weightNames {
+    &[body-weight='#{$weightName}'] {
+      --cap-richText-body-fontWeight: var(
+        --cap-richText-fontWeight-#{$weightName},
+        var(--cap-fontWeight-#{$weightName}-#{config.$defaultFont})
+      );
+    }
+
+    &[heading-weight='#{$weightName}'] {
+      --cap-richText-heading-fontWeight: var(
+        --cap-richText-fontWeight-#{$weightName},
+        var(--cap-fontWeight-#{$weightName}-#{config.$defaultFont})
+      );
+    }
+  }
+
+  /**
+   *
+   * Description...
+   *
+   */
+
   @each $lineHeightModifierName, $lineHeightModifier in config.$lineModifiers {
     &[line='#{$lineHeightModifierName}'] {
       --cap-richText-lineHeightModifier: #{$lineHeightModifier};
@@ -198,18 +226,20 @@ cap-rich-text {
   p,
   ul,
   ol {
-    --cap-richText-fontSize: var(--cap-richText-paragraph-fontSize);
-    --cap-richText-lineHeight: var(--cap-richText-paragraph-lineHeight);
-    --cap-richText-letterSpacing: var(--cap-richText-paragraph-letterSpacing);
+    --cap-richText-fontSize: var(--cap-richText-body-fontSize);
+    --cap-richText-fontWeight: var(--cap-richText-body-fontWeight);
+    --cap-richText-lineHeight: var(--cap-richText-body-lineHeight);
+    --cap-richText-letterSpacing: var(--cap-richText-body-letterSpacing);
 
     @if config.$trim {
-      --cap-richText-offset: var(--cap-richText-paragraph-offset);
+      --cap-richText-offset: var(--cap-richText-body-offset);
     }
   }
 
   @for $headingLevel from 1 through 6 {
     h#{$headingLevel} {
       --cap-richText-fontSize: var(--cap-richText-heading-#{$headingLevel}-fontSize);
+      --cap-richText-fontWeight: var(--cap-richText-heading-fontWeight);
       --cap-richText-lineHeight: var(--cap-richText-heading-#{$headingLevel}-lineHeight);
       --cap-richText-letterSpacing: var(--cap-richText-heading-#{$headingLevel}-letterSpacing);
 
