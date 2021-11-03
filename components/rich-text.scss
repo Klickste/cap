@@ -221,5 +221,14 @@ cap-rich-text {
 
   a {
     color: var(--cap-richText-anchor-color, blue);
+    opacity: var(--cap-richText-anchor-opacity, 1);
+    text-decoration: var(--cap-richText-anchor-textDecoration, underline);
+
+    @media (hover: hover) {
+      &:hover {
+        --cap-richText-anchor-opacity: var(--cap-richText-anchor-opacity-hover, 0.58);
+        --cap-richText-anchor-textDecoration: var(--cap-richText-anchor-textDecoration-hover, none);
+      }
+    }
   }
 }
