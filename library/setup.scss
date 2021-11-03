@@ -110,13 +110,13 @@ $scales: ();
   $fontWeightMax: math.max($fontWeightsValues...);
 
   @if $fontStyles != null {
-    @each $fontStyle, $SrcUrl in $fontStyles {
+    @each $fontStyle, $fontUrl in $fontStyles {
       @font-face {
         font-display: swap;
         font-family: string.unquote($fontFamily);
         font-style: string.unquote($fontStyle);
         font-weight: $fontWeightMin $fontWeightMax;
-        src: url($SrcUrl) format('woff2');
+        src: url($fontUrl) format('woff2');
       }
     }
   }
