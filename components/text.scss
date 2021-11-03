@@ -74,6 +74,10 @@ $_weightNames: utils.getWeightNames(config.$fonts);
       --cap-text-offset-#{$sizeName}: var(--cap-offset-#{$sizeName}-#{$fontName});
     }
   }
+
+  @each $weightName in $_weightNames {
+    --cap-text-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
+  }
 }
 
 /**
@@ -107,12 +111,8 @@ $_weightNames: utils.getWeightNames(config.$fonts);
 @mixin declareWeight($weightName) {
   --cap-text-fontWeight: var(
     --cap-text-fontWeight-#{$weightName},
-    var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
+    var(--cap-fontWeight-#{$weightName}-#{config.$defaultFont})
   );
-
-  @each $fontName, $fontProps in config.$fonts {
-    --cap-text-fontWeight-#{$weightName}: var(--cap-fontWeight-#{$weightName}-#{$fontName});
-  }
 }
 
 /**
@@ -139,7 +139,10 @@ $_weightNames: utils.getWeightNames(config.$fonts);
     var(--cap-fontFeatureSettings-#{config.$defaultFont})
   );
   font-kerning: normal;
-  font-weight: var(--cap-text-fontWeight);
+  font-weight: var(
+    --cap-text-fontWeight,
+    var(--cap-fontWeight-#{config.$defaultWeight}-#{config.$defaultFont})
+  );
   font-size: var(--cap-text-fontSize);
   line-height: calc(var(--cap-text-lineHeight) + var(--cap-text-lineHeightModifier));
   -webkit-font-smoothing: antialiased;
