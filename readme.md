@@ -29,8 +29,8 @@ Use & configure the Sass module:
           'heavy': 600,
         ),
         'styles': (
-          ('normal', '/fonts/Inter-roman.var.woff2'),
-          ('italic', '/fonts/Inter-italic.var.woff2'),
+          'normal': '/fonts/Inter-roman.var.woff2',
+          'italic': '/fonts/Inter-italic.var.woff2',
         ),
         'upm': 2816,
         'capHeight': 2048,
@@ -46,8 +46,8 @@ Use & configure the Sass module:
           'heavy': 900,
         ),
         'styles': (
-          ('normal', '/fonts/Merriweather-roman.var.woff2'),
-          ('italic', '/fonts/Merriweather-italic.var.woff2'),
+          'normal': '/fonts/Merriweather-roman.var.woff2',
+          'italic': '/fonts/Merriweather-italic.var.woff2',
         ),
         'upm': 2000,
         'capHeight': 1486,
