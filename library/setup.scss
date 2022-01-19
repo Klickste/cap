@@ -110,12 +110,23 @@ $scales: ();
   $fontWeightMax: math.max($fontWeightsValues...);
 
   @if $fontStyles != null {
-    @each $fontStyle, $fontUrl in $fontStyles {
+    @each $fontStyleName, $fontStyleProps in $fontStyles {
       @font-face {
+        $fontWeight: if(
+          meta.type-of($fontStyleProps) == 'string',
+          $fontWeightMin $fontWeightMax,
+          list.nth($fontStyleProps, 2)
+        );
+        $fontUrl: if(
+          meta.type-of($fontStyleProps) == 'string',
+          $fontStyleProps,
+          list.nth($fontStyleProps, 1)
+        );
+
         font-display: swap;
         font-family: string.unquote($fontFamily);
-        font-style: string.unquote($fontStyle);
-        font-weight: $fontWeightMin $fontWeightMax;
+        font-style: string.unquote($fontStyleName);
+        font-weight: $fontWeight;
         src: url($fontUrl) format('woff2');
       }
     }
