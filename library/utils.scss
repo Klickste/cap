@@ -34,7 +34,7 @@
  */
 
 @function getLetterSpacing($fontSize, $spacingFactor) {
-  $ratio: getRatio($fontSize, -0.0223 * $spacingFactor, 0.185, -0.1745);
+  $ratio: getRatio($fontSize, -0.0223, 0.185, -0.1745 + math.div($spacingFactor, 100));
 
   @return $ratio * 1em;
 }
