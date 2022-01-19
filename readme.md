@@ -11,8 +11,7 @@ Run `npm i @klickste/cap` in your project directory.
 Use & configure the Sass module:
 
 ```scss
-@use '@klickste/cap/cap' with
-  (
+@use '@klickste/cap/cap' with (
     $defaultWeight: 'soft',
     $defaultFont: 'sans',
     $baseSizes: (
