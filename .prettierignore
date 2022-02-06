@@ -1,4 +1,2 @@
-dist/
-
 package-lock.json
-src/components.d.ts
+tests/*.css

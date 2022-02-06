@@ -1,6 +1,11 @@
-/*===============================
-=            Modules            =
-===============================*/
+////
+/// @group fonts
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
 
 @use 'sass:math';
 @use 'sass:list';
@@ -8,69 +13,18 @@
 @use 'sass:meta';
 @use './config';
 
-/*=================================
-=            Functions            =
-=================================*/
+// ==========================================================================
+// Functions
+// ==========================================================================
 
-/**
- *
- * Description...
- *
- * Inpired by the "Dynamic Metrics" section on the Inter typeface family website:
- * https://rsms.me/inter/dynmetrics/
- *
- */
-
-@function getRatio($fontSize, $a, $b, $c) {
-  $d: math.div($fontSize, 1px);
-
-  @return ($a + ($b * math.pow(math.$e, $c * $d)));
-}
-
-/**
- *
- * Description...
- *
- */
-
-@function getLetterSpacing($fontSize, $spacingFactor) {
-  $ratio: getRatio($fontSize, -0.0223, 0.185, -0.1745 + math.div($spacingFactor, 100));
-
-  @return $ratio * 1em;
-}
-
-/**
- *
- * Description...
- *
- */
-
-@function getLineHeight($fontSize) {
-  $ratio: getRatio($fontSize, 1.2, 1.8, -0.12);
-
-  @if config.$roundEven {
-    @return math.round(math.div($fontSize * $ratio, 2)) * 2;
-  } @else {
-    @return math.round($fontSize * $ratio);
-  }
-}
-
-/**
- *
- * Description...
- *
- */
-
-@function getFontSize($fontSizeBase, $scaleFactor, $scaleIndex) {
-  @return math.round($fontSizeBase * math.pow($scaleFactor, $scaleIndex));
-}
-
-/**
- *
- * Description...
- *
- */
-
+/// Description...
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - Description...
+/// @param {number} $lineHeight - Description...
+/// @param {number} $upm - Description...
+/// @param {number} $capHeight - Description...
 @function getOffset($fontSize, $lineHeight, $upm, $capHeight) {
   $boxHeight: 0px;
 
@@ -83,35 +37,179 @@
   @return math.div(($lineHeight - $boxHeight), 2);
 }
 
-/**
- *
- * Description...
- *
- */
+/// Description...
+///
+/// @since 1.0.0
+///
+/// @param {number} $size - Description...
+/// @param {number} $a - Description...
+/// @param {number} $b - Description...
+/// @param {number} $c - Description...
+@function getRatio($size, $a, $b, $c) {
+  $d: math.div($size, 1px);
 
-@function getSizeNames($scales) {
-  $names: ();
-
-  @each $sizeKey in map.keys(list.nth($scales, 1)) {
-    $name: map.get(config.$sizeKeys, $sizeKey);
-    $names: list.append($names, $name);
-  }
-
-  @return $names;
+  @return ($a + ($b * math.pow(math.$e, $c * $d)));
 }
 
-/**
- *
- * Description...
- *
- */
+/// Description...
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - Description...
+/// @param {number} $spacing - Description...
+@function getLetterSpacing($fontSize, $spacing) {
+  $ratio: getRatio($fontSize, -0.0223, 0.185, -0.1745 + math.div($spacing, 100));
 
-@function getWeightNames($fonts) {
-  $weights: ();
+  @return math.div(math.round($ratio * 1000), 1000) * 1em;
+}
 
-  @each $font in map.values($fonts) {
-    $weights: map.merge($weights, map.get($font, 'weights'));
+/// Description...
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - Description...
+@function getLineHeight($fontSize) {
+  $ratio: getRatio($fontSize, 1.2, 1.8, -0.12);
+
+  @if config.$roundEven {
+    @return math.round(math.div($fontSize * $ratio, 2)) * 2;
+  } @else {
+    @return math.round($fontSize * $ratio);
+  }
+}
+
+/// Description...
+///
+/// @since 1.0.0
+///
+/// @param {number} $base - Description...
+/// @param {number} $factor - Description...
+/// @param {number} $scale - Description...
+@function getFontSize($base, $factor, $scale) {
+  @return math.round($base * math.pow($factor, $scale));
+}
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - Description...
+/// @param {string} $style - Description...
+/// @param {number | list} $weight - Description...
+/// @param {string} $src - Description...
+/// @param {string} $format - Description...
+/// @param {string} $display - Description...
+@mixin fontFace($family, $style, $weight, $src, $format: 'woff2', $display: 'swap') {
+  @font-face {
+    font-display: $display;
+    font-family: $family;
+    font-style: $style;
+    font-weight: $weight;
+    src: url($src) format($format);
+  }
+}
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - Description...
+/// @param {string} $fallback - Description...
+/// @param {list} $features - Description...
+/// @param {string} $name - Description...
+@mixin fontProps($family, $fallback, $weights, $features: null, $name: null) {
+  --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
+  --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{'' + $features + ''};
+
+  @each $key, $value in $weights {
+    --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
+  }
+}
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {number} $base - Description...
+/// @param {number} $factor - Description...
+/// @param {number} $ups - Description...
+/// @param {number} $downs - Description...
+/// @param {number} $spacing - Description...
+/// @param {list | map} $metrics - Description...
+@mixin scaleProps($base, $factor, $ups, $downs, $spacing: 0, $metrics: null) {
+  @for $index from ($downs * -1) through $ups {
+    $start: list.index(config.$scales, 'md');
+    $name: list.nth(config.$scales, $start + $index);
+    $fontSize: getFontSize($base, $factor, $index);
+    $lineHeight: getLineHeight($fontSize);
+
+    --#{config.$namespace}-fontSize-#{$name}: #{$fontSize};
+    --#{config.$namespace}-lineHeight-#{$name}: #{$lineHeight};
+
+    @if meta.type-of($spacing) == 'number' {
+      --#{config.$namespace}-letterSpacing-#{$name}: #{getLetterSpacing($fontSize, $spacing)};
+    } @else {
+      @each $style, $value in $spacing {
+        @if $value {
+          --#{config.$namespace}-letterSpacing-#{$name}-#{$style}: #{getLetterSpacing(
+              $fontSize,
+              $value
+            )};
+        }
+      }
+    }
+
+    @if type-of($metrics) == 'list' {
+      $upm: list.nth($metrics, 1);
+      $capHeight: list.nth($metrics, 2);
+
+      --#{config.$namespace}-offset-#{$name}: #{getOffset(
+          $fontSize,
+          $lineHeight,
+          $upm,
+          $capHeight
+        )};
+    } @else if meta.type-of($metrics) == 'map' {
+      @each $style, $metric in $metrics {
+        $upm: list.nth($metric, 1);
+        $capHeight: list.nth($metric, 2);
+
+        --#{config.$namespace}-offset-#{$name}-#{$style}: #{getOffset(
+            $fontSize,
+            $lineHeight,
+            $upm,
+            $capHeight
+          )};
+      }
+    }
+  }
+}
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {string} $component - Description...
+@mixin trim($component) {
+  padding-bottom: 1px;
+  padding-top: 1px;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
   }
 
-  @return map.keys($weights);
+  &::before {
+    margin-top: calc((var(--#{config.$namespace}-#{$component}-offset) + 1px) * -1);
+  }
+
+  &::after {
+    margin-bottom: calc((var(--#{config.$namespace}-#{$component}-offset) + 1px) * -1);
+  }
 }

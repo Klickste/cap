@@ -9,32 +9,26 @@
     "url": "https://github.com/klickste/cap.git"
   },
   "files": [
-    "cap.scss",
-    "components/",
+    "index.scss",
     "library/"
   ],
   "scripts": {
-    "sass.dev": "node_modules/.bin/sass style.scss dist/style.css",
-    "sass.prod": "node_modules/.bin/sass style.scss dist/style.css --style=compressed --no-source-map ",
-    "sass.watch": "node_modules/.bin/sass style.scss dist/style.css --watch",
-    "browser-sync": "browser-sync start --server --files \"dist/style.css, index.html\"",
-    "start": "concurrently \"npm:sass.watch\" \"npm:browser-sync\"",
-    "format": "prettier \"**/*.{scss,js,json,md,html}\" --write",
-    "font-metrics": "node tools/font-metrics.js"
+    "test:dev": "node_modules/.bin/sass tests/style.scss tests/style.css --no-source-map --load-path=./",
+    "test:prod": "node_modules/.bin/sass tests/style.scss tests/style.css --style=compressed --no-source-map --load-path=./",
+    "test:watch": "node_modules/.bin/sass tests/style.scss tests/style.css --watch --no-source-map --load-path=./",
+    "test:metrics": "node tests/metrics.js",
+    "format": "prettier . --write"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true
   },
   "dependencies": {
     "sass": "^1.49.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.7",
-    "concurrently": "^7.0.0",
     "fontkit": "^1.8.1",
     "prettier": "^2.5.1"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": true,
-    "htmlWhitespaceSensitivity": "strict"
   }
 }

@@ -1,2 +1,2 @@
-dist/
+tests/*.css
 node_modules/

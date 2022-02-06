@@ -1,161 +1,47 @@
-/*===============================
-=            Modules            =
-===============================*/
+////
+/// @group config
+/// @author cgoern
+////
 
-@use 'sass:list';
-@use 'sass:map';
+// ==========================================================================
+// Variables
+// ==========================================================================
 
-/*================================================
-=            Variables - configurable            =
-================================================*/
+/// The default namespace for CSS custom properties.
+///
+/// @since 2.0.0
+///
+/// @type string
+$namespace: 'cap' !default;
 
-/**
- *
- * Description...
- *
- */
-
-$debug: false !default;
-
-/**
- *
- * Description...
- *
- */
-
-$trim: true !default;
-
-/**
- *
- * Description...
- *
- */
-
-$root: ':root' !default;
-
-/**
- *
- * Description...
- *
- */
-
-$fonts: (
-  'sans': (
-    'family': 'sans-serif',
-    'weights': (
-      'soft': 400,
-      'strong': 500,
-      'heavy': 600,
-    ),
-    'styles': null,
-    'upm': 3000,
-    'capHeight': 2000,
-    'features': normal,
-    'spacing': null,
-  ),
-) !default;
-
-/**
- *
- * Description...
- *
- */
-
-$defaultFont: 'sans' !default;
-
-/**
- *
- * Description...
- *
- */
-
-$defaultWeight: 'soft' !default;
-
-/**
- *
- * Description...
- *
- */
-
-$upScales: 8 !default;
-
-/**
- *
- * Description...
- *
- */
-
-$downScales: 2 !default;
-
-/**
- *
- * Description...
- *
- */
-
-$scaleFactor: 1.2 !default;
-
-/**
- *
- * Description...
- *
- */
-
-$baseSizes: (15px) !default;
-
-/**
- *
- * Description...
- *
- */
-
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @type boolean
 $roundEven: true !default;
 
-/**
- *
- * Description...
- *
- */
-
-$lineModifiers: (
-  'tight': -2px,
-  'loose': 2px,
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @type list
+$scales: (
+  '7xs',
+  '6xs',
+  '5xs',
+  '4xs',
+  '3xs',
+  '2xs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl'
 ) !default;
-
-/*====================================================
-=            Variables - non configurable            =
-====================================================*/
-
-/**
- *
- * Description...
- *
- */
-
-$sizeKeys: (
-  '-8': '7xs',
-  '-7': '6xs',
-  '-6': '5xs',
-  '-5': '4xs',
-  '-4': '3xs',
-  '-3': '2xs',
-  '-2': 'xs',
-  '-1': 'sm',
-  '0': 'md',
-  '+1': 'lg',
-  '+2': 'xl',
-  '+3': '2xl',
-  '+4': '3xl',
-  '+5': '4xl',
-  '+6': '5xl',
-  '+7': '6xl',
-  '+8': '7xl',
-);
-
-/**
- *
- * Description...
- *
- */
-
-$baseSizeIndex: list.index(map.keys($sizeKeys), '0');

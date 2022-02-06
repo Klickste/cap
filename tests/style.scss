@@ -1,0 +1,61 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'index' as cap with (
+  $namespace: 'app'
+);
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+@include cap.fontFace(
+  $family: 'Inter',
+  $style: normal,
+  $weight: 400 600,
+  $src: '/fonts/Inter-roman.var.woff2'
+);
+
+@include cap.fontFace(
+  $family: 'Inter',
+  $style: italic,
+  $weight: 400 600,
+  $src: '/fonts/Inter-italic.var.woff2'
+);
+
+:root {
+  @include cap.fontProps(
+    $family: 'Inter',
+    $fallback: sans-serif,
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $features: (
+      'calt',
+      'liga',
+      'ss03',
+      'zero',
+      'cv05',
+      'cv10',
+    )
+  );
+
+  @include cap.scaleProps(
+    $base: 15px,
+    $factor: 1.2,
+    $ups: 8,
+    $downs: 2,
+    $spacing: 0,
+    $metrics: (
+      2816,
+      2048,
+    )
+  );
+}
+
+:host {
+  @include cap.trim('label');
+}

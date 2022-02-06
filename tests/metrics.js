@@ -1,7 +1,7 @@
 const fontkit = require('fontkit')
 const fonts = [
-  fontkit.openSync('fonts/Inter-roman.var.woff2'),
-  fontkit.openSync('fonts/Merriweather-roman.var.woff2'),
+  fontkit.openSync('tests/fonts/Inter-roman.var.woff2'),
+  fontkit.openSync('tests/fonts/Merriweather-roman.var.woff2'),
 ]
 
 fonts.map((font) => {
