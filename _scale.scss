@@ -1,3 +1,8 @@
+////
+/// @group scale
+/// @author cgoern
+////
+
 // ==========================================================================
 // Modules
 // ==========================================================================
@@ -11,54 +16,55 @@
 // Variables
 // ==========================================================================
 
-/// Description...
+/// Base font size for the scale calculation.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $base: 15px !default;
 
-/// Description...
+/// Number of upscales which should be calculated.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $ups: 6 !default;
 
-/// Description...
+/// Number of downscales which should be calculated.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $downs: 6 !default;
 
-/// Description...
+/// Factor for the modular scale calculation.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $factor: 1.2 !default;
 
-/// Description...
+/// Ratio for the letter spacing calculation.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $spacing: 0 !default;
 
-/// Description...
+/// UPM and cap height values of the used typeface.
 ///
 /// @since 2.1.0
 ///
-/// @type list
+/// @type null | list | map
 $metrics: null !default;
 
-/// Description...
+/// Up- and downscale custom property names.
 ///
 /// @since 2.0.0
 ///
 /// @type list
 $levels: (
+  '8xs',
   '7xs',
   '6xs',
   '5xs',
@@ -75,28 +81,29 @@ $levels: (
   '4xl',
   '5xl',
   '6xl',
-  '7xl'
+  '7xl',
+  '8xl'
 ) !default;
 
 // ==========================================================================
 // Mixins
 // ==========================================================================
 
-/// Description...
+/// Declares a set of custom properties for up- and downscales.
 ///
 /// @since 2.0.0
 ///
-/// @param {number} $base - Description...
-/// @param {number} $factor - Description...
-/// @param {number} $ups - Description...
-/// @param {number} $downs - Description...
-/// @param {number} $spacing - Description...
-/// @param {list | map} $metrics - Description...
+/// @param {number} $base - Base font size for the scale calculation.
+/// @param {number} $ups - Number of upscales which should be calculated.
+/// @param {number} $downs - Number of downscales which should be calculated.
+/// @param {number} $factor - Factor for the modular scale calculation.
+/// @param {number} $spacing - Ratio for the letter spacing calculation.
+/// @param {null | list | map} $metrics - UPM and cap height values of the used typeface.
 @mixin props(
   $base: $base,
-  $factor: $factor,
   $ups: $ups,
   $downs: $downs,
+  $factor: $factor,
   $spacing: $spacing,
   $metrics: $metrics
 ) {
@@ -106,15 +113,25 @@ $levels: (
     $fontSize: utils.calcFontSize($base, $factor, $index);
     $lineHeight: utils.calcLineHeight($fontSize);
 
+    //
+    // Declare fontSize and lineHeight.
+    // --------------------------------------------------------------------------
     --#{config.$namespace}-fontSize-#{$name}: #{$fontSize};
     --#{config.$namespace}-lineHeight-#{$name}: #{$lineHeight};
 
+    //
+    // Declare letterSpacing for a single style.
+    // --------------------------------------------------------------------------
     @if meta.type-of($spacing) == 'number' {
       --#{config.$namespace}-letterSpacing-#{$name}: #{utils.calcLetterSpacing(
           $fontSize,
           $spacing
         )};
-    } @else {
+    }
+    //
+    // Declare letterSpacing for multiple styles.
+    // --------------------------------------------------------------------------
+    @else {
       @each $style, $value in $spacing {
         @if $value {
           --#{config.$namespace}-letterSpacing-#{$name}-#{$style}: #{utils.calcLetterSpacing(
@@ -125,7 +142,10 @@ $levels: (
       }
     }
 
-    @if type-of($metrics) == 'list' {
+    //
+    // Declare trimOffset for a single style.
+    // --------------------------------------------------------------------------
+    @if meta.type-of($metrics) == 'list' {
       $upm: list.nth($metrics, 1);
       $capHeight: list.nth($metrics, 2);
 
@@ -135,7 +155,11 @@ $levels: (
           $upm,
           $capHeight
         )};
-    } @else if meta.type-of($metrics) == 'map' {
+    }
+    //
+    // Declare trimOffset for multiple styles.
+    // --------------------------------------------------------------------------
+    @else if meta.type-of($metrics) == 'map' {
       @each $style, $metric in $metrics {
         $upm: list.nth($metric, 1);
         $capHeight: list.nth($metric, 2);
