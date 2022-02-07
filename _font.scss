@@ -1,3 +1,8 @@
+////
+/// @group font
+/// @author cgoern
+////
+
 // ==========================================================================
 // Modules
 // ==========================================================================
@@ -8,7 +13,7 @@
 // Variables
 // ==========================================================================
 
-/// Description...
+/// Semantic font weights.
 ///
 /// @since 2.1.0
 ///
@@ -23,16 +28,16 @@ $weights: (
 // Mixins
 // ==========================================================================
 
-/// Description...
+/// @font-face rule for a given typeface.
 ///
 /// @since 2.0.0
 ///
-/// @param {string} $family - Description...
-/// @param {string} $style - Description...
-/// @param {number | list} $weight - Description...
-/// @param {string} $src - Description...
-/// @param {string} $format - Description...
-/// @param {string} $display - Description...
+/// @param {string} $family - The name of the font family.
+/// @param {string} $style - The style of the font family.
+/// @param {number | list} $weight - The weight(s) of the font family.
+/// @param {string} $src - The source URL of the font file.
+/// @param {string} $format - The font format of the font file.
+/// @param {string} $display - The display descriptor which determines when the font is ready to use.
 @mixin face($family, $style, $weight, $src, $format: 'woff2', $display: 'swap') {
   @font-face {
     font-display: $display;
@@ -43,23 +48,28 @@ $weights: (
   }
 }
 
-/// Description...
+/// Declares a set of custom properties for a used typeface.
 ///
 /// @since 2.0.0
 ///
-/// @param {string} $family - Description...
-/// @param {string} $fallback - Description...
-/// @param {list} $features - Description...
-/// @param {string} $name - Description...
+/// @param {string} $family - The name of the font family.
+/// @param {string} $fallback - A generic font family used as fallback mechanism.
+/// @param {null | list} $features - Advanced typographic features in OpenType fonts.
+/// @param {null | string} $name - Descriptive suffix of the font family.
 @mixin props($family, $fallback, $weights: $weights, $features: null, $name: null) {
+  //
+  // Declare fontFamily and fontFeatures.
+  // --------------------------------------------------------------------------
   --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
-
   --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{if(
       $features,
       '' + $features + '',
       normal
     )};
 
+  //
+  // Declare fontWeights.
+  // --------------------------------------------------------------------------
   @each $key, $value in $weights {
     --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
   }
