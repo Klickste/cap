@@ -5,27 +5,41 @@
 @use 'index' as cap with (
   $namespace: 'app'
 );
+@use 'font';
+@use 'scale' with (
+  $ups: 4,
+  $downs: 1,
+  $spacing: 0,
+  $metrics: (
+    2816,
+    2048,
+  )
+);
 
 // ==========================================================================
 // Rules
 // ==========================================================================
 
-@include cap.fontFace(
+@include font.face(
   $family: 'Inter',
   $style: normal,
   $weight: 400 600,
   $src: '/fonts/Inter-roman.var.woff2'
 );
 
-@include cap.fontFace(
+@include font.face(
   $family: 'Inter',
   $style: italic,
   $weight: 400 600,
   $src: '/fonts/Inter-italic.var.woff2'
 );
 
+// ==========================================================================
+// Single typeface
+// ==========================================================================
+
 :root {
-  @include cap.fontProps(
+  @include font.props(
     $family: 'Inter',
     $fallback: sans-serif,
     $weights: (
@@ -43,17 +57,11 @@
     )
   );
 
-  @include cap.scaleProps(
-    $base: 15px,
-    $factor: 1.2,
-    $ups: 8,
-    $downs: 2,
-    $spacing: 0,
-    $metrics: (
-      2816,
-      2048,
-    )
-  );
+  @include scale.props($base: 15px);
+
+  @media (pointer: coarse) {
+    @include scale.props($base: 17px, $factor: 1.1);
+  }
 }
 
 :host {

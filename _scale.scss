@@ -1,0 +1,152 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:list';
+@use 'sass:meta';
+@use './library/config';
+@use './library/utils';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type number
+$base: 15px !default;
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type number
+$ups: 6 !default;
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type number
+$downs: 6 !default;
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type number
+$factor: 1.2 !default;
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type number
+$spacing: 0 !default;
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type list
+$metrics: null !default;
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @type list
+$levels: (
+  '7xs',
+  '6xs',
+  '5xs',
+  '4xs',
+  '3xs',
+  '2xs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl'
+) !default;
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {number} $base - Description...
+/// @param {number} $factor - Description...
+/// @param {number} $ups - Description...
+/// @param {number} $downs - Description...
+/// @param {number} $spacing - Description...
+/// @param {list | map} $metrics - Description...
+@mixin props(
+  $base: $base,
+  $factor: $factor,
+  $ups: $ups,
+  $downs: $downs,
+  $spacing: $spacing,
+  $metrics: $metrics
+) {
+  @for $index from ($downs * -1) through $ups {
+    $start: list.index($levels, 'md');
+    $name: list.nth($levels, $start + $index);
+    $fontSize: utils.calcFontSize($base, $factor, $index);
+    $lineHeight: utils.calcLineHeight($fontSize);
+
+    --#{config.$namespace}-fontSize-#{$name}: #{$fontSize};
+    --#{config.$namespace}-lineHeight-#{$name}: #{$lineHeight};
+
+    @if meta.type-of($spacing) == 'number' {
+      --#{config.$namespace}-letterSpacing-#{$name}: #{utils.calcLetterSpacing(
+          $fontSize,
+          $spacing
+        )};
+    } @else {
+      @each $style, $value in $spacing {
+        @if $value {
+          --#{config.$namespace}-letterSpacing-#{$name}-#{$style}: #{utils.calcLetterSpacing(
+              $fontSize,
+              $value
+            )};
+        }
+      }
+    }
+
+    @if type-of($metrics) == 'list' {
+      $upm: list.nth($metrics, 1);
+      $capHeight: list.nth($metrics, 2);
+
+      --#{config.$namespace}-trimOffset-#{$name}: #{utils.calcTrimOffset(
+          $fontSize,
+          $lineHeight,
+          $upm,
+          $capHeight
+        )};
+    } @else if meta.type-of($metrics) == 'map' {
+      @each $style, $metric in $metrics {
+        $upm: list.nth($metric, 1);
+        $capHeight: list.nth($metric, 2);
+
+        --#{config.$namespace}-trimOffset-#{$name}-#{$style}: #{utils.calcTrimOffset(
+            $fontSize,
+            $lineHeight,
+            $upm,
+            $capHeight
+          )};
+      }
+    }
+  }
+}

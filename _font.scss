@@ -1,0 +1,66 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use './library/config';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+/// Description...
+///
+/// @since 2.1.0
+///
+/// @type map
+$weights: (
+  'soft': 400,
+  'strong': 500,
+  'heavy': 600,
+) !default;
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - Description...
+/// @param {string} $style - Description...
+/// @param {number | list} $weight - Description...
+/// @param {string} $src - Description...
+/// @param {string} $format - Description...
+/// @param {string} $display - Description...
+@mixin face($family, $style, $weight, $src, $format: 'woff2', $display: 'swap') {
+  @font-face {
+    font-display: $display;
+    font-family: $family;
+    font-style: $style;
+    font-weight: $weight;
+    src: url($src) format($format);
+  }
+}
+
+/// Description...
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - Description...
+/// @param {string} $fallback - Description...
+/// @param {list} $features - Description...
+/// @param {string} $name - Description...
+@mixin props($family, $fallback, $weights: $weights, $features: null, $name: null) {
+  --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
+
+  --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{if(
+      $features,
+      '' + $features + '',
+      normal
+    )};
+
+  @each $key, $value in $weights {
+    --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
+  }
+}

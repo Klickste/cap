@@ -9,13 +9,15 @@
     "url": "https://github.com/klickste/cap.git"
   },
   "files": [
+    "_font.scss",
+    "_scale.scss",
     "index.scss",
     "library/"
   ],
   "scripts": {
-    "test:dev": "node_modules/.bin/sass tests/style.scss tests/style.css --no-source-map --load-path=./",
-    "test:prod": "node_modules/.bin/sass tests/style.scss tests/style.css --style=compressed --no-source-map --load-path=./",
-    "test:watch": "node_modules/.bin/sass tests/style.scss tests/style.css --watch --no-source-map --load-path=./",
+    "test:dev": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --no-source-map --load-path=./",
+    "test:prod": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --style=compressed --no-source-map --load-path=./",
+    "test:watch": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --watch --no-source-map --load-path=./",
     "test:metrics": "node tests/metrics.js",
     "format": "prettier . --write"
   },
