@@ -44,14 +44,14 @@ $downs: 6 !default;
 /// @type number
 $factor: 1.2 !default;
 
-/// Ratio for the letter spacing calculation.
+/// Ratio modifier for the letter spacing calculation.
 ///
 /// @since 2.1.0
 ///
 /// @type number
 $spacing: 0 !default;
 
-/// UPM and cap height values of the used typeface.
+/// UPM (Units Per eM) and cap height values of the used typeface.
 ///
 /// @since 2.1.0
 ///
