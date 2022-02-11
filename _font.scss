@@ -38,7 +38,7 @@ $weights: (
 /// @param {string} $src - The source URL of the font file.
 /// @param {string} $format - The font format of the font file.
 /// @param {string} $display - The display descriptor which determines when the font is ready to use.
-@mixin face($family, $style, $weight, $src, $format: 'woff2', $display: 'swap') {
+@mixin face($family, $style, $weight, $src, $format: 'woff2', $display: swap) {
   @font-face {
     font-display: $display;
     font-family: $family;
