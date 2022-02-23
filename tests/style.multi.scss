@@ -1,0 +1,105 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'index' as cap with (
+  $namespace: 'app'
+);
+
+@use 'font';
+@use 'scale' with (
+  $factor: 1.2,
+  $ups: 6,
+  $downs: 1,
+  $spacing: (
+    'sans': 0,
+    'serif': 1,
+  ),
+  $metrics: (
+    'sans': (
+      2816,
+      2048,
+    ),
+    'serif': (
+      2000,
+      1486,
+    ),
+  )
+);
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+@include font.face(
+  $family: 'Inter',
+  $style: normal,
+  $weight: 400 600,
+  $src: '/fonts/Inter-roman.var.woff2'
+);
+
+@include font.face(
+  $family: 'Inter',
+  $style: italic,
+  $weight: 400 600,
+  $src: '/fonts/Inter-italic.var.woff2'
+);
+
+@include font.face(
+  $family: 'Merriweather',
+  $style: normal,
+  $weight: 400 700,
+  $src: '/fonts/Merriweather-roman.var.woff2'
+);
+
+@include font.face(
+  $family: 'Merriweather',
+  $style: italic,
+  $weight: 400 700,
+  $src: '/fonts/Merriweather-italic.var.woff2'
+);
+
+// ==========================================================================
+// Single typeface
+// ==========================================================================
+
+:root {
+  @include font.props(
+    $family: 'Inter',
+    $fallback: sans-serif,
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $features: (
+      'calt',
+      'liga',
+      'ss03',
+      'zero',
+      'cv05',
+      'cv10',
+    ),
+    $name: 'sans'
+  );
+
+  @include font.props(
+    $family: 'Merriweather',
+    $fallback: serif,
+    $weights: (
+      'soft': 400,
+      'heavy': 700,
+    ),
+    $name: 'serif'
+  );
+
+  @include scale.props($base: 15px);
+
+  @media (pointer: coarse) {
+    @include scale.props($base: 17px, $factor: 1.1);
+  }
+}
+
+:host {
+  @include cap.trim('label');
+}

@@ -1,0 +1,69 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'index' as cap with (
+  $namespace: 'app'
+);
+@use 'font';
+@use 'scale' with (
+  $ups: 4,
+  $downs: 1,
+  $spacing: 0,
+  $metrics: (
+    2816,
+    2048,
+  )
+);
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+@include font.face(
+  $family: 'Inter',
+  $style: normal,
+  $weight: 400 600,
+  $src: '/fonts/Inter-roman.var.woff2'
+);
+
+@include font.face(
+  $family: 'Inter',
+  $style: italic,
+  $weight: 400 600,
+  $src: '/fonts/Inter-italic.var.woff2'
+);
+
+// ==========================================================================
+// Single typeface
+// ==========================================================================
+
+:root {
+  @include font.props(
+    $family: 'Inter',
+    $fallback: sans-serif,
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $features: (
+      'calt',
+      'liga',
+      'ss03',
+      'zero',
+      'cv05',
+      'cv10',
+    )
+  );
+
+  @include scale.props($base: 15px);
+
+  @media (pointer: coarse) {
+    @include scale.props($base: 17px, $factor: 1.1);
+  }
+}
+
+:host {
+  @include cap.trim('label');
+}

@@ -1,52 +1,73 @@
-/*===============================
-=            Modules            =
-===============================*/
+////
+/// @group utils
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
 
 @use 'sass:math';
-@use 'sass:list';
-@use 'sass:map';
-@use 'sass:meta';
 @use './config';
 
-/*=================================
-=            Functions            =
-=================================*/
+// ==========================================================================
+// Functions
+// ==========================================================================
 
-/**
- *
- * Description...
- *
- * Inpired by the "Dynamic Metrics" section on the Inter typeface family website:
- * https://rsms.me/inter/dynmetrics/
- *
- */
+/// Calculates the trim offset for a font size.
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - The font size.
+/// @param {number} $lineHeight - The line height.
+/// @param {number} $upm - Units Per eM of the typeface.
+/// @param {number} $capHeight - Cap height ot the typeface.
+@function calcTrimOffset($fontSize, $lineHeight, $upm, $capHeight) {
+  $boxHeight: if(
+    config.$roundEven,
+    2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2)),
+    math.round(math.div($capHeight, $upm) * $fontSize)
+  );
 
-@function getRatio($fontSize, $a, $b, $c) {
-  $d: math.div($fontSize, 1px);
+  @return math.div(($lineHeight - $boxHeight), 2);
+}
+
+/// Calculates an exponential ratio.
+///
+/// Inspired by the "Dynamic Metrics" section of the Inter typeface family website.
+/// https://rsms.me/inter/dynmetrics
+///
+/// @since 1.0.0
+///
+/// @param {number} $size - The size.
+/// @param {number} $a
+/// @param {number} $b
+/// @param {number} $c
+@function calcRatio($size, $a, $b, $c) {
+  $d: math.div($size, 1px);
 
   @return ($a + ($b * math.pow(math.$e, $c * $d)));
 }
 
-/**
- *
- * Description...
- *
- */
+/// Calculates the letter spacing for a font size.
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - The font size.
+/// @param {number} $spacing - Ratio modifier for the calculation.
+@function calcLetterSpacing($fontSize, $spacing) {
+  $ratio: calcRatio($fontSize, -0.0223, 0.185, -0.1745 + math.div($spacing, 100));
 
-@function getLetterSpacing($fontSize, $spacingFactor) {
-  $ratio: getRatio($fontSize, -0.0223 * $spacingFactor, 0.185, -0.1745);
-
-  @return $ratio * 1em;
+  @return math.div(math.round($ratio * 1000), 1000) * 1em;
 }
 
-/**
- *
- * Description...
- *
- */
-
-@function getLineHeight($fontSize) {
-  $ratio: getRatio($fontSize, 1.2, 1.8, -0.12);
+/// Calculates the line height for a font size.
+///
+/// @since 1.0.0
+///
+/// @param {number} $fontSize - The font size.
+@function calcLineHeight($fontSize) {
+  $ratio: calcRatio($fontSize, 1.2, 1.8, -0.12);
 
   @if config.$roundEven {
     @return math.round(math.div($fontSize * $ratio, 2)) * 2;
@@ -55,63 +76,42 @@
   }
 }
 
-/**
- *
- * Description...
- *
- */
-
-@function getFontSize($fontSizeBase, $scaleFactor, $scaleIndex) {
-  @return math.round($fontSizeBase * math.pow($scaleFactor, $scaleIndex));
+/// Calculates a modular font size.
+///
+/// @since 1.0.0
+///
+/// @param {number} $base - Base font size for the scale calculation.
+/// @param {number} $factor - Factor for the modular scale calculation.
+/// @param {number} $scale - The modular scale index.
+@function calcFontSize($base, $factor, $scale) {
+  @return math.round($base * math.pow($factor, $scale));
 }
 
-/**
- *
- * Description...
- *
- */
+// ==========================================================================
+// Mixins
+// ==========================================================================
 
-@function getOffset($fontSize, $lineHeight, $upm, $capHeight) {
-  $boxHeight: 0px;
+/// Reduces the height of a selector by the value of the assigned trim offset.
+///
+/// @since 2.0.0
+///
+/// @param {string} $name - The name of the selector which should be trimmed.
+@mixin trim($name) {
+  padding-bottom: 1px;
+  padding-top: 1px;
 
-  @if config.$roundEven {
-    $boxHeight: 2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2));
-  } @else {
-    $boxHeight: math.round(math.div($capHeight, $upm) * $fontSize);
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
   }
 
-  @return math.div(($lineHeight - $boxHeight), 2);
-}
-
-/**
- *
- * Description...
- *
- */
-
-@function getSizeNames($scales) {
-  $names: ();
-
-  @each $sizeKey in map.keys(list.nth($scales, 1)) {
-    $name: map.get(config.$sizeKeys, $sizeKey);
-    $names: list.append($names, $name);
+  &::before {
+    margin-top: calc((var(--#{config.$namespace}-#{$name}-trimOffset) + 1px) * -1);
   }
 
-  @return $names;
-}
-
-/**
- *
- * Description...
- *
- */
-
-@function getWeightNames($fonts) {
-  $weights: ();
-
-  @each $font in map.values($fonts) {
-    $weights: map.merge($weights, map.get($font, 'weights'));
+  &::after {
+    margin-bottom: calc((var(--#{config.$namespace}-#{$name}-trimOffset) + 1px) * -1);
   }
-
-  @return map.keys($weights);
 }

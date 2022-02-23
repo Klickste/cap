@@ -1,0 +1,76 @@
+////
+/// @group font
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use './library/config';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+/// Semantic font weights.
+///
+/// @since 2.1.0
+///
+/// @type map
+$weights: (
+  'soft': 400,
+  'strong': 500,
+  'heavy': 600,
+) !default;
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+/// @font-face rule for a given typeface.
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - The name of the font family.
+/// @param {string} $style - The style of the font family.
+/// @param {number | list} $weight - The weight(s) of the font family.
+/// @param {string} $src - The source URL of the font file.
+/// @param {string} $format - The font format of the font file.
+/// @param {string} $display - The display descriptor which determines when the font is ready to use.
+@mixin face($family, $style, $weight, $src, $format: 'woff2', $display: swap) {
+  @font-face {
+    font-display: $display;
+    font-family: $family;
+    font-style: $style;
+    font-weight: $weight;
+    src: url($src) format($format);
+  }
+}
+
+/// Declares a set of custom properties for a used typeface.
+///
+/// @since 2.0.0
+///
+/// @param {string} $family - The name of the font family.
+/// @param {string} $fallback - A generic font family used as fallback mechanism.
+/// @param {null | list} $features - Advanced typographic features in OpenType fonts.
+/// @param {null | string} $name - Descriptive suffix of the font family.
+@mixin props($family, $fallback, $weights: $weights, $features: null, $name: null) {
+  //
+  // Declare fontFamily and fontFeatures.
+  // --------------------------------------------------------------------------
+  --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
+  --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{if(
+      $features,
+      '' + $features + '',
+      normal
+    )};
+
+  //
+  // Declare fontWeights.
+  // --------------------------------------------------------------------------
+  @each $key, $value in $weights {
+    --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
+  }
+}
