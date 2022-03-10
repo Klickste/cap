@@ -4,12 +4,6 @@
 ////
 
 // ==========================================================================
-// Modules
-// ==========================================================================
-
-@use './library/config';
-
-// ==========================================================================
 // Variables
 // ==========================================================================
 
@@ -60,17 +54,13 @@ $weights: (
   //
   // Declare fontFamily and fontFeatures.
   // --------------------------------------------------------------------------
-  --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
-  --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{if(
-      $features,
-      '' + $features + '',
-      normal
-    )};
+  --cap-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
+  --cap-fontFeatures#{if($name, '-#{$name}', '')}: #{if($features, '' + $features + '', normal)};
 
   //
   // Declare fontWeights.
   // --------------------------------------------------------------------------
   @each $key, $value in $weights {
-    --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
+    --cap-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
   }
 }

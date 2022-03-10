@@ -8,10 +8,24 @@
   $base: 17px,
   $ups: 8,
   $downs: 8,
-  $spacing: 0,
+  $spacing: (
+    'sans': 0,
+    'serif': null,
+    'mono': 0,
+  ),
   $metrics: (
-    2816,
-    2048,
+    'sans': (
+      2816,
+      2048,
+    ),
+    'serif': (
+      2000,
+      1486,
+    ),
+    'mono': (
+      1950,
+      1374,
+    ),
   )
 );
 
@@ -23,7 +37,7 @@
   $family: 'Inter',
   $style: normal,
   $weight: 400 600,
-  $src: './../assets/fonts/Inter-roman.var.woff2'
+  $src: './../assets/fonts/Inter-normal.var.woff2'
 );
 
 @include font.face(
@@ -31,6 +45,27 @@
   $style: italic,
   $weight: 400 600,
   $src: './../assets/fonts/Inter-italic.var.woff2'
+);
+
+@include font.face(
+  $family: 'Merriweather',
+  $style: normal,
+  $weight: 400 700,
+  $src: './../assets/fonts/Merriweather-normal.var.woff2'
+);
+
+@include font.face(
+  $family: 'Merriweather',
+  $style: italic,
+  $weight: 400 700,
+  $src: './../assets/fonts/Merriweather-italic.var.woff2'
+);
+
+@include font.face(
+  $family: 'FiraCode',
+  $style: normal,
+  $weight: 400 700,
+  $src: './../assets/fonts/FiraCode.var.woff2'
 );
 
 // ==========================================================================
@@ -53,12 +88,47 @@
       'zero',
       'cv05',
       'cv10',
-    )
+    ),
+    $name: 'sans'
+  );
+
+  @include font.props(
+    $family: 'Merriweather',
+    $fallback: serif,
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $name: 'serif'
+  );
+
+  @include font.props(
+    $family: 'FiraCode',
+    $fallback: monospace,
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $name: 'mono'
   );
 
   @include scale.props;
 }
 
 body {
-  font-family: var(--cap-fontFamily);
+  &.debug {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    display: grid;
+    font-kerning: normal;
+    gap: 64px;
+    grid-template: auto / minmax(auto, 640px);
+    justify-content: center;
+    margin: 0;
+    padding: 64px 16px;
+    text-rendering: optimizeLegibility;
+  }
 }

@@ -23,10 +23,7 @@
     "sass/"
   ],
   "scripts": {
-    "test:dev": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --no-source-map --load-path=./",
-    "test:prod": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --style=compressed --no-source-map --load-path=./",
-    "test:watch": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --watch --no-source-map --load-path=./",
-    "test:metrics": "node tests/metrics.js",
+    "metrics": "node tools/metrics.js",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "format": "prettier . --write"

@@ -34,6 +34,7 @@ $levels: (
   '+8': '7xl',
 );
 $weights: ('soft', 'strong', 'heavy');
+$families: ('sans', 'serif', 'mono');
 
 // ==========================================================================
 // Rules
@@ -66,11 +67,11 @@ $weights: ('soft', 'strong', 'heavy');
     }
 
     #{&}(.ellipsis) {
-      --cap-text-minWidth: 0;
       --cap-text-content-overflow: hidden;
       --cap-text-content-textOverflow: ellipsis;
       --cap-text-content-whiteSpace: nowrap;
       --cap-text-content-width: 100%;
+      --cap-text-minWidth: 0;
     }
 
     #{&}(.italic) {
@@ -81,21 +82,38 @@ $weights: ('soft', 'strong', 'heavy');
       #{&}(.#{if(string.index($level, '-') or string.index($level, '+'), '\\#{$level}', '\\3#{$level}')}) {
         --cap-text-content-fontSize: var(--cap-fontSize-#{$size});
         --cap-text-content-lineHeight: var(--cap-lineHeight-#{$size});
-        --cap-text-content-letterSpacing: var(--cap-letterSpacing-#{$size});
-        --cap-text-trimOffset: var(--cap-trimOffset-#{$size});
+
+        @each $family in $families {
+          --cap-text-content-letterSpacing-#{$family}: var(--cap-letterSpacing-#{$size}-#{$family});
+          --cap-text-trimOffset-#{$family}: var(--cap-trimOffset-#{$size}-#{$family});
+        }
       }
     }
 
     @each $weight in $weights {
       #{&}(.#{$weight}) {
-        --cap-text-content-fontWeight: var(--cap-fontWeight-#{$weight});
+        @each $family in $families {
+          --cap-text-content-fontWeight-#{$family}: var(--cap-fontWeight-#{$weight}-#{$family});
+        }
+      }
+    }
+
+    @each $family in $families {
+      #{&}(.#{$family}) {
+        --cap-text-content-fontFamily: var(--cap-fontFamily-#{$family});
+        --cap-text-content-fontWeight: var(--cap-text-content-fontWeight-#{$family});
+        --cap-text-content-letterSpacing: var(--cap-text-content-letterSpacing-#{$family}, normal);
+        --cap-text-trimOffset: var(--cap-text-trimOffset-#{$family});
       }
     }
   }
 }
 
 .content {
+  display: block;
+  font-family: var(--cap-text-content-fontFamily);
   font-size: var(--cap-text-content-fontSize);
+  font-style: var(--cap-text-content-fontStyle, normal);
   font-weight: var(--cap-text-content-fontWeight);
   letter-spacing: var(--cap-text-content-letterSpacing);
   line-height: var(--cap-text-content-lineHeight);
@@ -104,7 +122,6 @@ $weights: ('soft', 'strong', 'heavy');
   text-overflow: var(--cap-text-content-textOverflow, clip);
   white-space: var(--cap-text-content-whiteSpace, normal);
   width: var(--cap-text-content-width, auto);
-  font-style: var(--cap-text-content-fontStyle, normal);
 
   &[data-content-before] {
     &:before {
