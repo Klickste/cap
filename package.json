@@ -1,6 +1,6 @@
 {
   "name": "@klickste/cap",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Adaptive typography for the web.",
   "license": "MIT",
   "author": "klickste",
@@ -8,17 +8,24 @@
     "type": "git",
     "url": "https://github.com/klickste/cap.git"
   },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/cap/cap.esm.js",
   "files": [
-    "_font.scss",
-    "_scale.scss",
-    "index.scss",
-    "library/"
+    "dist/",
+    "loader/",
+    "www/",
+    "sass/"
   ],
   "scripts": {
-    "test:dev": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --no-source-map --load-path=./",
-    "test:prod": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --style=compressed --no-source-map --load-path=./",
-    "test:watch": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --watch --no-source-map --load-path=./",
-    "test:metrics": "node tests/metrics.js",
+    "metrics": "node tools/metrics.js",
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
     "format": "prettier . --write"
   },
   "prettier": {
@@ -27,9 +34,11 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@stencil/core": "^2.14.1",
     "sass": "^1.49.0"
   },
   "devDependencies": {
+    "@stencil/sass": "^1.5.2",
     "fontkit": "^1.8.1",
     "prettier": "^2.5.1"
   }
