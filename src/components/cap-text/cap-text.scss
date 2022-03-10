@@ -1,0 +1,115 @@
+////
+/// @group text
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:list';
+@use 'sass:string';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$levels: (
+  '-8': '7xs',
+  '-7': '6xs',
+  '-6': '5xs',
+  '-5': '4xs',
+  '-4': '3xs',
+  '-3': '2xs',
+  '-2': 'xs',
+  '-1': 'sm',
+  '0': 'md',
+  '+1': 'lg',
+  '+2': 'xl',
+  '+3': '2xl',
+  '+4': '3xl',
+  '+5': '4xl',
+  '+6': '5xl',
+  '+7': '6xl',
+  '+8': '7xl',
+);
+$weights: ('soft', 'strong', 'heavy');
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+:host {
+  display: block;
+  min-width: var(--text-minWidth, auto);
+  padding-bottom: 1px;
+  padding-top: 1px;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  &::before {
+    margin-top: calc((var(--text-content-trimOffset) + 1px) * -1);
+  }
+
+  &::after {
+    margin-bottom: calc((var(--text-content-trimOffset) + 1px) * -1);
+  }
+
+  @at-root {
+    #{&}(.no-wrap) {
+      --text-content-whiteSpace: nowrap;
+    }
+
+    #{&}(.ellipsis) {
+      --text-minWidth: 0;
+      --text-content-overflow: hidden;
+      --text-content-textOverflow: ellipsis;
+      --text-content-whiteSpace: nowrap;
+      --text-content-width: 100%;
+    }
+
+    @each $level, $size in $levels {
+      #{&}(.#{if(string.index($level, '-') or string.index($level, '+'), '\\#{$level}', '\\3#{$level}')}) {
+        --text-content-fontSize: var(--cap-fontSize-#{$size});
+        --text-content-lineHeight: var(--cap-lineHeight-#{$size});
+        --text-content-letterSpacing: var(--cap-letterSpacing-#{$size});
+        --text-content-trimOffset: var(--cap-trimOffset-#{$size});
+      }
+    }
+
+    @each $weight in $weights {
+      #{&}(.#{$weight}) {
+        --text-content-fontWeight: var(--cap-fontWeight-#{$weight});
+      }
+    }
+  }
+}
+
+.content {
+  font-size: var(--text-content-fontSize);
+  font-weight: var(--text-content-fontWeight);
+  letter-spacing: var(--text-content-letterSpacing);
+  line-height: var(--text-content-lineHeight);
+  margin: 0;
+  overflow: var(--text-content-overflow, visible);
+  text-overflow: var(--text-content-textOverflow, clip);
+  white-space: var(--text-content-whiteSpace, normal);
+  width: var(--text-content-width, auto);
+
+  &[data-text-before] {
+    &:before {
+      content: attr(data-text-before) '\0000A0';
+    }
+  }
+
+  &[data-text-after] {
+    &:after {
+      content: '\0000A0'attr(data-text-after);
+    }
+  }
+}
