@@ -15,7 +15,7 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/hello/cap.esm.js",
+  "unpkg": "dist/cap/cap.esm.js",
   "files": [
     "dist/",
     "loader/",
