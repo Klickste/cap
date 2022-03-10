@@ -1,4 +1,6 @@
-package-lock.json
-tests/*.css
 dist/
+loader/
+package-lock.json
+src/components.d.ts
+tests/*.css
 www/

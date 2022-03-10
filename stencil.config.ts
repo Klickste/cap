@@ -5,14 +5,15 @@ export const config: Config = {
   namespace: 'cap',
   taskQueue: 'async',
   plugins: [sass()],
+  globalStyle: 'src/global/style.scss',
   outputTargets: [
     {
       type: 'www',
-      serviceWorker: null
+      serviceWorker: null,
     },
     {
       type: 'docs-readme',
-      footer: ''
+      footer: '',
     },
     {
       type: 'dist',

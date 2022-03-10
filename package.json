@@ -20,10 +20,7 @@
     "dist/",
     "loader/",
     "www/",
-    "_font.scss",
-    "_scale.scss",
-    "index.scss",
-    "library/"
+    "sass/"
   ],
   "scripts": {
     "test:dev": "node_modules/.bin/sass tests/style.$npm_config_sheet.scss tests/style.$npm_config_sheet.css --no-source-map --load-path=./",
@@ -40,7 +37,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@stencil/core": "^2.14.0",
+    "@stencil/core": "^2.14.1",
     "sass": "^1.49.0"
   },
   "devDependencies": {

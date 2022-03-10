@@ -5,5 +5,7 @@ const fonts = [
 ]
 
 fonts.map((font) => {
-  console.log(`${font.fullName}\nUPM: ${font.unitsPerEm}\ncapHeight: ${font.capHeight}\nxHeight: ${font.xHeight}\n`)
+  console.log(
+    `${font.fullName}\nUPM: ${font.unitsPerEm}\ncapHeight: ${font.capHeight}\nxHeight: ${font.xHeight}\n`
+  )
 })

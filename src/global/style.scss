@@ -2,28 +2,16 @@
 // Modules
 // ==========================================================================
 
-@use 'index' as cap with (
-  $namespace: 'app'
-);
-
-@use 'font';
-@use 'scale' with (
-  $factor: 1.2,
-  $ups: 6,
-  $downs: 1,
-  $spacing: (
-    'sans': 0,
-    'serif': 1,
-  ),
+@use './../../sass/index' as cap;
+@use './../../sass/font';
+@use './../../sass/scale' with (
+  $base: 17px,
+  $ups: 8,
+  $downs: 8,
+  $spacing: 0,
   $metrics: (
-    'sans': (
-      2816,
-      2048,
-    ),
-    'serif': (
-      2000,
-      1486,
-    ),
+    2816,
+    2048,
   )
 );
 
@@ -35,28 +23,14 @@
   $family: 'Inter',
   $style: normal,
   $weight: 400 600,
-  $src: '/fonts/Inter-roman.var.woff2'
+  $src: './../assets/fonts/Inter-roman.var.woff2'
 );
 
 @include font.face(
   $family: 'Inter',
   $style: italic,
   $weight: 400 600,
-  $src: '/fonts/Inter-italic.var.woff2'
-);
-
-@include font.face(
-  $family: 'Merriweather',
-  $style: normal,
-  $weight: 400 700,
-  $src: '/fonts/Merriweather-roman.var.woff2'
-);
-
-@include font.face(
-  $family: 'Merriweather',
-  $style: italic,
-  $weight: 400 700,
-  $src: '/fonts/Merriweather-italic.var.woff2'
+  $src: './../assets/fonts/Inter-italic.var.woff2'
 );
 
 // ==========================================================================
@@ -79,27 +53,12 @@
       'zero',
       'cv05',
       'cv10',
-    ),
-    $name: 'sans'
+    )
   );
 
-  @include font.props(
-    $family: 'Merriweather',
-    $fallback: serif,
-    $weights: (
-      'soft': 400,
-      'heavy': 700,
-    ),
-    $name: 'serif'
-  );
-
-  @include scale.props($base: 15px);
-
-  @media (pointer: coarse) {
-    @include scale.props($base: 17px, $factor: 1.1);
-  }
+  @include scale.props;
 }
 
-:host {
-  @include cap.trim('label');
+body {
+  font-family: var(--cap-fontFamily);
 }

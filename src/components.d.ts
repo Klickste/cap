@@ -5,211 +5,122 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IconNameTypes, RichTextLevelTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
-import { MatchResults } from "@stencil/router";
+import { TextFamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
 export namespace Components {
-    interface AppFooter {
-    }
-    interface AppHead {
-        "pageDescription": string;
-        "pageTitle": string;
-    }
-    interface AppIcon {
-        "name": IconNameTypes;
-    }
-    interface AppPageContact {
-        "pageDescription": string;
-        "pageTitle": string;
-    }
-    interface AppPageError {
-        "pageDescription": string;
-        "pageTitle": string;
-    }
-    interface AppPageHome {
-        "pageDescription": string;
-        "pageTitle": string;
-    }
-    interface AppProject {
-        "match": MatchResults;
-    }
-    interface AppRichText {
+    interface CapText {
+        /**
+          * Description...
+         */
         "content": string;
-        "level": RichTextLevelTypes;
-    }
-    interface AppRoot {
-    }
-    interface AppTeaser {
-        "teaserTitle": string;
-        "url": string;
-    }
-    interface AppText {
-        "content": string;
+        /**
+          * Description...
+         */
+        "contentAfter": string;
+        /**
+          * Description...
+         */
+        "contentBefore": string;
+        /**
+          * Description...
+         */
         "ellipsis": boolean;
+        /**
+          * Description...
+         */
+        "family": TextFamilyTypes;
+        /**
+          * Description...
+         */
         "heading": TextHeadingTypes;
+        /**
+          * Description...
+         */
+        "italic": boolean;
+        /**
+          * Description...
+         */
         "level": TextLevelTypes;
+        /**
+          * Description...
+         */
         "noWrap": boolean;
+        /**
+          * Description...
+         */
         "paragraph": boolean;
-        "textAfter": string;
-        "textBefore": string;
+        /**
+          * Description...
+         */
         "weight": TextWeightTypes;
     }
 }
 declare global {
-    interface HTMLAppFooterElement extends Components.AppFooter, HTMLStencilElement {
+    interface HTMLCapTextElement extends Components.CapText, HTMLStencilElement {
     }
-    var HTMLAppFooterElement: {
-        prototype: HTMLAppFooterElement;
-        new (): HTMLAppFooterElement;
-    };
-    interface HTMLAppHeadElement extends Components.AppHead, HTMLStencilElement {
-    }
-    var HTMLAppHeadElement: {
-        prototype: HTMLAppHeadElement;
-        new (): HTMLAppHeadElement;
-    };
-    interface HTMLAppIconElement extends Components.AppIcon, HTMLStencilElement {
-    }
-    var HTMLAppIconElement: {
-        prototype: HTMLAppIconElement;
-        new (): HTMLAppIconElement;
-    };
-    interface HTMLAppPageContactElement extends Components.AppPageContact, HTMLStencilElement {
-    }
-    var HTMLAppPageContactElement: {
-        prototype: HTMLAppPageContactElement;
-        new (): HTMLAppPageContactElement;
-    };
-    interface HTMLAppPageErrorElement extends Components.AppPageError, HTMLStencilElement {
-    }
-    var HTMLAppPageErrorElement: {
-        prototype: HTMLAppPageErrorElement;
-        new (): HTMLAppPageErrorElement;
-    };
-    interface HTMLAppPageHomeElement extends Components.AppPageHome, HTMLStencilElement {
-    }
-    var HTMLAppPageHomeElement: {
-        prototype: HTMLAppPageHomeElement;
-        new (): HTMLAppPageHomeElement;
-    };
-    interface HTMLAppProjectElement extends Components.AppProject, HTMLStencilElement {
-    }
-    var HTMLAppProjectElement: {
-        prototype: HTMLAppProjectElement;
-        new (): HTMLAppProjectElement;
-    };
-    interface HTMLAppRichTextElement extends Components.AppRichText, HTMLStencilElement {
-    }
-    var HTMLAppRichTextElement: {
-        prototype: HTMLAppRichTextElement;
-        new (): HTMLAppRichTextElement;
-    };
-    interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
-    }
-    var HTMLAppRootElement: {
-        prototype: HTMLAppRootElement;
-        new (): HTMLAppRootElement;
-    };
-    interface HTMLAppTeaserElement extends Components.AppTeaser, HTMLStencilElement {
-    }
-    var HTMLAppTeaserElement: {
-        prototype: HTMLAppTeaserElement;
-        new (): HTMLAppTeaserElement;
-    };
-    interface HTMLAppTextElement extends Components.AppText, HTMLStencilElement {
-    }
-    var HTMLAppTextElement: {
-        prototype: HTMLAppTextElement;
-        new (): HTMLAppTextElement;
+    var HTMLCapTextElement: {
+        prototype: HTMLCapTextElement;
+        new (): HTMLCapTextElement;
     };
     interface HTMLElementTagNameMap {
-        "app-footer": HTMLAppFooterElement;
-        "app-head": HTMLAppHeadElement;
-        "app-icon": HTMLAppIconElement;
-        "app-page-contact": HTMLAppPageContactElement;
-        "app-page-error": HTMLAppPageErrorElement;
-        "app-page-home": HTMLAppPageHomeElement;
-        "app-project": HTMLAppProjectElement;
-        "app-rich-text": HTMLAppRichTextElement;
-        "app-root": HTMLAppRootElement;
-        "app-teaser": HTMLAppTeaserElement;
-        "app-text": HTMLAppTextElement;
+        "cap-text": HTMLCapTextElement;
     }
 }
 declare namespace LocalJSX {
-    interface AppFooter {
-    }
-    interface AppHead {
-        "pageDescription"?: string;
-        "pageTitle"?: string;
-    }
-    interface AppIcon {
-        "name"?: IconNameTypes;
-    }
-    interface AppPageContact {
-        "pageDescription"?: string;
-        "pageTitle"?: string;
-    }
-    interface AppPageError {
-        "pageDescription"?: string;
-        "pageTitle"?: string;
-    }
-    interface AppPageHome {
-        "pageDescription"?: string;
-        "pageTitle"?: string;
-    }
-    interface AppProject {
-        "match"?: MatchResults;
-    }
-    interface AppRichText {
+    interface CapText {
+        /**
+          * Description...
+         */
         "content"?: string;
-        "level"?: RichTextLevelTypes;
-    }
-    interface AppRoot {
-    }
-    interface AppTeaser {
-        "teaserTitle"?: string;
-        "url"?: string;
-    }
-    interface AppText {
-        "content"?: string;
+        /**
+          * Description...
+         */
+        "contentAfter"?: string;
+        /**
+          * Description...
+         */
+        "contentBefore"?: string;
+        /**
+          * Description...
+         */
         "ellipsis"?: boolean;
+        /**
+          * Description...
+         */
+        "family"?: TextFamilyTypes;
+        /**
+          * Description...
+         */
         "heading"?: TextHeadingTypes;
+        /**
+          * Description...
+         */
+        "italic"?: boolean;
+        /**
+          * Description...
+         */
         "level"?: TextLevelTypes;
+        /**
+          * Description...
+         */
         "noWrap"?: boolean;
+        /**
+          * Description...
+         */
         "paragraph"?: boolean;
-        "textAfter"?: string;
-        "textBefore"?: string;
+        /**
+          * Description...
+         */
         "weight"?: TextWeightTypes;
     }
     interface IntrinsicElements {
-        "app-footer": AppFooter;
-        "app-head": AppHead;
-        "app-icon": AppIcon;
-        "app-page-contact": AppPageContact;
-        "app-page-error": AppPageError;
-        "app-page-home": AppPageHome;
-        "app-project": AppProject;
-        "app-rich-text": AppRichText;
-        "app-root": AppRoot;
-        "app-teaser": AppTeaser;
-        "app-text": AppText;
+        "cap-text": CapText;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "app-footer": LocalJSX.AppFooter & JSXBase.HTMLAttributes<HTMLAppFooterElement>;
-            "app-head": LocalJSX.AppHead & JSXBase.HTMLAttributes<HTMLAppHeadElement>;
-            "app-icon": LocalJSX.AppIcon & JSXBase.HTMLAttributes<HTMLAppIconElement>;
-            "app-page-contact": LocalJSX.AppPageContact & JSXBase.HTMLAttributes<HTMLAppPageContactElement>;
-            "app-page-error": LocalJSX.AppPageError & JSXBase.HTMLAttributes<HTMLAppPageErrorElement>;
-            "app-page-home": LocalJSX.AppPageHome & JSXBase.HTMLAttributes<HTMLAppPageHomeElement>;
-            "app-project": LocalJSX.AppProject & JSXBase.HTMLAttributes<HTMLAppProjectElement>;
-            "app-rich-text": LocalJSX.AppRichText & JSXBase.HTMLAttributes<HTMLAppRichTextElement>;
-            "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "app-teaser": LocalJSX.AppTeaser & JSXBase.HTMLAttributes<HTMLAppTeaserElement>;
-            "app-text": LocalJSX.AppText & JSXBase.HTMLAttributes<HTMLAppTextElement>;
+            "cap-text": LocalJSX.CapText & JSXBase.HTMLAttributes<HTMLCapTextElement>;
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Host, Prop, h } from '@stencil/core'
-import { TextLevelTypes, TextWeightTypes, TextHeadingTypes } from './../../types'
+import { TextFamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from './../../types'
 
 @Component({
   tag: 'cap-text',
@@ -7,33 +7,80 @@ import { TextLevelTypes, TextWeightTypes, TextHeadingTypes } from './../../types
   shadow: true,
 })
 export class CapText {
+  /**
+   * Description...
+   */
   @Prop() content: string = 'Text'
+
+  /**
+   * Description...
+   */
+  @Prop() contentAfter: string
+
+  /**
+   * Description...
+   */
+  @Prop() contentBefore: string
+
+  /**
+   * Description...
+   */
   @Prop() ellipsis: boolean = false
+
+  /**
+   * Description...
+   */
+  @Prop() family: TextFamilyTypes = 'sans'
+
+  /**
+   * Description...
+   */
   @Prop() heading: TextHeadingTypes
+
+  /**
+   * Description...
+   */
+  @Prop() italic: boolean
+
+  /**
+   * Description...
+   */
   @Prop() level: TextLevelTypes = '0'
+
+  /**
+   * Description...
+   */
   @Prop() noWrap: boolean = false
+
+  /**
+   * Description...
+   */
   @Prop() paragraph: boolean
-  @Prop() textAfter: string
-  @Prop() textBefore: string
+
+  /**
+   * Description...
+   */
   @Prop() weight: TextWeightTypes = 'soft'
 
   render() {
     const Tag = this.heading ? `h${this.heading.toString()}` : this.paragraph ? 'p' : 'span'
     const addons = {
-      'data-text-before': this.textBefore,
-      'data-text-after': this.textAfter,
+      'data-content-before': this.contentBefore,
+      'data-content-after': this.contentAfter,
     }
     const hostClass = [
-      this.ellipsis && 'ellipsis',
-      this.noWrap && 'no-wrap',
+      this.ellipsis ? 'ellipsis' : '',
+      this.family,
       this.level,
+      this.noWrap ? 'no-wrap' : '',
+      this.italic ? 'italic' : '',
       this.weight,
     ]
 
     return (
       <Host class={hostClass.join(' ')}>
         <Tag class="content" {...addons}>
-          {this.content}
+          <slot />
         </Tag>
       </Host>
     )
