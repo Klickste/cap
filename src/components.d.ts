@@ -11,10 +11,6 @@ export namespace Components {
         /**
           * Description...
          */
-        "content": string;
-        /**
-          * Description...
-         */
         "contentAfter": string;
         /**
           * Description...
@@ -67,10 +63,6 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CapText {
-        /**
-          * Description...
-         */
-        "content"?: string;
         /**
           * Description...
          */

@@ -10,11 +10,6 @@ export class CapText {
   /**
    * Description...
    */
-  @Prop() content: string = 'Text'
-
-  /**
-   * Description...
-   */
   @Prop() contentAfter: string
 
   /**
@@ -62,6 +57,11 @@ export class CapText {
    */
   @Prop() weight: TextWeightTypes = 'soft'
 
+  /**
+   * Renders the object.
+   *
+   * @return     {JSX.Element}  { cap-text custom element }
+   */
   render() {
     const Tag = this.heading ? `h${this.heading.toString()}` : this.paragraph ? 'p' : 'span'
     const addons = {
