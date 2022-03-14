@@ -10,12 +10,12 @@ export class CapText {
   /**
    * Description...
    */
-  @Prop() contentAfter: string
+  @Prop({ attribute: 'append' }) dataAppend: string
 
   /**
    * Description...
    */
-  @Prop() contentBefore: string
+  @Prop({ attribute: 'prepend' }) dataPrepend: string
 
   /**
    * Description...
@@ -65,8 +65,8 @@ export class CapText {
   render() {
     const Tag = this.heading ? `h${this.heading.toString()}` : this.paragraph ? 'p' : 'span'
     const addons = {
-      'data-content-before': this.contentBefore,
-      'data-content-after': this.contentAfter,
+      'data-prepend': this.dataPrepend,
+      'data-append': this.dataAppend,
     }
     const hostClass = [
       this.ellipsis ? 'ellipsis' : '',

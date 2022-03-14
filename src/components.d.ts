@@ -11,11 +11,11 @@ export namespace Components {
         /**
           * Description...
          */
-        "contentAfter": string;
+        "dataAppend": string;
         /**
           * Description...
          */
-        "contentBefore": string;
+        "dataPrepend": string;
         /**
           * Description...
          */
@@ -66,11 +66,11 @@ declare namespace LocalJSX {
         /**
           * Description...
          */
-        "contentAfter"?: string;
+        "dataAppend"?: string;
         /**
           * Description...
          */
-        "contentBefore"?: string;
+        "dataPrepend"?: string;
         /**
           * Description...
          */

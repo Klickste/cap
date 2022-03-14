@@ -7,7 +7,6 @@
 // Modules
 // ==========================================================================
 
-@use 'sass:list';
 @use 'sass:string';
 
 // ==========================================================================
@@ -125,15 +124,15 @@ $families: ('sans', 'serif', 'mono');
   white-space: var(--cap-text-content-whiteSpace, normal);
   width: var(--cap-text-content-width, auto);
 
-  &[data-content-before] {
+  &[data-prepend] {
     &:before {
-      content: attr(data-content-before) '\0000A0';
+      content: attr(data-prepend) '\0000A0';
     }
   }
 
-  &[data-content-after] {
+  &[data-append] {
     &:after {
-      content: '\0000A0'attr(data-content-after);
+      content: '\0000A0'attr(data-append);
     }
   }
 }
