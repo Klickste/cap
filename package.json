@@ -34,8 +34,8 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@stencil/core": "^2.14.1",
-    "sass": "^1.49.0"
+    "@stencil/core": "^2.14.2",
+    "sass": "^1.49.9"
   },
   "devDependencies": {
     "@stencil/sass": "^1.5.2",
