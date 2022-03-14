@@ -5,8 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { TextFamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
+import { FamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
 export namespace Components {
+    interface CapRichText {
+        /**
+          * Description...
+         */
+        "family": FamilyTypes;
+    }
     interface CapText {
         /**
           * Description...
@@ -23,7 +29,7 @@ export namespace Components {
         /**
           * Description...
          */
-        "family": TextFamilyTypes;
+        "family": FamilyTypes;
         /**
           * Description...
          */
@@ -51,6 +57,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCapRichTextElement extends Components.CapRichText, HTMLStencilElement {
+    }
+    var HTMLCapRichTextElement: {
+        prototype: HTMLCapRichTextElement;
+        new (): HTMLCapRichTextElement;
+    };
     interface HTMLCapTextElement extends Components.CapText, HTMLStencilElement {
     }
     var HTMLCapTextElement: {
@@ -58,10 +70,17 @@ declare global {
         new (): HTMLCapTextElement;
     };
     interface HTMLElementTagNameMap {
+        "cap-rich-text": HTMLCapRichTextElement;
         "cap-text": HTMLCapTextElement;
     }
 }
 declare namespace LocalJSX {
+    interface CapRichText {
+        /**
+          * Description...
+         */
+        "family"?: FamilyTypes;
+    }
     interface CapText {
         /**
           * Description...
@@ -78,7 +97,7 @@ declare namespace LocalJSX {
         /**
           * Description...
          */
-        "family"?: TextFamilyTypes;
+        "family"?: FamilyTypes;
         /**
           * Description...
          */
@@ -105,6 +124,7 @@ declare namespace LocalJSX {
         "weight"?: TextWeightTypes;
     }
     interface IntrinsicElements {
+        "cap-rich-text": CapRichText;
         "cap-text": CapText;
     }
 }
@@ -112,6 +132,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cap-rich-text": LocalJSX.CapRichText & JSXBase.HTMLAttributes<HTMLCapRichTextElement>;
             "cap-text": LocalJSX.CapText & JSXBase.HTMLAttributes<HTMLCapTextElement>;
         }
     }

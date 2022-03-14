@@ -1,5 +1,5 @@
 import { Component, Host, Prop, h } from '@stencil/core'
-import { TextFamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from './../../types'
+import { FamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from './../../types'
 
 @Component({
   tag: 'cap-text',
@@ -25,7 +25,7 @@ export class CapText {
   /**
    * Description...
    */
-  @Prop() family: TextFamilyTypes = 'sans'
+  @Prop() family: FamilyTypes = 'sans'
 
   /**
    * Description...
