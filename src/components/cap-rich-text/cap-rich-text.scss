@@ -1,0 +1,120 @@
+////
+/// @group rich-text
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:list';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
+$families: ('sans', 'serif', 'mono');
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+cap-rich-text {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--cap-rich-text-fontFamily);
+  font-feature-settings: var(--cap-rich-text-fontFeatureSettings);
+  gap: var(--cap-rich-text-gap, 32px);
+
+  @each $family in $families {
+    &.#{$family} {
+      --cap-rich-text-fontFamily: var(--cap-fontFamily-#{$family});
+      --cap-rich-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
+      --cap-rich-text-child-base-fontWeight: var(--cap-fontWeight-soft-#{$family});
+      --cap-rich-text-child-base-letterSpacing: var(--cap-letterSpacing-md-#{$family}, normal);
+      --cap-rich-text-child-base-trimOffset: var(--cap-trimOffset-md-#{$family});
+      --cap-rich-text-child-heading-fontWeight: var(--cap-fontWeight-heavy-#{$family});
+
+      @for $heading from 1 through 6 {
+        $level: list.nth($headingLevels, $heading);
+
+        --cap-rich-text-child-heading-#{$heading}-letterSpacing: var(
+          --cap-letterSpacing-#{$level}-#{$family},
+          normal
+        );
+        --cap-rich-text-child-heading-#{$heading}-trimOffset: var(
+          --cap-trimOffset-#{$level}-#{$family}
+        );
+      }
+    }
+  }
+
+  * {
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol {
+    font-size: var(--cap-rich-text-child-fontSize);
+    letter-spacing: var(--cap-rich-text-child-letterSpacing);
+    line-height: var(--cap-rich-text-child-lineHeight);
+    font-weight: var(--cap-rich-text-child-fontWeight);
+    padding-bottom: 1px;
+    padding-top: 1px;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
+    &::before {
+      margin-top: calc((var(--cap-rich-text-child-trimOffset) + 1px) * -1);
+    }
+
+    &::after {
+      margin-bottom: calc((var(--cap-rich-text-child-trimOffset) + 1px) * -1);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    --cap-rich-text-child-fontWeight: var(--cap-rich-text-child-heading-fontWeight);
+  }
+
+  @for $heading from 1 through 6 {
+    $level: list.nth($headingLevels, $heading);
+
+    h#{$heading} {
+      --cap-rich-text-child-fontSize: var(--cap-fontSize-#{$level});
+      --cap-rich-text-child-letterSpacing: var(
+        --cap-rich-text-child-heading-#{$heading}-letterSpacing
+      );
+      --cap-rich-text-child-lineHeight: var(--cap-lineHeight-#{$level});
+      --cap-rich-text-child-trimOffset: var(--cap-rich-text-child-heading-#{$heading}-trimOffset);
+    }
+  }
+
+  p,
+  ul,
+  ol {
+    --cap-rich-text-child-fontSize: var(--cap-fontSize-md);
+    --cap-rich-text-child-fontWeight: var(--cap-rich-text-child-base-fontWeight);
+    --cap-rich-text-child-letterSpacing: var(--cap-rich-text-child-base-letterSpacing);
+    --cap-rich-text-child-lineHeight: var(--cap-lineHeight-md);
+    --cap-rich-text-child-trimOffset: var(--cap-rich-text-child-base-trimOffset);
+  }
+}
