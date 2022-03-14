@@ -1,0 +1,138 @@
+////
+/// @group text
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:string';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$levels: (
+  '-8': '7xs',
+  '-7': '6xs',
+  '-6': '5xs',
+  '-5': '4xs',
+  '-4': '3xs',
+  '-3': '2xs',
+  '-2': 'xs',
+  '-1': 'sm',
+  '0': 'md',
+  '+1': 'lg',
+  '+2': 'xl',
+  '+3': '2xl',
+  '+4': '3xl',
+  '+5': '4xl',
+  '+6': '5xl',
+  '+7': '6xl',
+  '+8': '7xl',
+);
+$weights: ('soft', 'strong', 'heavy');
+$families: ('sans', 'serif', 'mono');
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+:host {
+  display: block;
+  min-width: var(--cap-text-minWidth, auto);
+  padding-bottom: 1px;
+  padding-top: 1px;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  &::before {
+    margin-top: calc((var(--cap-text-trimOffset) + 1px) * -1);
+  }
+
+  &::after {
+    margin-bottom: calc((var(--cap-text-trimOffset) + 1px) * -1);
+  }
+
+  @at-root {
+    #{&}(.no-wrap) {
+      --cap-text-content-whiteSpace: nowrap;
+    }
+
+    #{&}(.ellipsis) {
+      --cap-text-content-overflow: hidden;
+      --cap-text-content-textOverflow: ellipsis;
+      --cap-text-content-whiteSpace: nowrap;
+      --cap-text-content-width: 100%;
+      --cap-text-minWidth: 0;
+    }
+
+    #{&}(.italic) {
+      --cap-text-content-fontStyle: italic;
+    }
+
+    @each $level, $size in $levels {
+      #{&}(.#{if(string.index($level, '-') or string.index($level, '+'), '\\#{$level}', '\\3#{$level}')}) {
+        --cap-text-content-fontSize: var(--cap-fontSize-#{$size});
+        --cap-text-content-lineHeight: var(--cap-lineHeight-#{$size});
+
+        @each $family in $families {
+          --cap-text-content-letterSpacing-#{$family}: var(--cap-letterSpacing-#{$size}-#{$family});
+          --cap-text-trimOffset-#{$family}: var(--cap-trimOffset-#{$size}-#{$family});
+        }
+      }
+    }
+
+    @each $weight in $weights {
+      #{&}(.#{$weight}) {
+        @each $family in $families {
+          --cap-text-content-fontWeight-#{$family}: var(--cap-fontWeight-#{$weight}-#{$family});
+        }
+      }
+    }
+
+    @each $family in $families {
+      #{&}(.#{$family}) {
+        --cap-text-content-fontFamily: var(--cap-fontFamily-#{$family});
+        --cap-text-content-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
+        --cap-text-content-fontWeight: var(--cap-text-content-fontWeight-#{$family});
+        --cap-text-content-letterSpacing: var(--cap-text-content-letterSpacing-#{$family}, normal);
+        --cap-text-trimOffset: var(--cap-text-trimOffset-#{$family});
+      }
+    }
+  }
+}
+
+.content {
+  display: block;
+  font-family: var(--cap-text-content-fontFamily);
+  font-feature-settings: var(--cap-text-content-fontFeatureSettings);
+  font-size: var(--cap-text-content-fontSize);
+  font-style: var(--cap-text-content-fontStyle, normal);
+  font-weight: var(--cap-text-content-fontWeight);
+  letter-spacing: var(--cap-text-content-letterSpacing);
+  line-height: var(--cap-text-content-lineHeight);
+  margin: 0;
+  overflow: var(--cap-text-content-overflow, visible);
+  text-overflow: var(--cap-text-content-textOverflow, clip);
+  white-space: var(--cap-text-content-whiteSpace, normal);
+  width: var(--cap-text-content-width, auto);
+
+  &[data-prepend] {
+    &:before {
+      content: attr(data-prepend) '\0000A0';
+    }
+  }
+
+  &[data-append] {
+    &:after {
+      content: '\0000A0'attr(data-append);
+    }
+  }
+}

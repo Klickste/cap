@@ -9,7 +9,6 @@
 
 @use 'sass:list';
 @use 'sass:meta';
-@use './library/config';
 @use './library/utils';
 
 // ==========================================================================
@@ -116,28 +115,23 @@ $levels: (
     //
     // Declare fontSize and lineHeight.
     // --------------------------------------------------------------------------
-    --#{config.$namespace}-fontSize-#{$name}: #{$fontSize};
-    --#{config.$namespace}-lineHeight-#{$name}: #{$lineHeight};
+    --cap-fontSize-#{$name}: #{$fontSize};
+    --cap-lineHeight-#{$name}: #{$lineHeight};
 
     //
     // Declare letterSpacing for a single style.
     // --------------------------------------------------------------------------
     @if meta.type-of($spacing) == 'number' {
-      --#{config.$namespace}-letterSpacing-#{$name}: #{utils.calcLetterSpacing(
-          $fontSize,
-          $spacing
-        )};
+      --cap-letterSpacing-#{$name}: #{utils.calcLetterSpacing($fontSize, $spacing)};
     }
+
     //
     // Declare letterSpacing for multiple styles.
     // --------------------------------------------------------------------------
     @else {
       @each $style, $value in $spacing {
         @if $value {
-          --#{config.$namespace}-letterSpacing-#{$name}-#{$style}: #{utils.calcLetterSpacing(
-              $fontSize,
-              $value
-            )};
+          --cap-letterSpacing-#{$name}-#{$style}: #{utils.calcLetterSpacing($fontSize, $value)};
         }
       }
     }
@@ -149,13 +143,9 @@ $levels: (
       $upm: list.nth($metrics, 1);
       $capHeight: list.nth($metrics, 2);
 
-      --#{config.$namespace}-trimOffset-#{$name}: #{utils.calcTrimOffset(
-          $fontSize,
-          $lineHeight,
-          $upm,
-          $capHeight
-        )};
+      --cap-trimOffset-#{$name}: #{utils.calcTrimOffset($fontSize, $lineHeight, $upm, $capHeight)};
     }
+
     //
     // Declare trimOffset for multiple styles.
     // --------------------------------------------------------------------------
@@ -164,7 +154,7 @@ $levels: (
         $upm: list.nth($metric, 1);
         $capHeight: list.nth($metric, 2);
 
-        --#{config.$namespace}-trimOffset-#{$name}-#{$style}: #{utils.calcTrimOffset(
+        --cap-trimOffset-#{$name}-#{$style}: #{utils.calcTrimOffset(
             $fontSize,
             $lineHeight,
             $upm,

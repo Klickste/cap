@@ -4,12 +4,6 @@
 ////
 
 // ==========================================================================
-// Modules
-// ==========================================================================
-
-@use './library/config';
-
-// ==========================================================================
 // Variables
 // ==========================================================================
 
@@ -58,10 +52,10 @@ $weights: (
 /// @param {null | string} $name - Descriptive suffix of the font family.
 @mixin props($family, $fallback, $weights: $weights, $features: null, $name: null) {
   //
-  // Declare fontFamily and fontFeatures.
+  // Declare fontFamily and fontFeatureSettings.
   // --------------------------------------------------------------------------
-  --#{config.$namespace}-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
-  --#{config.$namespace}-fontFeatures#{if($name, '-#{$name}', '')}: #{if(
+  --cap-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
+  --cap-fontFeatureSettings#{if($name, '-#{$name}', '')}: #{if(
       $features,
       '' + $features + '',
       normal
@@ -71,6 +65,6 @@ $weights: (
   // Declare fontWeights.
   // --------------------------------------------------------------------------
   @each $key, $value in $weights {
-    --#{config.$namespace}-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
+    --cap-fontWeight-#{$key}#{if($name, '-#{$name}', '')}: #{$value};
   }
 }
