@@ -100,7 +100,7 @@ $families: ('sans', 'serif', 'mono');
     @each $family in $families {
       #{&}(.#{$family}) {
         --cap-text-content-fontFamily: var(--cap-fontFamily-#{$family});
-        --cap-text-content-fontFeatureSettings: var(--cap-fontFeatures-#{$family});
+        --cap-text-content-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
         --cap-text-content-fontWeight: var(--cap-text-content-fontWeight-#{$family});
         --cap-text-content-letterSpacing: var(--cap-text-content-letterSpacing-#{$family}, normal);
         --cap-text-trimOffset: var(--cap-text-trimOffset-#{$family});

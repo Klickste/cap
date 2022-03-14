@@ -52,10 +52,14 @@ $weights: (
 /// @param {null | string} $name - Descriptive suffix of the font family.
 @mixin props($family, $fallback, $weights: $weights, $features: null, $name: null) {
   //
-  // Declare fontFamily and fontFeatures.
+  // Declare fontFamily and fontFeatureSettings.
   // --------------------------------------------------------------------------
   --cap-fontFamily#{if($name, '-#{$name}', '')}: '#{$family}', #{$fallback};
-  --cap-fontFeatures#{if($name, '-#{$name}', '')}: #{if($features, '' + $features + '', normal)};
+  --cap-fontFeatureSettings#{if($name, '-#{$name}', '')}: #{if(
+      $features,
+      '' + $features + '',
+      normal
+    )};
 
   //
   // Declare fontWeights.
