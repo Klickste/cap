@@ -46,6 +46,7 @@ cap-rich-text {
       --cap-rich-text-fontFamily: var(--cap-fontFamily-#{$family});
       --cap-rich-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
       --cap-rich-text-heading-fontWeight: var(--cap-fontWeight-heavy-#{$family});
+      --cap-rich-text-strong-fontWeight: var(--cap-fontWeight-heavy-#{$family});
 
       @for $heading from 1 through 6 {
         $level: list.nth($headingLevels, $heading);
@@ -127,7 +128,7 @@ cap-rich-text {
     li {
       &::before {
         color: var(--cap-rich-text-list-item-before-color, inherit);
-        content: var(--cap-rich-text-list-item-before-content, '•');
+        content: var(--cap-rich-text-list-item-before-content, '\002022');
       }
     }
   }
@@ -137,7 +138,7 @@ cap-rich-text {
 
     li {
       &::before {
-        content: counter(order) '.';
+        content: counter(order) '\00002E';
         counter-increment: order;
       }
     }
@@ -162,5 +163,9 @@ cap-rich-text {
     background: var(--cap-rich-text-horizontal-rule-background, lightgray);
     border: 0;
     height: var(--cap-rich-text-horizontal-rule-height, 2px);
+  }
+
+  strong {
+    --cap-rich-text-child-fontWeight: var(--cap-rich-text-strong-fontWeight);
   }
 }
