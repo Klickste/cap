@@ -18,10 +18,8 @@ export class CapRichText {
    * @return     {JSX.Element}  { cap-rich-text custom element }
    */
   render() {
-    const hostClass = [this.family]
-
     return (
-      <Host class={hostClass.join(' ')}>
+      <Host class={this.family}>
         <slot />
       </Host>
     )

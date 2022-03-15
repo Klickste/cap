@@ -17,6 +17,17 @@ $headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
 $families: ('sans', 'serif', 'mono');
 
 // ==========================================================================
+// Documentation
+// ==========================================================================
+
+/** @prop --cap-rich-text-anchor-color: Description... */
+/** @prop --cap-rich-text-horizontal-rule-background: Description... */
+/** @prop --cap-rich-text-horizontal-rule-height: Description... */
+/** @prop --cap-rich-text-list-item-before-color: Description... */
+/** @prop --cap-rich-text-list-item-before-content: Description... */
+/** @prop --cap-rich-text-list-item-paddingLeft: Description... */
+
+// ==========================================================================
 // Rules
 // ==========================================================================
 
@@ -50,21 +61,13 @@ cap-rich-text {
 
   * {
     margin: 0;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  ul,
-  ol {
     font-size: var(--cap-rich-text-child-fontSize);
     letter-spacing: var(--cap-rich-text-child-letterSpacing);
     line-height: var(--cap-rich-text-child-lineHeight);
     font-weight: var(--cap-rich-text-child-fontWeight);
+  }
+
+  > *:not(hr) {
     padding-bottom: 1px;
     padding-top: 1px;
 
@@ -123,7 +126,8 @@ cap-rich-text {
   ul {
     li {
       &::before {
-        content: var(--cap-rich-text-list-style, '•');
+        color: var(--cap-rich-text-list-item-before-color, inherit);
+        content: var(--cap-rich-text-list-item-before-content, '•');
       }
     }
   }
@@ -140,7 +144,7 @@ cap-rich-text {
   }
 
   li {
-    padding-left: var(--cap-rich-text-list-indent, 32px);
+    padding-left: var(--cap-rich-text-list-item-paddingLeft, 32px);
     position: relative;
 
     &::before {
@@ -148,5 +152,15 @@ cap-rich-text {
       position: absolute;
       top: 0;
     }
+  }
+
+  a {
+    color: var(--cap-rich-text-anchor-color, blue);
+  }
+
+  hr {
+    background: var(--cap-rich-text-horizontal-rule-background, lightgray);
+    border: 0;
+    height: var(--cap-rich-text-horizontal-rule-height, 2px);
   }
 }

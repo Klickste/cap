@@ -121,6 +121,13 @@
   );
 
   @include scale.props;
+
+  --cap-rich-text-anchor-color: green;
+  --cap-rich-text-horizontal-rule-background: whitesmoke;
+  --cap-rich-text-horizontal-rule-height: 4px;
+  --cap-rich-text-list-item-before-color: blue;
+  --cap-rich-text-list-item-before-content: '\0025AA';
+  --cap-rich-text-list-item-paddingLeft: 42px;
 }
 
 body {
