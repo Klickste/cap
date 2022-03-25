@@ -15,7 +15,7 @@ export class CapRichText {
   /**
    * Renders the object.
    *
-   * @return     {JSX.Element}  { cap-rich-text custom element }
+   * @return {JSX.Element}    cap-rich-text custom element
    */
   render() {
     return (

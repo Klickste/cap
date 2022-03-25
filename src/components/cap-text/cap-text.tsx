@@ -60,7 +60,7 @@ export class CapText {
   /**
    * Renders the object.
    *
-   * @return     {JSX.Element}  { cap-text custom element }
+   * @return {JSX.Element}    cap-text custom element
    */
   render() {
     const Tag = this.heading ? `h${this.heading.toString()}` : this.paragraph ? 'p' : 'span'
