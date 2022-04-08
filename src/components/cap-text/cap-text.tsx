@@ -62,7 +62,7 @@ export class CapText {
    *
    * @return {JSX.Element}    cap-text custom element
    */
-  render() {
+  render(): any {
     const Tag = this.heading ? `h${this.heading.toString()}` : this.paragraph ? 'p' : 'span'
     const addons = {
       'data-prepend': this.dataPrepend,

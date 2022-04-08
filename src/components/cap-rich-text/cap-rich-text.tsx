@@ -17,7 +17,7 @@ export class CapRichText {
    *
    * @return {JSX.Element}    cap-rich-text custom element
    */
-  render() {
+  render(): any {
     return (
       <Host class={this.family}>
         <slot />
