@@ -21,6 +21,7 @@ $families: ('sans', 'serif', 'mono');
 // ==========================================================================
 
 /** @prop --cap-rich-text-anchor-color: Description... */
+/** @prop --cap-rich-text-color: Description... */
 /** @prop --cap-rich-text-horizontal-rule-background: Description... */
 /** @prop --cap-rich-text-horizontal-rule-height: Description... */
 /** @prop --cap-rich-text-list-item-before-color: Description... */
@@ -32,6 +33,7 @@ $families: ('sans', 'serif', 'mono');
 // ==========================================================================
 
 cap-rich-text {
+  color: var(--cap-rich-text-color, inherit);
   display: flex;
   flex-direction: column;
   font-family: var(--cap-rich-text-fontFamily);

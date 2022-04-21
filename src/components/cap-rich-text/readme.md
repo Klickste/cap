@@ -13,6 +13,7 @@
 | Name                                         | Description    |
 | -------------------------------------------- | -------------- |
 | `--cap-rich-text-anchor-color`               | Description... |
+| `--cap-rich-text-color`                      | Description... |
 | `--cap-rich-text-horizontal-rule-background` | Description... |
 | `--cap-rich-text-horizontal-rule-height`     | Description... |
 | `--cap-rich-text-list-item-before-color`     | Description... |
