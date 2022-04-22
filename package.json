@@ -26,20 +26,46 @@
     "metrics": "node tools/metrics.js",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
-    "format": "prettier . --write"
+    "prettier": "prettier \"**/*.{html,js,json,md,ts,tsx}\" --write",
+    "stylelint": "stylelint \"**/*.scss\" --fix",
+    "format": "npm run prettier && npm run stylelint"
+  },
+  "devDependencies": {
+    "@stencil/core": "^2.15.1",
+    "@stencil/sass": "^1.5.2",
+    "fontkit": "^1.8.1",
+    "postcss-scss": "^4.0.3",
+    "prettier": "^2.6.2",
+    "sass": "^1.50.1",
+    "stylelint": "^14.7.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0"
   },
   "prettier": {
     "printWidth": 100,
     "semi": false,
     "singleQuote": true
   },
-  "dependencies": {
-    "@stencil/core": "^2.14.2",
-    "sass": "^1.49.9"
-  },
-  "devDependencies": {
-    "@stencil/sass": "^1.5.2",
-    "fontkit": "^1.8.1",
-    "prettier": "^2.5.1"
+  "stylelint": {
+    "customSyntax": "postcss-scss",
+    "extends": [
+      "stylelint-config-prettier"
+    ],
+    "plugins": [
+      "stylelint-prettier",
+      "stylelint-order"
+    ],
+    "rules": {
+      "prettier/prettier": true,
+      "order/order": [
+        "dollar-variables",
+        "custom-properties",
+        "declarations",
+        "rules",
+        "at-rules"
+      ],
+      "order/properties-alphabetical-order": true
+    }
   }
 }

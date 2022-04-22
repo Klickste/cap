@@ -73,6 +73,14 @@
 // ==========================================================================
 
 :root {
+  --cap-rich-text-color: rgb(0 0 0 / 68%);
+  --cap-rich-text-anchor-color: green;
+  --cap-rich-text-horizontal-rule-background: whitesmoke;
+  --cap-rich-text-horizontal-rule-height: 4px;
+  --cap-rich-text-list-item-before-color: blue;
+  --cap-rich-text-list-item-before-content: '\0025AA';
+  --cap-rich-text-list-item-paddingLeft: 42px;
+
   @include font.props(
     $family: 'Inter',
     $fallback: sans-serif,
@@ -121,28 +129,20 @@
   );
 
   @include scale.props;
-
-  --cap-rich-text-color: rgb(0 0 0 / 68%);
-  --cap-rich-text-anchor-color: green;
-  --cap-rich-text-horizontal-rule-background: whitesmoke;
-  --cap-rich-text-horizontal-rule-height: 4px;
-  --cap-rich-text-list-item-before-color: blue;
-  --cap-rich-text-list-item-before-content: '\0025AA';
-  --cap-rich-text-list-item-paddingLeft: 42px;
 }
 
 body {
   &.debug {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: none;
     display: grid;
     font-kerning: normal;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     gap: 64px;
     grid-template: auto / minmax(auto, 640px);
     justify-content: center;
     margin: 0;
     padding: 64px 16px;
     text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: none;
   }
 }
