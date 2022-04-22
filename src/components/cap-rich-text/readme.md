@@ -4,9 +4,10 @@
 
 ## Properties
 
-| Property | Attribute | Description    | Type                          | Default  |
-| -------- | --------- | -------------- | ----------------------------- | -------- |
-| `family` | `family`  | Description... | `"mono" \| "sans" \| "serif"` | `'sans'` |
+| Property  | Attribute | Description    | Type                                                    | Default     |
+| --------- | --------- | -------------- | ------------------------------------------------------- | ----------- |
+| `family`  | `family`  | Description... | `"mono" \| "sans" \| "serif"`                           | `'sans'`    |
+| `leading` | `leading` | Description... | `"compact" \| "loose" \| "narrow" \| "open" \| "tight"` | `'compact'` |
 
 ## CSS Custom Properties
 

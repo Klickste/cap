@@ -19,3 +19,4 @@ export type TextLevelTypes =
   | '+8'
 export type TextWeightTypes = 'soft' | 'strong' | 'heavy'
 export type TextHeadingTypes = 1 | 2 | 3 | 4 | 5 | 6
+export type LeadingTypes = 'tight' | 'narrow' | 'compact' | 'loose' | 'open'

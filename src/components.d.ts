@@ -5,13 +5,17 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
+import { FamilyTypes, LeadingTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from "./types";
 export namespace Components {
     interface CapRichText {
         /**
           * Description...
          */
         "family": FamilyTypes;
+        /**
+          * Description...
+         */
+        "leading": LeadingTypes;
     }
     interface CapText {
         /**
@@ -80,6 +84,10 @@ declare namespace LocalJSX {
           * Description...
          */
         "family"?: FamilyTypes;
+        /**
+          * Description...
+         */
+        "leading"?: LeadingTypes;
     }
     interface CapText {
         /**
