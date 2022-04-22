@@ -8,20 +8,15 @@
 // ==========================================================================
 
 @use 'sass:list';
+@use 'sass:map';
+@use './../../../sass/font';
+@use './../../../sass/scale';
 
 // ==========================================================================
 // Variables
 // ==========================================================================
 
-$families: ('sans', 'serif', 'mono');
 $headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
-$leadings: (
-  'tight': -4px,
-  'narrow': -2px,
-  'compact': 0px,
-  'loose': 2px,
-  'open': 4px,
-);
 
 // ==========================================================================
 // Documentation
@@ -157,7 +152,7 @@ cap-rich-text {
     --cap-rich-text-child-fontWeight: var(--cap-rich-text-strong-fontWeight);
   }
 
-  @each $family in $families {
+  @each $family in font.$families {
     &.#{$family} {
       --cap-rich-text-base-fontWeight: var(--cap-fontWeight-soft-#{$family});
       --cap-rich-text-base-letterSpacing: var(--cap-letterSpacing-md-#{$family}, normal);
@@ -190,9 +185,9 @@ cap-rich-text {
     }
   }
 
-  @each $leadingName, $leadingValue in $leadings {
-    &.#{$leadingName} {
-      --cap-rich-text-child-lineHeightModifier: #{$leadingValue};
+  @each $leading in map.keys(scale.$leadings) {
+    &.#{$leading} {
+      --cap-rich-text-child-lineHeightModifier: var(--cap-lineHeightModifier-#{$leading});
     }
   }
 }

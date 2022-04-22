@@ -45,6 +45,10 @@ export namespace Components {
         /**
           * Description...
          */
+        "leading": LeadingTypes;
+        /**
+          * Description...
+         */
         "level": TextLevelTypes;
         /**
           * Description...
@@ -114,6 +118,10 @@ declare namespace LocalJSX {
           * Description...
          */
         "italic"?: boolean;
+        /**
+          * Description...
+         */
+        "leading"?: LeadingTypes;
         /**
           * Description...
          */

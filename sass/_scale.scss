@@ -84,6 +84,19 @@ $levels: (
   '8xl'
 ) !default;
 
+/// Line height modifiers.
+///
+/// @since 3.3.4
+///
+/// @type map
+$leadings: (
+  'tight': -4px,
+  'narrow': -2px,
+  'compact': 0px,
+  'loose': 2px,
+  'open': 4px,
+);
+
 // ==========================================================================
 // Mixins
 // ==========================================================================
@@ -162,5 +175,9 @@ $levels: (
           )};
       }
     }
+  }
+
+  @each $name, $value in $leadings {
+    --cap-lineHeightModifier-#{$name}: #{$value};
   }
 }

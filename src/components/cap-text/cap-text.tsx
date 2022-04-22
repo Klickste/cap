@@ -1,5 +1,11 @@
 import { Component, Host, Prop, h } from '@stencil/core'
-import { FamilyTypes, TextHeadingTypes, TextLevelTypes, TextWeightTypes } from './../../types'
+import {
+  FamilyTypes,
+  TextHeadingTypes,
+  TextLevelTypes,
+  TextWeightTypes,
+  LeadingTypes,
+} from './../../types'
 
 @Component({
   tag: 'cap-text',
@@ -40,6 +46,11 @@ export class CapText {
   /**
    * Description...
    */
+  @Prop() leading: LeadingTypes = 'compact'
+
+  /**
+   * Description...
+   */
   @Prop() level: TextLevelTypes = '0'
 
   /**
@@ -71,9 +82,10 @@ export class CapText {
     const hostClass = [
       this.ellipsis ? 'ellipsis' : '',
       this.family,
+      this.italic ? 'italic' : '',
+      this.leading,
       this.level,
       this.noWrap ? 'no-wrap' : '',
-      this.italic ? 'italic' : '',
       this.weight,
     ]
 

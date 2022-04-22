@@ -12,6 +12,7 @@
 | `family`      | `family`    | Description... | `"mono" \| "sans" \| "serif"`                                                                                                         | `'sans'`    |
 | `heading`     | `heading`   | Description... | `1 \| 2 \| 3 \| 4 \| 5 \| 6`                                                                                                          | `undefined` |
 | `italic`      | `italic`    | Description... | `boolean`                                                                                                                             | `undefined` |
+| `leading`     | `leading`   | Description... | `"compact" \| "loose" \| "narrow" \| "open" \| "tight"`                                                                               | `'compact'` |
 | `level`       | `level`     | Description... | `"+1" \| "+2" \| "+3" \| "+4" \| "+5" \| "+6" \| "+7" \| "+8" \| "-1" \| "-2" \| "-3" \| "-4" \| "-5" \| "-6" \| "-7" \| "-8" \| "0"` | `'0'`       |
 | `noWrap`      | `no-wrap`   | Description... | `boolean`                                                                                                                             | `false`     |
 | `paragraph`   | `paragraph` | Description... | `boolean`                                                                                                                             | `undefined` |

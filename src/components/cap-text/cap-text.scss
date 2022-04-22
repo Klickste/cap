@@ -8,6 +8,9 @@
 // ==========================================================================
 
 @use 'sass:string';
+@use 'sass:map';
+@use './../../../sass/font';
+@use './../../../sass/scale';
 
 // ==========================================================================
 // Variables
@@ -33,7 +36,6 @@ $levels: (
   '+8': '7xl',
 );
 $weights: ('soft', 'strong', 'heavy');
-$families: ('sans', 'serif', 'mono');
 
 // ==========================================================================
 // Rules
@@ -53,11 +55,15 @@ $families: ('sans', 'serif', 'mono');
   }
 
   &::before {
-    margin-top: calc((var(--cap-text-trimOffset) + 1px) * -1);
+    margin-top: calc(
+      (var(--cap-text-trimOffset) + (var(--cap-text-content-lineHeightModifier) / 2) + 1px) * -1
+    );
   }
 
   &::after {
-    margin-bottom: calc((var(--cap-text-trimOffset) + 1px) * -1);
+    margin-bottom: calc(
+      (var(--cap-text-trimOffset) + (var(--cap-text-content-lineHeightModifier) / 2) + 1px) * -1
+    );
   }
 
   @at-root {
@@ -82,28 +88,34 @@ $families: ('sans', 'serif', 'mono');
         --cap-text-content-fontSize: var(--cap-fontSize-#{$size});
         --cap-text-content-lineHeight: var(--cap-lineHeight-#{$size});
 
-        @each $family in $families {
+        @each $family in font.$families {
           --cap-text-content-letterSpacing-#{$family}: var(--cap-letterSpacing-#{$size}-#{$family});
           --cap-text-trimOffset-#{$family}: var(--cap-trimOffset-#{$size}-#{$family});
         }
       }
     }
 
-    @each $weight in $weights {
+    @each $weight in map.keys(font.$weights) {
       #{&}(.#{$weight}) {
-        @each $family in $families {
+        @each $family in font.$families {
           --cap-text-content-fontWeight-#{$family}: var(--cap-fontWeight-#{$weight}-#{$family});
         }
       }
     }
 
-    @each $family in $families {
+    @each $family in font.$families {
       #{&}(.#{$family}) {
         --cap-text-content-fontFamily: var(--cap-fontFamily-#{$family});
         --cap-text-content-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
         --cap-text-content-fontWeight: var(--cap-text-content-fontWeight-#{$family});
         --cap-text-content-letterSpacing: var(--cap-text-content-letterSpacing-#{$family}, normal);
         --cap-text-trimOffset: var(--cap-text-trimOffset-#{$family});
+      }
+    }
+
+    @each $leading in map.keys(scale.$leadings) {
+      #{&}(.#{$leading}) {
+        --cap-text-content-lineHeightModifier: var(--cap-lineHeightModifier-#{$leading});
       }
     }
   }
@@ -117,7 +129,9 @@ $families: ('sans', 'serif', 'mono');
   font-style: var(--cap-text-content-fontStyle, normal);
   font-weight: var(--cap-text-content-fontWeight);
   letter-spacing: var(--cap-text-content-letterSpacing);
-  line-height: var(--cap-text-content-lineHeight);
+  line-height: calc(
+    var(--cap-text-content-lineHeight) + var(--cap-text-content-lineHeightModifier)
+  );
   margin: 0;
   overflow: var(--cap-text-content-overflow, visible);
   text-overflow: var(--cap-text-content-textOverflow, clip);
