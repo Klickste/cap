@@ -16,26 +16,6 @@
 // Variables
 // ==========================================================================
 
-$levels: (
-  '-8': '7xs',
-  '-7': '6xs',
-  '-6': '5xs',
-  '-5': '4xs',
-  '-4': '3xs',
-  '-3': '2xs',
-  '-2': 'xs',
-  '-1': 'sm',
-  '0': 'md',
-  '+1': 'lg',
-  '+2': 'xl',
-  '+3': '2xl',
-  '+4': '3xl',
-  '+5': '4xl',
-  '+6': '5xl',
-  '+7': '6xl',
-  '+8': '7xl',
-);
-
 $defaultFamily: list.nth(font.$families, 1);
 $defaultWeight: list.nth(list.nth(font.$weights, 1), 1);
 
@@ -111,7 +91,7 @@ cap-text {
     --cap-text-fontStyle: italic;
   }
 
-  @each $level, $size in $levels {
+  @each $level, $size in scale.$levels {
     &[level='#{$level}'] {
       --cap-text-fontSize: var(--cap-fontSize-#{$size});
       --cap-text-lineHeight: var(--cap-lineHeight-#{$size});
