@@ -22,8 +22,8 @@ $weights: (
 ///
 /// @since 3.3.4
 ///
-/// @type map
-$families: ('sans', 'serif', 'mono');
+/// @type list
+$families: ('sans') !default;
 
 // ==========================================================================
 // Mixins

@@ -20,12 +20,10 @@ Run `npm i @klickste/cap` in your project directory and ensure Sass can resolve 
 
 > **Note**: Named parameters for included **mixins** are not necessarily required. This is just for documentation purposes, so that depends on your preference.
 
-Use and (optionally) configure the main module:
+Use the main module:
 
 ```scss
-@use '@klickste/cap' with (
-  $namespace: 'app'
-);
+@use '@klickste/cap';
 ```
 
 ### Specify fonts
@@ -41,71 +39,28 @@ Use and (optionally) configure the main module:
   $src: './fonts/Inter-roman.var.woff2'
 );
 
-:root {
-  @include font.props(
-    $family: 'Inter',
-    $fallback: sans-serif,
-    $weights: ('soft': 400,'strong': 500,'heavy': 600),
-    $features: ('calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10')
-  );
-}
-
-//  ==========================================================================
-//  CSS output
-//  ==========================================================================
-
-//  @font-face {
-//    font-display: 'swap';
-//    font-family: 'Inter';
-//    font-style: normal;
-//    font-weight: 400 600;
-//    src: url('./fonts/Inter-roman.var.woff2') format('woff2');
-//  }
-//
-//  :root {
-//    --app-fontFamily: 'Inter', sans-serif;
-//    --app-fontFeatures: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10';
-//    --app-fontWeight-soft: 400;
-//    --app-fontWeight-strong: 500;
-//    --app-fontWeight-heavy: 600;
-//  }
-```
-<!-- prettier-ignore-end -->
-
-If you would like to use multiple typefaces, you have to provide a `$name` for each `font.props()`. This ensures you can access individual properties which may results from different font metrics or configurations:
-
-<!-- prettier-ignore-start -->
-```scss
-@use '@klickste/cap/font';
-
-@include font.face(
-  $family: 'Inter',
-  $style: normal,
-  $weight: 400 600,
-  $src: './fonts/Inter-roman.var.woff2'
-);
-
 @include font.face(
   $family: 'Merriweather',
   $style: normal,
-  $weight: 500 700,
-  $src: './fonts/Merriweather-roman.var.woff2'
+  $weight: 300 700,
+  $src: './fonts/Merriweather.var.woff2'
 );
 
 :root {
   @include font.props(
     $family: 'Inter',
     $fallback: sans-serif,
+    $name: 'sans',
     $weights: ('soft': 400, 'strong': 500, 'heavy': 600),
-    $features: ('calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10'),
-    $name: 'sans'
+    $features: ('calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10')
   );
 
   @include font.props(
     $family: 'Merriweather',
     $fallback: serif,
-    $weights: ('soft': 500, 'strong': 600, 'heavy': 700),
-    $name: 'serif'
+    $name: 'serif',
+    $weights: ('soft': 300, 'strong': 400, 'heavy': 700),
+    $features: ('liga')
   );
 }
 
@@ -125,21 +80,22 @@ If you would like to use multiple typefaces, you have to provide a `$name` for e
 //    font-display: 'swap';
 //    font-family: 'Merriweather';
 //    font-style: normal;
-//    font-weight: 500 700;
-//    src: url('./fonts/Merriweather-roman.var.woff2') format('woff2');
+//    font-weight: 300 700;
+//    src: url('./fonts/Merriweather.var.woff2') format('woff2');
 //  }
 //
 //  :root {
-//    --app-fontFamily-sans: 'Inter', sans-serif;
-//    --app-fontFeatures-sans: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10';
-//    --app-fontWeight-soft-sans: 400;
-//    --app-fontWeight-strong-sans: 500;
-//    --app-fontWeight-heavy-sans: 600;
-//    --app-fontFamily-serif: 'Merriweather', serif;
-//    --app-fontFeatures-serif: normal;
-//    --app-fontWeight-soft-serif: 500;
-//    --app-fontWeight-strong-serif: 600;
-//    --app-fontWeight-heavy-serif: 700;
+//    --cap-fontFamily-sans: 'Inter', sans-serif;
+//    --cap-fontFeatures-sans: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10';
+//    --cap-fontWeight-soft-sans: 400;
+//    --cap-fontWeight-strong-sans: 500;
+//    --cap-fontWeight-heavy-sans: 600;
+//
+//    --cap-fontFamily-serif: 'Merriweather', serif;
+//    --cap-fontFeatures-serif: 'liga';
+//    --cap-fontWeight-soft-serif: 300;
+//    --cap-fontWeight-strong-serif: 400;
+//    --cap-fontWeight-heavy-serif: 700;
 //  }
 ```
 <!-- prettier-ignore-end -->
@@ -158,8 +114,14 @@ If you would like to use multiple typefaces, you have to provide a `$name` for e
     $ups: 3,
     $downs: 1,
     $factor: 1.2,
-    $spacing: 0,
-    $metrics: (2816, 2048)
+    $spacing: (
+      'sans': 0,
+      'serif': null
+    ),
+    $metrics: (
+      'sans': (2816, 2048),
+      'serif': (2000, 1486)
+    )
   );
 }
 
@@ -168,30 +130,35 @@ If you would like to use multiple typefaces, you have to provide a `$name` for e
 //  ==========================================================================
 
 //  :root {
-//    --app-fontSize-sm: 13px;
-//    --app-lineHeight-sm: 20px;
-//    --app-letterSpacing-sm: -0.003em;
-//    --app-trimOffset-sm: 5px;
+//    --cap-fontSize-sm: 13px;
+//    --cap-lineHeight-sm: 20px;
+//    --cap-letterSpacing-sm-sans: -0.003em;
+//    --cap-trimOffset-sm-sans: 5px;
+//    --cap-trimOffset-sm-serif: 5px;
 //
-//    --app-fontSize-md: 15px;
-//    --app-lineHeight-md: 22px;
-//    --app-letterSpacing-md: -0.009em;
-//    --app-trimOffset-md: 6px;
+//    --cap-fontSize-md: 15px;
+//    --cap-lineHeight-md: 22px;
+//    --cap-letterSpacing-md-sans: -0.009em;
+//    --cap-trimOffset-md-sans: 6px;
+//    --cap-trimOffset-md-serif: 5px;
 //
-//    --app-fontSize-lg: 18px;
-//    --app-lineHeight-lg: 26px;
-//    --app-letterSpacing-lg: -0.014em;
-//    --app-trimOffset-lg: 6px;
+//    --cap-fontSize-lg: 18px;
+//    --cap-lineHeight-lg: 26px;
+//    --cap-letterSpacing-lg-sans: -0.014em;
+//    --cap-trimOffset-lg-sans: 6px;
+//    --cap-trimOffset-lg-serif: 6px;
 //
-//    --app-fontSize-xl: 22px;
-//    --app-lineHeight-xl: 30px;
-//    --app-letterSpacing-xl: -0.018em;
-//    --app-trimOffset-xl: 7px;
+//    --cap-fontSize-xl: 22px;
+//    --cap-lineHeight-xl: 30px;
+//    --cap-letterSpacing-xl-sans: -0.018em;
+//    --cap-trimOffset-xl-sans: 7px;
+//    --cap-trimOffset-xl-serif: 7px;
 //
-//    --app-fontSize-2xl: 26px;
-//    --app-lineHeight-2xl: 34px;
-//    --app-letterSpacing-2xl: -0.02em;
-//    --app-trimOffset-2xl: 8px;
+//    --cap-fontSize-2xl: 26px;
+//    --cap-lineHeight-2xl: 34px;
+//    --cap-letterSpacing-2xl-sans: -0.02em;
+//    --cap-trimOffset-2xl-sans: 8px;
+//    --cap-trimOffset-2xl-serif: 7px;
 //  }
 ```
 <!-- prettier-ignore-end -->
@@ -203,8 +170,14 @@ Alternatively, you can directly configure the module, if you would like to reuse
 @use '@klickste/cap/scale' with (
   $ups: 3,
   $downs: 1,
-  $spacing: 0,
-  $metrics: (2816, 2048)
+  $spacing: (
+    'sans': 0,
+    'serif': null
+  ),
+  $metrics: (
+    'sans': (2816, 2048),
+    'serif': (2000, 1486)
+  )
 );
 
 :root {
@@ -220,106 +193,69 @@ Alternatively, you can directly configure the module, if you would like to reuse
 //  ==========================================================================
 
 //  :root {
-//    --app-fontSize-sm: 13px;
-//    --app-lineHeight-sm: 20px;
-//    --app-letterSpacing-sm: -0.003em;
-//    --app-trimOffset-sm: 5px;
+//    --cap-fontSize-sm: 13px;
+//    --cap-lineHeight-sm: 20px;
+//    --cap-letterSpacing-sm-sans: -0.003em;
+//    --cap-trimOffset-sm-sans: 5px;
+//    --cap-trimOffset-sm-serif: 5px;
 //
-//    --app-fontSize-md: 15px;
-//    --app-lineHeight-md: 22px;
-//    --app-letterSpacing-md: -0.009em;
-//    --app-trimOffset-md: 6px;
+//    --cap-fontSize-md: 15px;
+//    --cap-lineHeight-md: 22px;
+//    --cap-letterSpacing-md-sans: -0.009em;
+//    --cap-trimOffset-md-sans: 6px;
+//    --cap-trimOffset-md-serif: 5px;
 //
-//    --app-fontSize-lg: 18px;
-//    --app-lineHeight-lg: 26px;
-//    --app-letterSpacing-lg: -0.014em;
-//    --app-trimOffset-lg: 6px;
+//    --cap-fontSize-lg: 18px;
+//    --cap-lineHeight-lg: 26px;
+//    --cap-letterSpacing-lg-sans: -0.014em;
+//    --cap-trimOffset-lg-sans: 6px;
+//    --cap-trimOffset-lg-serif: 6px;
 //
-//    --app-fontSize-xl: 22px;
-//    --app-lineHeight-xl: 30px;
-//    --app-letterSpacing-xl: -0.018em;
-//    --app-trimOffset-xl: 7px;
+//    --cap-fontSize-xl: 22px;
+//    --cap-lineHeight-xl: 30px;
+//    --cap-letterSpacing-xl-sans: -0.018em;
+//    --cap-trimOffset-xl-sans: 7px;
+//    --cap-trimOffset-xl-serif: 7px;
 //
-//    --app-fontSize-2xl: 26px;
-//    --app-lineHeight-2xl: 34px;
-//    --app-letterSpacing-2xl: -0.02em;
-//    --app-trimOffset-2xl: 8px;
+//    --cap-fontSize-2xl: 26px;
+//    --cap-lineHeight-2xl: 34px;
+//    --cap-letterSpacing-2xl-sans: -0.02em;
+//    --cap-trimOffset-2xl-sans: 8px;
+//    --cap-trimOffset-2xl-serif: 7px;
 //  }
-
+//
 //  @media (pointer: coarse) {
 //    :root {
-//      --app-fontSize-sm: 15px;
-//      --app-lineHeight-sm: 22px;
-//      --app-letterSpacing-sm: -0.009em;
-//      --app-trimOffset-sm: 6px;
+//      --cap-fontSize-sm: 15px;
+//      --cap-lineHeight-sm: 22px;
+//      --cap-letterSpacing-sm-sans: -0.009em;
+//      --cap-trimOffset-sm-sans: 6px;
+//      --cap-trimOffset-sm-serif: 5px;
 //
-//      --app-fontSize-md: 17px;
-//      --app-lineHeight-md: 24px;
-//      --app-letterSpacing-md: -0.013em;
-//      --app-trimOffset-md: 6px;
+//      --cap-fontSize-md: 17px;
+//      --cap-lineHeight-md: 24px;
+//      --cap-letterSpacing-md-sans: -0.013em;
+//      --cap-trimOffset-md-sans: 6px;
+//      --cap-trimOffset-md-serif: 6px;
 //
-//      --app-fontSize-lg: 19px;
-//      --app-lineHeight-lg: 26px;
-//      --app-letterSpacing-lg: -0.016em;
-//      --app-trimOffset-lg: 6px;
+//      --cap-fontSize-lg: 19px;
+//      --cap-lineHeight-lg: 26px;
+//      --cap-letterSpacing-lg-sans: -0.016em;
+//      --cap-trimOffset-lg-sans: 6px;
+//      --cap-trimOffset-lg-serif: 6px;
 //
-//      --app-fontSize-xl: 21px;
-//      --app-lineHeight-xl: 28px;
-//      --app-letterSpacing-xl: -0.018em;
-//      --app-trimOffset-xl: 6px;
+//      --cap-fontSize-xl: 21px;
+//      --cap-lineHeight-xl: 28px;
+//      --cap-letterSpacing-xl-sans: -0.018em;
+//      --cap-trimOffset-xl-sans: 6px;
+//      --cap-trimOffset-xl-serif: 6px;
 //
-//      --app-fontSize-2xl: 23px;
-//      --app-lineHeight-2xl: 30px;
-//      --app-letterSpacing-2xl: -0.019em;
-//      --app-trimOffset-2xl: 7px;
+//      --cap-fontSize-2xl: 23px;
+//      --cap-lineHeight-2xl: 30px;
+//      --cap-letterSpacing-2xl-sans: -0.019em;
+//      --cap-trimOffset-2xl-sans: 7px;
+//      --cap-trimOffset-2xl-serif: 6px;
 //    }
-//  }
-```
-<!-- prettier-ignore-end -->
-
-If you would like to use multiple typefaces, you have to provide a map for the `$spacing` and `$metrics` configuration/parameter. Use the `$name` parameter you specified in the `font.props()` mixin as the map keys:
-
-<!-- prettier-ignore-start -->
-```scss
-@use '@klickste/cap/scale' with (
-  $ups: 3,
-  $downs: 1,
-  $factor: 1.2,
-  $spacing: ('sans': 0, 'serif': 1),
-  $metrics: (
-    'sans': (2816, 2048),
-    'serif': (2000, 1486),
-  )
-);
-
-:root {
-  @include scale.props($base: 15px);
-}
-
-//  ==========================================================================
-//  CSS output
-//  ==========================================================================
-
-//  :root {
-//
-//    ...
-//
-//    --app-fontSize-md: 15px;
-//    --app-lineHeight-md: 22px;
-//    --app-letterSpacing-md-sans: -0.009em;
-//    --app-letterSpacing-md-serif: -0.007em;
-//    --app-trimOffset-md-sans: 6px;
-//    --app-trimOffset-md-serif: 5px;
-//
-//    --app-fontSize-lg: 18px;
-//    --app-lineHeight-lg: 26px;
-//    --app-letterSpacing-lg-sans: -0.014em;
-//    --app-letterSpacing-lg-serif: -0.013em;
-//    --app-trimOffset-lg-sans: 6px;
-//    --app-trimOffset-lg-serif: 6px;
-//
-//    ...
-//
 //  }
 ```
 <!-- prettier-ignore-end -->

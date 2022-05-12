@@ -16,6 +16,7 @@
 // Variables
 // ==========================================================================
 
+$families: ('sans', 'serif', 'mono');
 $headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
 
 // ==========================================================================
@@ -152,7 +153,7 @@ cap-rich-text {
     --cap-rich-text-child-fontWeight: var(--cap-rich-text-strong-fontWeight);
   }
 
-  @each $family in font.$families {
+  @each $family in $families {
     &.#{$family} {
       --cap-rich-text-base-fontWeight: var(--cap-fontWeight-soft-#{$family});
       --cap-rich-text-base-letterSpacing: var(--cap-letterSpacing-md-#{$family}, normal);

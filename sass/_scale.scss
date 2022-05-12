@@ -8,6 +8,7 @@
 // ==========================================================================
 
 @use 'sass:list';
+@use 'sass:map';
 @use 'sass:meta';
 @use './library/utils';
 
@@ -63,26 +64,24 @@ $metrics: null !default;
 ///
 /// @type list
 $levels: (
-  '8xs',
-  '7xs',
-  '6xs',
-  '5xs',
-  '4xs',
-  '3xs',
-  '2xs',
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  '2xl',
-  '3xl',
-  '4xl',
-  '5xl',
-  '6xl',
-  '7xl',
-  '8xl'
-) !default;
+  '-8': '7xs',
+  '-7': '6xs',
+  '-6': '5xs',
+  '-5': '4xs',
+  '-4': '3xs',
+  '-3': '2xs',
+  '-2': 'xs',
+  '-1': 'sm',
+  '0': 'md',
+  '+1': 'lg',
+  '+2': 'xl',
+  '+3': '2xl',
+  '+4': '3xl',
+  '+5': '4xl',
+  '+6': '5xl',
+  '+7': '6xl',
+  '+8': '7xl',
+);
 
 /// Line height modifiers.
 ///
@@ -120,8 +119,9 @@ $leadings: (
   $metrics: $metrics
 ) {
   @for $index from ($downs * -1) through $ups {
-    $start: list.index($levels, 'md');
-    $name: list.nth($levels, $start + $index);
+    $levelValues: map.values($levels);
+    $start: list.index($levelValues, 'md');
+    $name: list.nth($levelValues, $start + $index);
     $fontSize: utils.calcFontSize($base, $factor, $index);
     $lineHeight: utils.calcLineHeight($fontSize);
 
@@ -141,7 +141,7 @@ $leadings: (
     //
     // Declare letterSpacing for multiple styles.
     // --------------------------------------------------------------------------
-    @else {
+    @else if meta.type-of($spacing) == 'map' {
       @each $style, $value in $spacing {
         @if $value {
           --cap-letterSpacing-#{$name}-#{$style}: #{utils.calcLetterSpacing($fontSize, $value)};

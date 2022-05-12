@@ -1,0 +1,149 @@
+////
+/// @group text
+/// @author cgoern
+////
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:map';
+@use 'sass:list';
+@use './../font';
+@use './../scale';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$levels: (
+  '-8': '7xs',
+  '-7': '6xs',
+  '-6': '5xs',
+  '-5': '4xs',
+  '-4': '3xs',
+  '-3': '2xs',
+  '-2': 'xs',
+  '-1': 'sm',
+  '0': 'md',
+  '+1': 'lg',
+  '+2': 'xl',
+  '+3': '2xl',
+  '+4': '3xl',
+  '+5': '4xl',
+  '+6': '5xl',
+  '+7': '6xl',
+  '+8': '7xl',
+);
+
+$defaultFamily: list.nth(font.$families, 1);
+$defaultWeight: list.nth(list.nth(font.$weights, 1), 1);
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
+cap-text {
+  display: block;
+  font-family: var(--cap-text-fontFamily, var(--cap-fontFamily-#{$defaultFamily}));
+  font-feature-settings: var(
+    --cap-text-fontFeatureSettings,
+    var(--cap-fontFeatureSettings-#{$defaultFamily})
+  );
+  font-size: var(--cap-text-fontSize);
+  font-style: var(--cap-text-fontStyle, normal);
+  font-weight: var(
+    --cap-text-fontWeight,
+    var(--cap-fontWeight-#{$defaultWeight}-#{$defaultFamily})
+  );
+  letter-spacing: var(--cap-text-letterSpacing, var(--cap-text-letterSpacing-#{$defaultFamily}));
+  line-height: calc(
+    var(--cap-text-lineHeight) +
+      var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact))
+  );
+  margin: 0;
+  min-width: var(--cap-text-minWidth, auto);
+  overflow: var(--cap-text-overflow, visible);
+  padding-bottom: 1px;
+  padding-top: 1px;
+  text-overflow: var(--cap-text-textOverflow, clip);
+  white-space: var(--cap-text-whiteSpace, normal);
+  width: var(--cap-text-width, auto);
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  &::before {
+    margin-top: calc(
+      (
+          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{$defaultFamily})) +
+            (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
+        ) * -1
+    );
+  }
+
+  &::after {
+    margin-bottom: calc(
+      (
+          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{$defaultFamily})) +
+            (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
+        ) * -1
+    );
+  }
+
+  &[no-wrap] {
+    --cap-text-whiteSpace: nowrap;
+  }
+
+  &[ellipsis] {
+    --cap-text-overflow: hidden;
+    --cap-text-textOverflow: ellipsis;
+    --cap-text-whiteSpace: nowrap;
+    --cap-text-width: 100%;
+    --cap-text-minWidth: 0;
+  }
+
+  &[italic] {
+    --cap-text-fontStyle: italic;
+  }
+
+  @each $level, $size in $levels {
+    &[level='#{$level}'] {
+      --cap-text-fontSize: var(--cap-fontSize-#{$size});
+      --cap-text-lineHeight: var(--cap-lineHeight-#{$size});
+
+      @each $family in font.$families {
+        --cap-text-letterSpacing-#{$family}: var(--cap-letterSpacing-#{$size}-#{$family});
+        --cap-text-trimOffset-#{$family}: var(--cap-trimOffset-#{$size}-#{$family});
+      }
+    }
+  }
+
+  @each $weight in map.keys(font.$weights) {
+    &[weight='#{$weight}'] {
+      @each $family in font.$families {
+        --cap-text-fontWeight-#{$family}: var(--cap-fontWeight-#{$weight}-#{$family});
+      }
+    }
+  }
+
+  @each $family in font.$families {
+    &[family='#{$family}'] {
+      --cap-text-fontFamily: var(--cap-fontFamily-#{$family});
+      --cap-text-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
+      --cap-text-fontWeight: var(--cap-text-fontWeight-#{$family});
+      --cap-text-letterSpacing: var(--cap-text-letterSpacing-#{$family}, normal);
+      --cap-text-trimOffset: var(--cap-text-trimOffset-#{$family});
+    }
+  }
+
+  @each $leading in map.keys(scale.$leadings) {
+    &[leading='#{$leading}'] {
+      --cap-text-lineHeightModifier: var(--cap-lineHeightModifier-#{$leading});
+    }
+  }
+}

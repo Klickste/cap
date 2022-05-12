@@ -9,32 +9,13 @@
 
 @use 'sass:string';
 @use 'sass:map';
-@use './../../../sass/font';
 @use './../../../sass/scale';
 
 // ==========================================================================
 // Variables
 // ==========================================================================
 
-$levels: (
-  '-8': '7xs',
-  '-7': '6xs',
-  '-6': '5xs',
-  '-5': '4xs',
-  '-4': '3xs',
-  '-3': '2xs',
-  '-2': 'xs',
-  '-1': 'sm',
-  '0': 'md',
-  '+1': 'lg',
-  '+2': 'xl',
-  '+3': '2xl',
-  '+4': '3xl',
-  '+5': '4xl',
-  '+6': '5xl',
-  '+7': '6xl',
-  '+8': '7xl',
-);
+$families: ('sans', 'serif', 'mono');
 $weights: ('soft', 'strong', 'heavy');
 
 // ==========================================================================
@@ -83,27 +64,27 @@ $weights: ('soft', 'strong', 'heavy');
       --cap-text-content-fontStyle: italic;
     }
 
-    @each $level, $size in $levels {
+    @each $level, $size in scale.$levels {
       #{&}(.#{if(string.index($level, '-') or string.index($level, '+'), '\\#{$level}', '\\3#{$level}')}) {
         --cap-text-content-fontSize: var(--cap-fontSize-#{$size});
         --cap-text-content-lineHeight: var(--cap-lineHeight-#{$size});
 
-        @each $family in font.$families {
+        @each $family in $families {
           --cap-text-content-letterSpacing-#{$family}: var(--cap-letterSpacing-#{$size}-#{$family});
           --cap-text-trimOffset-#{$family}: var(--cap-trimOffset-#{$size}-#{$family});
         }
       }
     }
 
-    @each $weight in map.keys(font.$weights) {
+    @each $weight in $weights {
       #{&}(.#{$weight}) {
-        @each $family in font.$families {
+        @each $family in $families {
           --cap-text-content-fontWeight-#{$family}: var(--cap-fontWeight-#{$weight}-#{$family});
         }
       }
     }
 
-    @each $family in font.$families {
+    @each $family in $families {
       #{&}(.#{$family}) {
         --cap-text-content-fontFamily: var(--cap-fontFamily-#{$family});
         --cap-text-content-fontFeatureSettings: var(--cap-fontFeatureSettings-#{$family});
