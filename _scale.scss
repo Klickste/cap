@@ -83,6 +83,20 @@ $levels: (
   '+8': '7xl',
 );
 
+/// Name values of the levels.
+///
+/// @since 4.0.0
+///
+/// @type list
+$levelNames: map.values($levels);
+
+/// Index of the base level.
+///
+/// @since 4.0.0
+///
+/// @type number
+$levelStart: list.index($levelNames, 'md');
+
 /// Line height modifiers.
 ///
 /// @since 3.3.4
@@ -118,11 +132,9 @@ $leadings: (
   $spacing: $spacing,
   $metrics: $metrics
 ) {
-  @for $index from ($downs * -1) through $ups {
-    $levelValues: map.values($levels);
-    $start: list.index($levelValues, 'md');
-    $name: list.nth($levelValues, $start + $index);
-    $fontSize: utils.calcFontSize($base, $factor, $index);
+  @for $level from ($downs * -1) through $ups {
+    $name: list.nth($levelNames, $levelStart + $level);
+    $fontSize: utils.calcFontSize($base, $factor, $level);
     $lineHeight: utils.calcLineHeight($fontSize);
 
     //

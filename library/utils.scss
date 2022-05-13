@@ -8,6 +8,7 @@
 // ==========================================================================
 
 @use 'sass:math';
+@use 'sass:list';
 @use './config';
 
 // ==========================================================================
@@ -85,6 +86,21 @@
 /// @param {number} $scale - The modular scale index.
 @function calcFontSize($base, $factor, $scale) {
   @return math.round($base * math.pow($factor, $scale));
+}
+
+/// Reverses the order of items in a list.
+///
+/// @since 4.0.0
+///
+/// @param {list} $list - The list.
+@function reverseList($list) {
+  $reversed: ();
+
+  @for $index from list.length($list) * -1 through -1 {
+    $reversed: list.append($reversed, list.nth($list, math.abs($index)));
+  }
+
+  @return $reversed;
 }
 
 // ==========================================================================

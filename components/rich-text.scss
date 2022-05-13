@@ -9,6 +9,7 @@
 
 @use 'sass:list';
 @use 'sass:map';
+@use './../library/utils';
 @use './../font';
 @use './../scale';
 
@@ -16,8 +17,16 @@
 // Variables
 // ==========================================================================
 
-$families: ('sans', 'serif', 'mono');
-$headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
+$headingLevels: ();
+
+@for $index from 0 through 5 {
+  $headingLevels: list.append(
+    $headingLevels,
+    list.nth(scale.$levelNames, scale.$levelStart + $index)
+  );
+}
+
+$headingLevels: utils.reverseList($headingLevels);
 
 // ==========================================================================
 // Custom properties
@@ -41,6 +50,7 @@ cap-rich-text {
   flex-direction: column;
   font-family: var(--cap-rich-text-fontFamily);
   font-feature-settings: var(--cap-rich-text-fontFeatureSettings);
+  font-style: var(--cap-rich-text-fontStyle, normal);
   gap: var(--cap-rich-text-gap, 32px);
 
   * {
@@ -153,7 +163,11 @@ cap-rich-text {
     --cap-rich-text-child-fontWeight: var(--cap-rich-text-strong-fontWeight);
   }
 
-  @each $family in $families {
+  &[italic] {
+    --cap-rich-text-fontStyle: italic;
+  }
+
+  @each $family in font.$families {
     &[family='#{$family}'] {
       --cap-rich-text-base-fontWeight: var(--cap-fontWeight-soft-#{$family});
       --cap-rich-text-base-letterSpacing: var(--cap-letterSpacing-md-#{$family}, normal);

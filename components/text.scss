@@ -13,30 +13,26 @@
 @use './../scale';
 
 // ==========================================================================
-// Variables
-// ==========================================================================
-
-$defaultFamily: list.nth(font.$families, 1);
-$defaultWeight: list.nth(list.nth(font.$weights, 1), 1);
-
-// ==========================================================================
 // Rules
 // ==========================================================================
 
 cap-text {
   display: block;
-  font-family: var(--cap-text-fontFamily, var(--cap-fontFamily-#{$defaultFamily}));
+  font-family: var(--cap-text-fontFamily, var(--cap-fontFamily-#{font.$defaultFamily}));
   font-feature-settings: var(
     --cap-text-fontFeatureSettings,
-    var(--cap-fontFeatureSettings-#{$defaultFamily})
+    var(--cap-fontFeatureSettings-#{font.$defaultFamily})
   );
   font-size: var(--cap-text-fontSize);
   font-style: var(--cap-text-fontStyle, normal);
   font-weight: var(
     --cap-text-fontWeight,
-    var(--cap-fontWeight-#{$defaultWeight}-#{$defaultFamily})
+    var(--cap-fontWeight-#{font.$defaultWeight}-#{font.$defaultFamily})
   );
-  letter-spacing: var(--cap-text-letterSpacing, var(--cap-text-letterSpacing-#{$defaultFamily}));
+  letter-spacing: var(
+    --cap-text-letterSpacing,
+    var(--cap-text-letterSpacing-#{font.$defaultFamily})
+  );
   line-height: calc(
     var(--cap-text-lineHeight) +
       var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact))
@@ -60,7 +56,7 @@ cap-text {
   &::before {
     margin-top: calc(
       (
-          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{$defaultFamily})) +
+          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{font.$defaultFamily})) +
             (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
         ) * -1
     );
@@ -69,7 +65,7 @@ cap-text {
   &::after {
     margin-bottom: calc(
       (
-          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{$defaultFamily})) +
+          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{font.$defaultFamily})) +
             (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
         ) * -1
     );

@@ -30,8 +30,8 @@
       1486,
     ),
     'mono': (
-      1950,
-      1374,
+      2048,
+      1456,
     ),
   )
 );
@@ -71,10 +71,17 @@
 );
 
 @include font.face(
-  $family: 'FiraCode',
+  $family: 'RobotoMono',
   $style: normal,
   $weight: 400 700,
-  $src: 'fonts/FiraCode.var.woff2'
+  $src: 'fonts/RobotoMono-normal.var.woff2'
+);
+
+@include font.face(
+  $family: 'RobotoMono',
+  $style: italic,
+  $weight: 400 700,
+  $src: 'fonts/RobotoMono-italic.var.woff2'
 );
 
 // ==========================================================================
@@ -108,7 +115,7 @@
     $weights: (
       'soft': 400,
       'strong': 500,
-      'heavy': 600,
+      'heavy': 700,
     ),
     $features: (
       'liga',
@@ -116,13 +123,13 @@
   );
 
   @include font.props(
-    $family: 'FiraCode',
+    $family: 'RobotoMono',
     $fallback: monospace,
     $name: 'mono',
     $weights: (
       'soft': 400,
       'strong': 500,
-      'heavy': 600,
+      'heavy': 700,
     ),
     $features: (
       'liga',
