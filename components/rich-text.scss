@@ -9,8 +9,8 @@
 
 @use 'sass:list';
 @use 'sass:map';
-@use './../../../sass/font';
-@use './../../../sass/scale';
+@use './../font';
+@use './../scale';
 
 // ==========================================================================
 // Variables
@@ -20,7 +20,7 @@ $families: ('sans', 'serif', 'mono');
 $headingLevels: ('4xl', '3xl', '2xl', 'xl', 'lg', 'md');
 
 // ==========================================================================
-// Documentation
+// Custom properties
 // ==========================================================================
 
 /** @prop --cap-rich-text-anchor-color: Description... */
@@ -154,7 +154,7 @@ cap-rich-text {
   }
 
   @each $family in $families {
-    &.#{$family} {
+    &[family='#{$family}'] {
       --cap-rich-text-base-fontWeight: var(--cap-fontWeight-soft-#{$family});
       --cap-rich-text-base-letterSpacing: var(--cap-letterSpacing-md-#{$family}, normal);
       --cap-rich-text-base-trimOffset: var(--cap-trimOffset-md-#{$family});
@@ -187,7 +187,7 @@ cap-rich-text {
   }
 
   @each $leading in map.keys(scale.$leadings) {
-    &.#{$leading} {
+    &[leading='#{$leading}'] {
       --cap-rich-text-child-lineHeightModifier: var(--cap-lineHeightModifier-#{$leading});
     }
   }

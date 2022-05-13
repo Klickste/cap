@@ -7,6 +7,7 @@
   $families: (
     'sans',
     'serif',
+    'mono',
   )
 );
 @use './../scale' with (
@@ -16,6 +17,7 @@
   $spacing: (
     'sans': 0,
     'serif': null,
+    'mono': 10,
   ),
   $factor: 1.212,
   $metrics: (
@@ -27,9 +29,14 @@
       2000,
       1486,
     ),
+    'mono': (
+      1950,
+      1374,
+    ),
   )
 );
 @use './../components/text';
+@use './../components/rich-text';
 
 // ==========================================================================
 // Rules
@@ -39,28 +46,35 @@
   $family: 'Inter',
   $style: normal,
   $weight: 400 600,
-  $src: './../../src/assets/fonts/Inter-normal.var.woff2'
+  $src: 'fonts/Inter-normal.var.woff2'
 );
 
 @include font.face(
   $family: 'Inter',
   $style: italic,
   $weight: 400 600,
-  $src: './../../src/assets/fonts/Inter-italic.var.woff2'
+  $src: 'fonts/Inter-italic.var.woff2'
 );
 
 @include font.face(
   $family: 'Merriweather',
   $style: normal,
   $weight: 400 700,
-  $src: './../src/assets/fonts/Merriweather-normal.var.woff2'
+  $src: 'fonts/Merriweather-normal.var.woff2'
 );
 
 @include font.face(
   $family: 'Merriweather',
   $style: italic,
   $weight: 400 700,
-  $src: './../src/assets/fonts/Merriweather-italic.var.woff2'
+  $src: 'fonts/Merriweather-italic.var.woff2'
+);
+
+@include font.face(
+  $family: 'FiraCode',
+  $style: normal,
+  $weight: 400 700,
+  $src: 'fonts/FiraCode.var.woff2'
 );
 
 // ==========================================================================
@@ -91,6 +105,20 @@
     $family: 'Merriweather',
     $fallback: serif,
     $name: 'serif',
+    $weights: (
+      'soft': 400,
+      'strong': 500,
+      'heavy': 600,
+    ),
+    $features: (
+      'liga',
+    )
+  );
+
+  @include font.props(
+    $family: 'FiraCode',
+    $fallback: monospace,
+    $name: 'mono',
     $weights: (
       'soft': 400,
       'strong': 500,
