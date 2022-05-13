@@ -20,17 +20,13 @@ Run `npm i @klickste/cap` in your project directory and ensure Sass can resolve 
 
 > **Note**: Named parameters for included **mixins** are not necessarily required. This is just for documentation purposes, so that depends on your preference.
 
-Use the main module:
-
-```scss
-@use '@klickste/cap';
-```
-
 ### Specify fonts
 
 <!-- prettier-ignore-start -->
 ```scss
-@use '@klickste/cap/font';
+@use '@klickste/cap/font' with (
+  $families: ('sans', 'serif')
+);
 
 @include font.face(
   $family: 'Inter',
@@ -288,7 +284,6 @@ fonts.map((font) => {
 
 ### Use custom properties
 
-This library does not provide any built-in selector rules for class names or other attributes, _but this may change in upcoming releases._
 You can simply use the declared custom properties anywhere in your stylesheets to create your own (semantic) typography system.
 
 ```scss
@@ -303,17 +298,17 @@ $levels: (
   font-size: var(--app-label-fontSize);
   line-height: var(--app-label-lineHeight);
   letter-spacing: var(--app-label-letterSpacing);
-  font-weight: var(--app-label-fontWeight, var(--app-fontWeight-soft));
+  font-weight: var(--app-label-fontWeight, var(--cap-fontWeight-soft-sans));
 
   &--required {
-    --app-label-fontWeight: var(--app-fontWeight-strong);
+    --app-label-fontWeight: var(--cap-fontWeight-strong-sans);
   }
 
   @each $level, $scale in $levels {
     &--#{$level} {
-      --app-label-fontSize: var(--app-fontSize-#{$scale});
-      --app-label-lineHeight: var(--app-lineHeight-#{$scale});
-      --app-label-letterSpacing: var(--app-letterSpacing-#{$scale});
+      --app-label-fontSize: var(--cap-fontSize-#{$scale});
+      --app-label-lineHeight: var(--cap-lineHeight-#{$scale});
+      --app-label-letterSpacing: var(--cap-letterSpacing-#{$scale}-sans);
     }
   }
 }
@@ -326,23 +321,23 @@ $levels: (
 //    font-size: var(--app-label-fontSize);
 //    line-height: var(--app-label-lineHeight);
 //    letter-spacing: var(--app-label-letterSpacing);
-//    font-weight: var(--app-label-fontWeight, var(--app-fontWeight-soft));
+//    font-weight: var(--app-label-fontWeight, var(--cap-fontWeight-soft-sans));
 //  }
 //
 //  .app-label--required {
-//    --app-label-fontWeight: var(--app-fontWeight-strong);
+//    --app-label-fontWeight: var(--cap-fontWeight-strong-sans);
 //  }
 //
 //  .app-label--primary {
-//    --app-label-fontSize: var(--app-fontSize-md);
-//    --app-label-lineHeight: var(--app-lineHeight-md);
-//    --app-label-letterSpacing: var(--app-letterSpacing-md);
+//    --app-label-fontSize: var(--cap-fontSize-md);
+//    --app-label-lineHeight: var(--cap-lineHeight-md);
+//    --app-label-letterSpacing: var(--cap-letterSpacing-md-sans);
 //  }
 //
 //  .app-label--secondary {
-//    --app-label-fontSize: var(--app-fontSize-sm);
-//    --app-label-lineHeight: var(--app-lineHeight-sm);
-//    --app-label-letterSpacing: var(--app-letterSpacing-sm);
+//    --app-label-fontSize: var(--cap-fontSize-sm);
+//    --app-label-lineHeight: var(--cap-lineHeight-sm);
+//    --app-label-letterSpacing: var(--cap-letterSpacing-sm-sans);
 //  }
 ```
 
@@ -360,19 +355,23 @@ $levels: (
   'secondary': 'sm',
 );
 
-.app-label {
-  font-size: var(--app-label-fontSize);
-  line-height: var(--app-label-lineHeight);
-  letter-spacing: var(--app-label-letterSpacing);
+.app-article {
+  font-size: var(--app-article-fontSize);
+  line-height: var(--app-article-lineHeight);
+  letter-spacing: var(--app-article-letterSpacing);
 
-  @include cap.trim($name: 'label');
+  &--wide {
+    --app-article-lineHeightModifier: 2px;
+  }
+
+  @include cap.trim($name: 'article', $namespace: 'app');
 
   @each $level, $scale in $levels {
     &--#{$level} {
-      --app-label-fontSize: var(--app-fontSize-#{$scale});
-      --app-label-lineHeight: var(--app-lineHeight-#{$scale});
-      --app-label-letterSpacing: var(--app-letterSpacing-#{$scale});
-      --app-label-trimOffset: var(--app-trimOffset-#{$scale});
+      --app-article-fontSize: var(--app-fontSize-#{$scale});
+      --app-article-lineHeight: var(--app-lineHeight-#{$scale});
+      --app-article-letterSpacing: var(--app-letterSpacing-#{$scale}-sans);
+      --app-article-trimOffset: var(--app-trimOffset-#{$scale}-sans);
     }
   }
 }
@@ -381,48 +380,49 @@ $levels: (
 //  CSS output
 //  ==========================================================================
 
-//  .app-label {
-//    font-size: var(--app-label-fontSize);
-//    line-height: var(--app-label-lineHeight);
-//    letter-spacing: var(--app-label-letterSpacing);
+//  .app-article {
+//    font-size: var(--app-article-fontSize);
+//    letter-spacing: var(--app-article-letterSpacing);
+//    line-height: var(--app-article-lineHeight);
 //    padding-bottom: 1px;
 //    padding-top: 1px;
-//   }
+//  }
 //
-//  .app-label::before,
-//  .app-label::after {
-//    content: "";
+//  .app-article--wide {
+//    --app-article-lineHeightModifier: 2px;
+//  }
+//
+//
+//  .app-article::before,
+//  .app-article::after {
+//    content: '';
 //    display: block;
 //    height: 0;
-//   }
+//  }
 //
-//  .app-label::before {
-//    margin-top: calc((var(--app-label-trimOffset) + 1px) * -1);
-//   }
+//  .app-article::before {
+//    margin-top: calc(
+//      (var(--app-article-trimOffset) + var(--app-article-lineHeightModifier) / 2 + 1px) * -1
+//    );
+//  }
 //
-//  .app-label::after {
-//    margin-bottom: calc((var(--app-label-trimOffset) + 1px) * -1);
-//   }
+//  .app-article::after {
+//    margin-bottom: calc(
+//      (var(--app-article-trimOffset) + var(--app-article-lineHeightModifier) / 2 + 1px) * -1
+//    );
+//  }
 //
-//  .app-label--primary {
-//    --app-label-fontSize: var(--app-fontSize-md);
-//    --app-label-lineHeight: var(--app-lineHeight-md);
-//    --app-label-letterSpacing: var(--app-letterSpacing-md);
-//    --app-label-trimOffset: var(--app-trimOffset-md);
-//   }
+//  .app-article--primary {
+//    --app-article-fontSize: var(--cap-fontSize-md);
+//    --app-article-lineHeight: var(--cap-lineHeight-md);
+//    --app-article-letterSpacing: var(--cap-letterSpacing-md-sans);
+//    --app-article-trimOffset: var(--cap-trimOffset-md-sans);
+//  }
 //
-//  .app-label--secondary {
-//    --app-label-fontSize: var(--app-fontSize-sm);
-//    --app-label-lineHeight: var(--app-lineHeight-sm);
-//    --app-label-letterSpacing: var(--app-letterSpacing-sm);
-//    --app-label-trimOffset: var(--app-trimOffset-sm);
-//   }
-```
-
-Since calculated `lineHeight` values are rounded to an even number, the associated trim values are rounded to a whole number. This always results in an even selector height for any declared scale. From a design perspective this is more comfortable to work with, but can be disabled by configuring the main module:
-
-```scss
-@use '@klickste/cap' with (
-  $roundEven: false
-);
+//  .app-article--secondary {
+//    --app-article-fontSize: var(--cap-fontSize-sm);
+//    --app-article-lineHeight: var(--cap-lineHeight-sm);
+//    --app-article-letterSpacing: var(--cap-letterSpacing-sm-sans);
+//    --app-article-trimOffset: var(--cap-trimOffset-sm-sans);
+//  }
 ```

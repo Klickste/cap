@@ -9,7 +9,7 @@
 
 @use 'sass:math';
 @use 'sass:list';
-@use './config';
+@use './font';
 
 // ==========================================================================
 // Functions
@@ -24,11 +24,7 @@
 /// @param {number} $upm - Units Per eM of the typeface.
 /// @param {number} $capHeight - Cap height ot the typeface.
 @function calcTrimOffset($fontSize, $lineHeight, $upm, $capHeight) {
-  $boxHeight: if(
-    config.$roundEven,
-    2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2)),
-    math.round(math.div($capHeight, $upm) * $fontSize)
-  );
+  $boxHeight: 2 * math.round(math.div(((math.div($capHeight, $upm)) * $fontSize), 2));
 
   @return math.div(($lineHeight - $boxHeight), 2);
 }
@@ -70,11 +66,7 @@
 @function calcLineHeight($fontSize) {
   $ratio: calcRatio($fontSize, 1.2, 1.8, -0.12);
 
-  @if config.$roundEven {
-    @return math.round(math.div($fontSize * $ratio, 2)) * 2;
-  } @else {
-    @return math.round($fontSize * $ratio);
-  }
+  @return math.round(math.div($fontSize * $ratio, 2)) * 2;
 }
 
 /// Calculates a modular font size.
@@ -112,7 +104,10 @@
 /// @since 2.0.0
 ///
 /// @param {string} $name - The name of the selector which should be trimmed.
-@mixin trim($name) {
+/// @param {string} $namespace - The namespace of the custom properties.
+///
+/// TODO: Conditional defaults for custom properties.
+@mixin trim($name, $namespace: 'cap') {
   padding-bottom: 1px;
   padding-top: 1px;
 
@@ -124,10 +119,36 @@
   }
 
   &::before {
-    margin-top: calc((var(--cap-#{$name}-trimOffset) + 1px) * -1);
+    margin-top: calc(
+      (
+          var(
+              --#{$namespace}-#{$name}-trimOffset,
+              var(--#{$namespace}-#{$name}-trimOffset-#{font.$defaultFamily})
+            ) +
+            (
+              var(
+                  --#{$namespace}-#{$name}-lineHeightModifier,
+                  var(--cap-lineHeightModifier-compact)
+                ) / 2
+            ) + 1px
+        ) * -1
+    );
   }
 
   &::after {
-    margin-bottom: calc((var(--cap-#{$name}-trimOffset) + 1px) * -1);
+    margin-bottom: calc(
+      (
+          var(
+              --#{$namespace}-#{$name}-trimOffset,
+              var(--#{$namespace}-#{$name}-trimOffset-#{font.$defaultFamily})
+            ) +
+            (
+              var(
+                  --#{$namespace}-#{$name}-lineHeightModifier,
+                  var(--cap-lineHeightModifier-compact)
+                ) / 2
+            ) + 1px
+        ) * -1
+    );
   }
 }

@@ -11,9 +11,9 @@
   "files": [
     "_font.scss",
     "_scale.scss",
+    "_utils.scss",
     "index.scss",
-    "components/",
-    "library/"
+    "components/"
   ],
   "scripts": {
     "metrics": "node tools/metrics.js",

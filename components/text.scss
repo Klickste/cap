@@ -7,10 +7,11 @@
 // Modules
 // ==========================================================================
 
-@use 'sass:map';
 @use 'sass:list';
+@use 'sass:map';
 @use './../font';
 @use './../scale';
+@use './../utils';
 
 // ==========================================================================
 // Rules
@@ -40,36 +41,9 @@ cap-text {
   margin: 0;
   min-width: var(--cap-text-minWidth, auto);
   overflow: var(--cap-text-overflow, visible);
-  padding-bottom: 1px;
-  padding-top: 1px;
   text-overflow: var(--cap-text-textOverflow, clip);
   white-space: var(--cap-text-whiteSpace, normal);
   width: var(--cap-text-width, auto);
-
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    height: 0;
-  }
-
-  &::before {
-    margin-top: calc(
-      (
-          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{font.$defaultFamily})) +
-            (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
-        ) * -1
-    );
-  }
-
-  &::after {
-    margin-bottom: calc(
-      (
-          var(--cap-text-trimOffset, var(--cap-text-trimOffset-#{font.$defaultFamily})) +
-            (var(--cap-text-lineHeightModifier, var(--cap-lineHeightModifier-compact)) / 2) + 1px
-        ) * -1
-    );
-  }
 
   &[no-wrap] {
     --cap-text-whiteSpace: nowrap;
@@ -86,6 +60,8 @@ cap-text {
   &[italic] {
     --cap-text-fontStyle: italic;
   }
+
+  @include utils.trim('text');
 
   @each $level, $size in scale.$levels {
     &[level='#{$level}'] {

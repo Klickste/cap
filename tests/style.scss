@@ -2,7 +2,6 @@
 // Modules
 // ==========================================================================
 
-@use './../index' as cap;
 @use './../font' with (
   $families: (
     'sans',
@@ -37,6 +36,7 @@
 );
 @use './../components/text';
 @use './../components/rich-text';
+@use './../utils';
 
 // ==========================================================================
 // Rules
@@ -152,3 +152,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: none;
 }
+
+// @use './../index' as cap;
+
+// div {
+//   line-height: cap.calcLineHeight(15px);
+// }

@@ -9,9 +9,9 @@
 
 @use 'sass:list';
 @use 'sass:map';
-@use './../library/utils';
 @use './../font';
 @use './../scale';
+@use './../utils';
 
 // ==========================================================================
 // Variables
@@ -64,33 +64,7 @@ cap-rich-text {
   }
 
   > *:not(hr) {
-    padding-bottom: 1px;
-    padding-top: 1px;
-
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
-    &::before {
-      margin-top: calc(
-        (
-            var(--cap-rich-text-child-trimOffset) +
-              (var(--cap-rich-text-child-lineHeightModifier) / 2) + 1px
-          ) * -1
-      );
-    }
-
-    &::after {
-      margin-bottom: calc(
-        (
-            var(--cap-rich-text-child-trimOffset) +
-              (var(--cap-rich-text-child-lineHeightModifier) / 2) + 1px
-          ) * -1
-      );
-    }
+    @include utils.trim('rich-text-child');
   }
 
   h1,
