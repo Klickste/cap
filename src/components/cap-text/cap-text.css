@@ -1,0 +1,123 @@
+:host {
+	display: block;
+	font-family: var(--low-text-font-family);
+	font-feature-settings: var(--low-text-font-feature-settings, normal);
+	font-kerning: normal;
+	font-optical-sizing: auto;
+	font-size: var(--low-text-font-size);
+	font-variation-settings: 'wght' var(--low-text-font-weight);
+	letter-spacing: var(--low-text-letter-spacing);
+	line-height: var(--low-text-line-height);
+	padding-bottom: 1px;
+	padding-top: 1px;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+}
+
+:host(.\-2) {
+	--low-text-font-size: var(--low-text-font-size-minus-2);
+	--low-text-leading-trim: var(--low-text-leading-trim-minus-2);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-minus-2);
+	--low-text-line-height: var(--low-text-line-height-minus-2);
+}
+
+:host(.\-1) {
+	--low-text-font-size: var(--low-text-font-size-minus-1);
+	--low-text-leading-trim: var(--low-text-leading-trim-minus-1);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-minus-1);
+	--low-text-line-height: var(--low-text-line-height-minus-1);
+}
+
+:host(.\30) {
+	--low-text-font-size: var(--low-text-font-size-0);
+	--low-text-leading-trim: var(--low-text-leading-trim-0);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-0);
+	--low-text-line-height: var(--low-text-line-height-0);
+}
+
+:host(.\+1) {
+	--low-text-font-size: var(--low-text-font-size-plus-1);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-1);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-1);
+	--low-text-line-height: var(--low-text-line-height-plus-1);
+}
+
+:host(.\+2) {
+	--low-text-font-size: var(--low-text-font-size-plus-2);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-2);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-2);
+	--low-text-line-height: var(--low-text-line-height-plus-2);
+}
+
+:host(.\+3) {
+	--low-text-font-size: var(--low-text-font-size-plus-3);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-3);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-3);
+	--low-text-line-height: var(--low-text-line-height-plus-3);
+}
+
+:host(.\+4) {
+	--low-text-font-size: var(--low-text-font-size-plus-4);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-4);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-4);
+	--low-text-line-height: var(--low-text-line-height-plus-4);
+}
+
+:host(.\+5) {
+	--low-text-font-size: var(--low-text-font-size-plus-5);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-5);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-5);
+	--low-text-line-height: var(--low-text-line-height-plus-5);
+}
+
+:host(.\+6) {
+	--low-text-font-size: var(--low-text-font-size-plus-6);
+	--low-text-leading-trim: var(--low-text-leading-trim-plus-6);
+	--low-text-letter-spacing: var(--low-text-letter-spacing-plus-6);
+	--low-text-line-height: var(--low-text-line-height-plus-6);
+}
+
+:host::before,
+:host::after {
+	content: '';
+	display: block;
+	height: 0;
+}
+
+:host::before {
+	margin-top: calc((var(--low-text-leading-trim) + 1px) * -1);
+}
+
+:host::after {
+	margin-bottom: calc((var(--low-text-leading-trim) + 1px) * -1);
+}
+
+:host(.soft) {
+	--low-text-font-weight: var(--low-text-font-weight-soft);
+}
+
+:host(.strong) {
+	--low-text-font-weight: var(--low-text-font-weight-strong);
+}
+
+:host(.heavy) {
+	--low-text-font-weight: var(--low-text-font-weight-heavy);
+}
+
+::slotted(a) {
+	color: var(--low-text-anchor-color, blue);
+	text-decoration: var(--low-text-anchor-text-decoration, underline);
+}
+
+::slotted(strong) {
+	font-variation-settings: 'wght' var(--low-text-strong-font-weight, 700);
+}
+
+#content::before {
+	content: attr(data-before);
+}
+
+#content::after {
+	content: attr(data-after);
+}

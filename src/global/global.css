@@ -1,0 +1,44 @@
+:root {
+	--low-text-font-family: 'Inter', sans-serif;
+	--low-text-font-feature-settings: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10', 'ss01';
+	--low-text-upm: 2048;
+	--low-text-cap-height: 1490;
+	--low-text-level-ratio: 1.2;
+	--low-text-level-base: 14px;
+	--low-text-font-weight-soft: 400;
+	--low-text-font-weight-strong: 500;
+	--low-text-font-weight-heavy: 600;
+}
+
+/**
+ * Fonts
+ * Inter-4.0-beta7
+ */
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Inter.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style: italic;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Inter-Italic.var.woff2') format('woff2-variations');
+}
+
+body {
+	margin: 0;
+	padding: 48px 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+}
+
+/* cap-text:not(:defined) {
+	visibility: hidden;
+} */

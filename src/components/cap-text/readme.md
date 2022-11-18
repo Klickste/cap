@@ -4,18 +4,11 @@
 
 ## Properties
 
-| Property      | Attribute   | Description    | Type                                                                                                                                  | Default     |
-| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `dataAppend`  | `append`    | Description... | `string`                                                                                                                              | `undefined` |
-| `dataPrepend` | `prepend`   | Description... | `string`                                                                                                                              | `undefined` |
-| `ellipsis`    | `ellipsis`  | Description... | `boolean`                                                                                                                             | `false`     |
-| `family`      | `family`    | Description... | `"mono" \| "sans" \| "serif"`                                                                                                         | `'sans'`    |
-| `heading`     | `heading`   | Description... | `1 \| 2 \| 3 \| 4 \| 5 \| 6`                                                                                                          | `undefined` |
-| `italic`      | `italic`    | Description... | `boolean`                                                                                                                             | `undefined` |
-| `leading`     | `leading`   | Description... | `"compact" \| "loose" \| "narrow" \| "open" \| "tight"`                                                                               | `'compact'` |
-| `level`       | `level`     | Description... | `"+1" \| "+2" \| "+3" \| "+4" \| "+5" \| "+6" \| "+7" \| "+8" \| "-1" \| "-2" \| "-3" \| "-4" \| "-5" \| "-6" \| "-7" \| "-8" \| "0"` | `'0'`       |
-| `noWrap`      | `no-wrap`   | Description... | `boolean`                                                                                                                             | `false`     |
-| `paragraph`   | `paragraph` | Description... | `boolean`                                                                                                                             | `undefined` |
-| `weight`      | `weight`    | Description... | `"heavy" \| "soft" \| "strong"`                                                                                                       | `'soft'`    |
+| Property        | Attribute        | Description          | Type                                                                  | Default     |
+| --------------- | ---------------- | -------------------- | --------------------------------------------------------------------- | ----------- |
+| `contentAfter`  | `content-after`  | { item_description } | `string`                                                              | `undefined` |
+| `contentBefore` | `content-before` | { item_description } | `string`                                                              | `undefined` |
+| `level`         | `level`          | { item_description } | `"+1" \| "+2" \| "+3" \| "+4" \| "+5" \| "+6" \| "-1" \| "-2" \| "0"` | `'0'`       |
+| `weight`        | `weight`         | { item_description } | `"heavy" \| "soft" \| "strong"`                                       | `'soft'`    |
 
 ---

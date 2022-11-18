@@ -1,78 +1,41 @@
 {
-  "name": "@klickste/cap",
-  "version": "4.0.0-beta.2",
-  "description": "Adaptive typography for the web.",
-  "license": "MIT",
-  "author": "klickste",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/klickste/cap.git"
-  },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/components.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/cap/cap.esm.js",
-  "files": [
-    "dist/",
-    "loader/",
-    "www/",
-    "sass/"
-  ],
-  "scripts": {
-    "metrics": "node tools/metrics.js",
-    "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
-    "prettier": "prettier \"**/*.{html,js,json,md,ts,tsx}\" --write",
-    "stylelint": "stylelint \"**/*.scss\" --fix",
-    "sass:dev": "sass sass/tests/style.scss style.css --no-source-map --load-path=sass",
-    "sass:prod": "sass sass/tests/style.scss style.css --no-source-map --load-path=sass --style=compressed",
-    "sass:watch": "sass sass/tests/style.scss style.css --no-source-map --load-path=sass --watch --update",
-    "serve": "serve",
-    "test": "concurrently \"npm run serve\" \"npm run sass:watch\"",
-    "format": "npm run prettier && npm run stylelint"
-  },
-  "devDependencies": {
-    "@stencil/core": "^2.15.1",
-    "@stencil/sass": "^1.5.2",
-    "concurrently": "^7.1.0",
-    "fontkit": "^1.8.1",
-    "postcss-scss": "^4.0.3",
-    "prettier": "^2.6.2",
-    "sass": "^1.50.1",
-    "serve": "^13.0.2",
-    "stylelint": "^14.7.1",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-order": "^5.0.0",
-    "stylelint-prettier": "^2.0.0"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": true
-  },
-  "stylelint": {
-    "customSyntax": "postcss-scss",
-    "extends": [
-      "stylelint-config-prettier"
-    ],
-    "plugins": [
-      "stylelint-prettier",
-      "stylelint-order"
-    ],
-    "rules": {
-      "prettier/prettier": true,
-      "order/order": [
-        "dollar-variables",
-        "custom-properties",
-        "declarations",
-        "rules",
-        "at-rules"
-      ],
-      "order/properties-alphabetical-order": true
-    }
-  }
+	"name": "@klickste/cap",
+	"version": "5.0.0-beta.1",
+	"description": "Adaptive typography for the web.",
+	"license": "MIT",
+	"author": "klickste",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/klickste/cap.git"
+	},
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.js",
+	"es2015": "dist/esm/index.mjs",
+	"es2017": "dist/esm/index.mjs",
+	"types": "dist/types/components.d.ts",
+	"collection": "dist/collection/collection-manifest.json",
+	"collection:main": "dist/collection/index.js",
+	"unpkg": "dist/cap/cap.esm.js",
+	"files": [
+		"dist/",
+		"loader/"
+	],
+	"scripts": {
+		"metrics": "node tools/metrics.js",
+		"build": "stencil build --docs",
+		"start": "stencil build --dev --watch --serve",
+		"format": "prettier . --write"
+	},
+	"dependencies": {
+		"@stencil/core": "^2.19.3"
+	},
+	"devDependencies": {
+		"fontkit": "^2.0.2",
+		"prettier": "^2.7.1"
+	},
+	"prettier": {
+		"printWidth": 100,
+		"semi": false,
+		"singleQuote": true
+	}
 }
