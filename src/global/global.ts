@@ -4,10 +4,17 @@ export default async () => {
 	const body: HTMLBodyElement = document.querySelector('body')
 	const head: HTMLHeadElement = document.querySelector('head')
 	const style: CSSStyleDeclaration = getComputedStyle(body)
-	const levelsBase: number = parseInt(style.getPropertyValue('--cap-text-levels-base'))
-	const levelsRatio: number = parseFloat(style.getPropertyValue('--cap-text-levels-ratio'))
-	const levelsDown: number = parseInt(style.getPropertyValue('--cap-text-levels-down'))
-	const levelsUp: number = parseInt(style.getPropertyValue('--cap-text-levels-up'))
+
+	const levelsDownProperty: string = style.getPropertyValue('--cap-text-levels-down')
+	const levelsUpProperty: string = style.getPropertyValue('--cap-text-levels-up')
+	const levelsBaseProperty: string = style.getPropertyValue('--cap-text-levels-base')
+	const levelsRatioProperty: string = style.getPropertyValue('--cap-text-levels-ratio')
+
+	const levelsDown: number = levelsDownProperty !== '' ? parseInt(levelsDownProperty) : -2
+	const levelsUp: number = levelsUpProperty !== '' ? parseInt(levelsUpProperty) : 6
+	const levelsBase: number = levelsBaseProperty !== '' ? parseInt(levelsBaseProperty) : 14
+	const levelsRatio: number = levelsRatioProperty !== '' ? parseFloat(levelsRatioProperty) : 1.2
+
 	const families: CapTextFamily[] = ['sans', 'serif', 'mono']
 
 	let styles: string = ''
