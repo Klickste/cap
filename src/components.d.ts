@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CapTextLevel, CapTextWeight } from "./types";
+import { CapTextFamily, CapTextLevel, CapTextWeight } from "./types";
 export namespace Components {
     interface CapText {
         /**
@@ -16,6 +16,10 @@ export namespace Components {
           * { item_description }
          */
         "contentBefore": string;
+        /**
+          * { item_description }
+         */
+        "family": CapTextFamily;
         /**
           * { item_description }
          */
@@ -47,6 +51,10 @@ declare namespace LocalJSX {
           * { item_description }
          */
         "contentBefore"?: string;
+        /**
+          * { item_description }
+         */
+        "family"?: CapTextFamily;
         /**
           * { item_description }
          */

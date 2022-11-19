@@ -1,18 +1,31 @@
 :root {
-	--low-text-font-family: 'Inter', sans-serif;
-	--low-text-font-feature-settings: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10', 'ss01';
-	--low-text-upm: 2048;
-	--low-text-cap-height: 1490;
-	--low-text-level-ratio: 1.2;
-	--low-text-level-base: 14px;
-	--low-text-font-weight-soft: 400;
-	--low-text-font-weight-strong: 500;
-	--low-text-font-weight-heavy: 600;
+	--cap-text-font-weight-soft: 400;
+	--cap-text-font-weight-strong: 500;
+	--cap-text-font-weight-heavy: 600;
+
+	--cap-text-levels-ratio: 1.2;
+	--cap-text-levels-base: 17px;
+	--cap-text-levels-down: -8;
+	--cap-text-levels-up: 8;
+
+	--cap-text-font-family-sans: 'Inter', sans-serif;
+	--cap-text-font-feature-settings-sans: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10', 'ss01';
+	--cap-text-upm-sans: 2048;
+	--cap-text-cap-height-sans: 1490;
+
+	--cap-text-font-family-serif: 'Merriweather', serif;
+	--cap-text-font-feature-settings-serif: 'liga';
+	--cap-text-upm-serif: 2000;
+	--cap-text-cap-height-serif: 1486;
+
+	--cap-text-font-family-mono: 'Fira Code', monospace;
+	--cap-text-font-feature-settings-mono: 'liga';
+	--cap-text-upm-mono: 1950;
+	--cap-text-cap-height-mono: 1374;
 }
 
 /**
  * Fonts
- * Inter-4.0-beta7
  */
 
 @font-face {
@@ -29,6 +42,30 @@
 	font-style: italic;
 	font-weight: 100 900;
 	src: url('./../assets/fonts/Inter-Italic.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Merriweather.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Merriweather';
+	font-style: italic;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Merriweather-Italic.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/FiraCode.var.woff2') format('woff2-variations');
 }
 
 body {
