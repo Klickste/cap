@@ -34,7 +34,7 @@ export class CapText {
 
 	render() {
 		return (
-			<Host class={`${this.level} ${this.weight} ${this.family}`}>
+			<Host class={`level:${this.level} weight:${this.weight} family:${this.family}`}>
 				<span id="content" data-before={this.contentBefore} data-after={this.contentAfter}>
 					<slot />
 				</span>

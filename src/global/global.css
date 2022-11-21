@@ -4,9 +4,9 @@
 	--cap-text-font-weight-heavy: 600;
 
 	--cap-text-levels-ratio: 1.2;
-	--cap-text-levels-base: 17px;
-	--cap-text-levels-down: -8;
-	--cap-text-levels-up: 8;
+	--cap-text-levels-base: 14px;
+	--cap-text-levels-down: -2;
+	--cap-text-levels-up: 6;
 
 	--cap-text-font-family-sans: 'Inter', sans-serif;
 	--cap-text-font-feature-settings-sans: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10', 'ss01';
@@ -71,7 +71,7 @@
 	src: url('./../assets/fonts/FiraCode.var.woff2') format('woff2-variations');
 }
 
-body {
+body.cap-debug {
 	margin: 0;
 	padding: 48px 24px;
 	display: flex;
@@ -79,6 +79,6 @@ body {
 	gap: 48px;
 }
 
-/* cap-text:not(:defined) {
-	visibility: hidden;
-} */
+body.cap-debug cap-text {
+	box-shadow: inset 0 1px 0 0 rgb(255 0 0 / 50%), inset 0 -1px 0 0 rgb(255 0 0 / 50%);
+}

@@ -29,14 +29,14 @@ export default async () => {
 		name: string
 		fontSize: number
 		lineHeight: number
-		letterSpacing: number
-		leadingTrims: { family: CapTextFamily; value: number }[],
+		letterSpacings: { family: CapTextFamily; value: number }[]
+		leadingTrims: { family: CapTextFamily; value: number }[]
 	}[] = []
 
 	/**
 	 * Gets the font size
-	 * @param   {number}          level - The level
-	 * @returns {Promise<number>}       - The font size
+	 * @param   {number} level - The level
+	 * @returns {number}       - The font size
 	 */
 	const getFontSize = (level: number): number => {
 		return Math.round(levelsBase * Math.pow(levelsRatio, level))
@@ -44,8 +44,8 @@ export default async () => {
 
 	/**
 	 * Gets the line height
-	 * @param   {number}          fontSize - The font size
-	 * @returns {Promise<number>}          - The line height
+	 * @param   {number} fontSize - The font size
+	 * @returns {number}          - The line height
 	 */
 	const getLineHeight = (fontSize: number): number => {
 		const ratio = 1.2 + 1.8 * Math.pow(Math.E, -0.12 * fontSize)
@@ -55,20 +55,21 @@ export default async () => {
 
 	/**
 	 * Gets the letter spacing
-	 * @param   {number}          fontSize - The font size
-	 * @returns {Promise<number>}          - The letter spacing
+	 * @param   {number} fontSize - The font size
+	 * @param   {number} factor   - The factor
+	 * @returns {number}          - The letter spacing
 	 */
-	const getLetterSpacing = (fontSize: number): number => {
-		const ratio = -0.0223 + 0.185 * Math.pow(Math.E, -0.1745 * fontSize)
+	const getLetterSpacing = (fontSize: number, factor: number): number => {
+		const ratio = factor !== 0 ? -0.0223 + 0.185 * Math.pow(Math.E, -0.1745 * fontSize * factor) : 0
 
 		return Math.round(ratio * 1000) / 1000
 	}
 
 	/**
 	 * Gets the leading trim
-	 * @param   {number}          fontSize   - The font size
-	 * @param   {number}          lineHeight - The line height
-	 * @returns {Promise<number>}            - The letter spacing
+	 * @param   {number} fontSize   - The font size
+	 * @param   {number} lineHeight - The line height
+	 * @returns {number}            - The letter spacing
 	 */
 	const getLeadingTrim = (
 		fontSize: number,
@@ -87,18 +88,19 @@ export default async () => {
 	families.forEach((family) => {
 		const upm: string = style.getPropertyValue(`--cap-text-upm-${family}`)
 		const capHeight: string = style.getPropertyValue(`--cap-text-cap-height-${family}`)
-		const letterSpacingFactor: string = style.getPropertyValue(`--cap-text-letter-spacing-factor-${family}`)
+		const letterSpacingFactor: string = style.getPropertyValue(
+			`--cap-text-letter-spacing-factor-${family}`
+		)
 
 		if (upm !== '' && capHeight !== '') {
 			metrics.push({
 				family: family,
 				upm: parseInt(upm),
 				capHeight: parseInt(capHeight),
-				letterSpacingFactor: parseFloat(letterSpacingFactor)
+				letterSpacingFactor: parseFloat(letterSpacingFactor),
 			})
 		}
 	})
-
 
 	if (metrics.length > 0) {
 		/**
@@ -108,16 +110,22 @@ export default async () => {
 			const levelSign = level < 0 ? 'minus' : level > 0 ? 'plus' : ''
 			const fontSize = getFontSize(level)
 			const lineHeight = getLineHeight(fontSize)
-			const letterSpacing = getLetterSpacing(fontSize)
 
 			let leadingTrims: { family: CapTextFamily; value: number }[] = []
+			let letterSpacings: { family: CapTextFamily; value: number }[] = []
 
 			metrics.forEach((metric) => {
 				const leadingTrim = getLeadingTrim(fontSize, lineHeight, metric.upm, metric.capHeight)
+				const letterSpacing = getLetterSpacing(fontSize, metric.letterSpacingFactor)
 
 				leadingTrims.push({
 					family: metric.family,
 					value: leadingTrim,
+				})
+
+				letterSpacings.push({
+					family: metric.family,
+					value: letterSpacing,
 				})
 			})
 
@@ -125,13 +133,10 @@ export default async () => {
 				name: `${levelSign}${levelSign !== '' ? '-' : ''}${Math.abs(level)}`,
 				fontSize: fontSize,
 				lineHeight: lineHeight,
-				letterSpacing: letterSpacing,
-				leadingTrims: leadingTrims
+				letterSpacings: letterSpacings,
+				leadingTrims: leadingTrims,
 			})
 		}
-
-
-	console.log(scales)
 
 		/**
 		 * Setups custom properties
@@ -142,14 +147,20 @@ export default async () => {
 						(scale) => `
 							--cap-text-font-size-${scale.name}: ${scale.fontSize}px;
 							--cap-text-line-height-${scale.name}: ${scale.lineHeight}px;
-							--cap-text-letter-spacing-${scale.name}-sans: ${scale.letterSpacing}em;
 
 							${scale.leadingTrims
 								.map(
 									(leadingTrim) =>
 										`--cap-text-leading-trim-${scale.name}-${leadingTrim.family}: ${leadingTrim.value}px;`
 								)
-								.join('')}`
+								.join('')}
+							${scale.letterSpacings
+								.map(
+									(letterSpacing) =>
+										`--cap-text-letter-spacing-${scale.name}-${letterSpacing.family}: ${letterSpacing.value}em;`
+								)
+								.join('')}
+							`
 					)
 					.join('')}
 			}`
