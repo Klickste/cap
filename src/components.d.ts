@@ -9,23 +9,27 @@ import { CapTextFamily, CapTextLevel, CapTextWeight } from "./types";
 export namespace Components {
     interface CapText {
         /**
-          * { item_description }
+          * Description...
          */
         "contentAfter": string;
         /**
-          * { item_description }
+          * Description...
          */
         "contentBefore": string;
         /**
-          * { item_description }
+          * Description...
+         */
+        "ellipsis": boolean;
+        /**
+          * Description...
          */
         "family": CapTextFamily;
         /**
-          * { item_description }
+          * Description...
          */
         "level": CapTextLevel;
         /**
-          * { item_description }
+          * Description...
          */
         "weight": CapTextWeight;
     }
@@ -44,23 +48,27 @@ declare global {
 declare namespace LocalJSX {
     interface CapText {
         /**
-          * { item_description }
+          * Description...
          */
         "contentAfter"?: string;
         /**
-          * { item_description }
+          * Description...
          */
         "contentBefore"?: string;
         /**
-          * { item_description }
+          * Description...
+         */
+        "ellipsis"?: boolean;
+        /**
+          * Description...
          */
         "family"?: CapTextFamily;
         /**
-          * { item_description }
+          * Description...
          */
         "level"?: CapTextLevel;
         /**
-          * { item_description }
+          * Description...
          */
         "weight"?: CapTextWeight;
     }

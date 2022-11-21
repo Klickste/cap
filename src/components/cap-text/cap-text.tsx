@@ -8,33 +8,42 @@ import { CapTextLevel, CapTextWeight, CapTextFamily } from './../../types'
 })
 export class CapText {
 	/**
-	 * { item_description }
+	 * Description...
 	 */
 	@Prop() level: CapTextLevel = '0'
 
 	/**
-	 * { item_description }
+	 * Description...
 	 */
 	@Prop() weight: CapTextWeight = 'soft'
 
 	/**
-	 * { item_description }
+	 * Description...
 	 */
 	@Prop() family: CapTextFamily = 'sans'
 
 	/**
-	 * { item_description }
+	 * Description...
 	 */
 	@Prop() contentBefore: string
 
 	/**
-	 * { item_description }
+	 * Description...
 	 */
 	@Prop() contentAfter: string
 
+	/**
+	 * Description...
+	 */
+	@Prop() ellipsis: boolean = false
+
 	render() {
 		return (
-			<Host class={`level:${this.level} weight:${this.weight} family:${this.family}`}>
+			<Host
+				class={`level:${this.level} weight:${this.weight} family:${this.family} ${
+					this.ellipsis ? 'ellipsis' : ''
+				}`}
+			>
 				<span id="content" data-before={this.contentBefore} data-after={this.contentAfter}>
 					<slot />
 				</span>
