@@ -230,6 +230,7 @@
 	--cap-text-font-feature-settings: var(--cap-text-font-feature-settings-sans);
 	--cap-text-leading-trim: var(--cap-text-leading-trim-sans);
 	--cap-text-letter-spacing: var(--cap-text-letter-spacing-sans);
+	--cap-text-font-weight: var(--cap-text-font-weight-sans);
 }
 
 :host(.family\3a serif) {
@@ -237,6 +238,7 @@
 	--cap-text-font-feature-settings: var(--cap-text-font-feature-settings-serif);
 	--cap-text-leading-trim: var(--cap-text-leading-trim-serif);
 	--cap-text-letter-spacing: var(--cap-text-letter-spacing-serif);
+	--cap-text-font-weight: var(--cap-text-font-weight-serif);
 }
 
 :host(.family\3a mono) {
@@ -244,6 +246,7 @@
 	--cap-text-font-feature-settings: var(--cap-text-font-feature-settings-mono);
 	--cap-text-leading-trim: var(--cap-text-leading-trim-mono);
 	--cap-text-letter-spacing: var(--cap-text-letter-spacing-mono);
+	--cap-text-font-weight: var(--cap-text-font-weight-mono);
 }
 
 /**
@@ -251,15 +254,21 @@
  */
 
 :host(.weight\3a soft) {
-	--cap-text-font-weight: var(--cap-text-font-weight-soft);
+	--cap-text-font-weight-sans: var(--cap-text-font-weight-soft-sans);
+	--cap-text-font-weight-serif: var(--cap-text-font-weight-soft-serif);
+	--cap-text-font-weight-mono: var(--cap-text-font-weight-soft-mono);
 }
 
 :host(.weight\3a strong) {
-	--cap-text-font-weight: var(--cap-text-font-weight-strong);
+	--cap-text-font-weight-sans: var(--cap-text-font-weight-strong-sans);
+	--cap-text-font-weight-serif: var(--cap-text-font-weight-strong-serif);
+	--cap-text-font-weight-mono: var(--cap-text-font-weight-strong-mono);
 }
 
 :host(.weight\3a heavy) {
-	--cap-text-font-weight: var(--cap-text-font-weight-heavy);
+	--cap-text-font-weight-sans: var(--cap-text-font-weight-heavy-sans);
+	--cap-text-font-weight-serif: var(--cap-text-font-weight-heavy-serif);
+	--cap-text-font-weight-mono: var(--cap-text-font-weight-heavy-mono);
 }
 
 /**

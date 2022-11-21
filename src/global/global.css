@@ -1,8 +1,4 @@
 :root {
-	--cap-text-font-weight-soft: 400;
-	--cap-text-font-weight-strong: 500;
-	--cap-text-font-weight-heavy: 600;
-
 	--cap-text-levels-ratio: 1.2;
 	--cap-text-levels-base: 14px;
 	--cap-text-levels-down: -2;
@@ -13,18 +9,27 @@
 	--cap-text-upm-sans: 2048;
 	--cap-text-cap-height-sans: 1490;
 	--cap-text-letter-spacing-factor-sans: 1;
+	--cap-text-font-weight-soft-sans: 400;
+	--cap-text-font-weight-strong-sans: 500;
+	--cap-text-font-weight-heavy-sans: 600;
 
 	--cap-text-font-family-serif: 'Merriweather', serif;
 	--cap-text-font-feature-settings-serif: 'liga';
 	--cap-text-upm-serif: 2000;
 	--cap-text-cap-height-serif: 1486;
 	--cap-text-letter-spacing-factor-serif: 0.5;
+	--cap-text-font-weight-soft-serif: 400;
+	--cap-text-font-weight-strong-serif: 500;
+	--cap-text-font-weight-heavy-serif: 700;
 
 	--cap-text-font-family-mono: 'Fira Code', monospace;
 	--cap-text-font-feature-settings-mono: 'liga';
 	--cap-text-upm-mono: 1950;
 	--cap-text-cap-height-mono: 1374;
 	--cap-text-letter-spacing-factor-mono: 0;
+	--cap-text-font-weight-soft-mono: 400;
+	--cap-text-font-weight-strong-mono: 500;
+	--cap-text-font-weight-heavy-mono: 600;
 }
 
 /**
