@@ -23,13 +23,14 @@ export default async () => {
 		family: CapTextFamily
 		upm: number
 		capHeight: number
+		letterSpacingFactor: number
 	}[] = []
 	let scales: {
 		name: string
 		fontSize: number
 		lineHeight: number
 		letterSpacing: number
-		leadingTrims: { family: CapTextFamily; value: number }[]
+		leadingTrims: { family: CapTextFamily; value: number }[],
 	}[] = []
 
 	/**
@@ -86,15 +87,18 @@ export default async () => {
 	families.forEach((family) => {
 		const upm: string = style.getPropertyValue(`--cap-text-upm-${family}`)
 		const capHeight: string = style.getPropertyValue(`--cap-text-cap-height-${family}`)
+		const letterSpacingFactor: string = style.getPropertyValue(`--cap-text-letter-spacing-factor-${family}`)
 
 		if (upm !== '' && capHeight !== '') {
 			metrics.push({
 				family: family,
 				upm: parseInt(upm),
 				capHeight: parseInt(capHeight),
+				letterSpacingFactor: parseFloat(letterSpacingFactor)
 			})
 		}
 	})
+
 
 	if (metrics.length > 0) {
 		/**
@@ -122,9 +126,12 @@ export default async () => {
 				fontSize: fontSize,
 				lineHeight: lineHeight,
 				letterSpacing: letterSpacing,
-				leadingTrims: leadingTrims,
+				leadingTrims: leadingTrims
 			})
 		}
+
+
+	console.log(scales)
 
 		/**
 		 * Setups custom properties

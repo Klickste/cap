@@ -12,16 +12,19 @@
 	--cap-text-font-feature-settings-sans: 'calt', 'liga', 'ss03', 'zero', 'cv05', 'cv10', 'ss01';
 	--cap-text-upm-sans: 2048;
 	--cap-text-cap-height-sans: 1490;
+	--cap-text-letter-spacing-factor-sans: 1;
 
 	--cap-text-font-family-serif: 'Merriweather', serif;
 	--cap-text-font-feature-settings-serif: 'liga';
 	--cap-text-upm-serif: 2000;
 	--cap-text-cap-height-serif: 1486;
+	--cap-text-letter-spacing-factor-serif: 0.5;
 
 	--cap-text-font-family-mono: 'Fira Code', monospace;
 	--cap-text-font-feature-settings-mono: 'liga';
 	--cap-text-upm-mono: 1950;
 	--cap-text-cap-height-mono: 1374;
+	--cap-text-letter-spacing-factor-mono: 0;
 }
 
 /**
