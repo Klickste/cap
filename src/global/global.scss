@@ -1,0 +1,113 @@
+@use './../index' as cap with (
+	$levels-ups: 6,
+	$levels-downs: 2,
+	$family-sans: (
+		'font': '"Inter"',
+		'fallback': 'sans-serif',
+		'upm': 2048,
+		'cap-height': 1490,
+		'spacing': 1,
+		'features': '"calt", "liga", "ss03", "zero", "cv05", "cv10", "ss01"',
+		'weights': (
+			'soft': 400,
+			'strong': 500,
+			'bla': 600,
+		),
+	),
+	$family-serif: (
+		'font': '"Merriweather"',
+		'fallback': 'serif',
+		'upm': 2000,
+		'cap-height': 1486,
+		'spacing': 0.5,
+		'features': '"liga"',
+		'weights': (
+			'soft': 300,
+			'strong': 600,
+			'heavy': 700,
+		),
+	),
+	$family-mono: (
+		'font': '"Fira Code"',
+		'fallback': 'monospace',
+		'upm': 1950,
+		'cap-height': 1374,
+		'spacing': 0,
+		'features': '"liga"',
+		'weights': (
+			'soft': 400,
+			'strong': 500,
+			'heavy': 600,
+		),
+	)
+);
+
+:root {
+	@include cap.levels;
+	@include cap.families;
+}
+
+/**
+ * Fonts
+ */
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Inter.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style: italic;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Inter-Italic.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Merriweather.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Merriweather';
+	font-style: italic;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/Merriweather-Italic.var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url('./../assets/fonts/FiraCode.var.woff2') format('woff2-variations');
+}
+
+body {
+	&.cap-debug {
+		margin: 0;
+		padding: 48px 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+		background: var(--body-cap-debug-background, white);
+		color: var(--body-cap-debug-color, black);
+
+		cap-text {
+			box-shadow: inset 0 1px 0 0 rgb(255 0 0 / 50%), inset 0 -1px 0 0 rgb(255 0 0 / 50%);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			--body-cap-debug-background: black;
+			--body-cap-debug-color: white;
+		}
+	}
+}

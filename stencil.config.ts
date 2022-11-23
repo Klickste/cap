@@ -1,10 +1,12 @@
 import { Config } from '@stencil/core'
+import { sass } from '@stencil/sass'
 
 export const config: Config = {
 	namespace: 'cap',
 	taskQueue: 'async',
-	globalStyle: 'src/global/global.css',
-	globalScript: 'src/global/global.ts',
+	plugins: [sass()],
+	globalStyle: 'src/global/global.scss',
+	// globalScript: 'src/global/global.ts',
 	outputTargets: [
 		{
 			type: 'www',

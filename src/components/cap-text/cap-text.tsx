@@ -3,7 +3,7 @@ import { CapTextLevel, CapTextWeight, CapTextFamily } from './../../types'
 
 @Component({
 	tag: 'cap-text',
-	styleUrl: 'cap-text.css',
+	styleUrl: 'cap-text.scss',
 	shadow: true,
 })
 export class CapText {

@@ -1,7 +1,7 @@
 :host {
 	display: block;
 	font-family: var(--cap-text-font-family);
-	font-feature-settings: var(--cap-text-font-feature-settings, normal);
+	font-feature-settings: var(--cap-text-font-feature-settings);
 	font-kerning: normal;
 	font-optical-sizing: auto;
 	font-size: var(--cap-text-font-size);
