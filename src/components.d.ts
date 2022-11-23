@@ -27,6 +27,10 @@ export namespace Components {
         /**
           * Description...
          */
+        "italic": boolean;
+        /**
+          * Description...
+         */
         "level": CapTextLevel;
         /**
           * Description...
@@ -63,6 +67,10 @@ declare namespace LocalJSX {
           * Description...
          */
         "family"?: CapTextFamily;
+        /**
+          * Description...
+         */
+        "italic"?: boolean;
         /**
           * Description...
          */

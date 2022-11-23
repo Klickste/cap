@@ -37,12 +37,17 @@ export class CapText {
 	 */
 	@Prop() ellipsis: boolean = false
 
+	/**
+	 * Description...
+	 */
+	@Prop() italic: boolean = false
+
 	render() {
 		return (
 			<Host
 				class={`level:${this.level} weight:${this.weight} family:${this.family} ${
 					this.ellipsis ? 'ellipsis' : ''
-				}`}
+				} ${this.italic ? 'italic' : ''}`}
 			>
 				<span id="content" data-before={this.contentBefore} data-after={this.contentAfter}>
 					<slot />

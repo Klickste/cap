@@ -6,6 +6,7 @@
 	font-optical-sizing: auto;
 	font-size: var(--cap-text-font-size);
 	font-variation-settings: 'wght' var(--cap-text-font-weight);
+	font-style: var(--cap-text-font-style, normal);
 	letter-spacing: var(--cap-text-letter-spacing);
 	line-height: var(--cap-text-line-height);
 	padding-bottom: 1px;
@@ -281,6 +282,10 @@
 	--cap-text-content-white-space: nowrap;
 	--cap-text-content-width: 100%;
 	--cap-text-content-min-width: 0;
+}
+
+:host(.italic) {
+	--cap-text-font-style: italic;
 }
 
 /**
