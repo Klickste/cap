@@ -329,11 +329,11 @@
  * Content before/after
  */
 
-#content::before {
+:host(.has\3a content-before) #content::before {
 	content: attr(data-before);
 }
 
-#content::after {
+:host(.has\3a content-after) #content::after {
 	content: attr(data-after);
 }
 

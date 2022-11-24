@@ -48,13 +48,25 @@ export class CapText {
 	@Prop() leading: CapTextLeading = 'compact'
 
 	render() {
+		const hostClass = [
+			`level:${this.level}`,
+			`weight:${this.weight}`,
+			`family:${this.family}`,
+			`leading:${this.leading}`,
+			this.ellipsis ? 'ellipsis' : '',
+			this.italic ? 'italic' : '',
+			this.contentBefore ? 'has:content-before' : '',
+			this.contentAfter ? 'has:content-after' : '',
+		]
+
+		const contentAttributes = {
+			'data-before': this.contentBefore,
+			'data-after': this.contentAfter,
+		}
+
 		return (
-			<Host
-				class={`level:${this.level} weight:${this.weight} family:${this.family} leading:${
-					this.leading
-				} ${this.ellipsis ? 'ellipsis' : ''} ${this.italic ? 'italic' : ''}`}
-			>
-				<span id="content" data-before={this.contentBefore} data-after={this.contentAfter}>
+			<Host class={hostClass.join(' ')}>
+				<span id="content" {...contentAttributes}>
 					<slot />
 				</span>
 			</Host>
