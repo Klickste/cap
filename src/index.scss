@@ -73,8 +73,8 @@ $families: (
 		$font-size: get-font-size($level, $base, $ratio);
 		$line-height: get-line-height($font-size);
 
-		--cap-text-font-size-#{$sign + math.abs($level)}: #{$font-size}px;
-		--cap-text-line-height-#{$sign + math.abs($level)}: #{$line-height}px;
+		--cap-font-size-#{$sign + math.abs($level)}: #{$font-size}px;
+		--cap-line-height-#{$sign + math.abs($level)}: #{$line-height}px;
 
 		@each $name, $props in $families {
 			@if $props != () {
@@ -88,8 +88,8 @@ $families: (
 				);
 				$leading-trim: get-leading-trim($font-size, $line-height, $upm, $cap-height);
 
-				--cap-text-letter-spacing-#{$sign + math.abs($level)}-#{$name}: #{$letter-spacing};
-				--cap-text-leading-trim-#{$sign + math.abs($level)}-#{$name}: #{$leading-trim}px;
+				--cap-letter-spacing-#{$sign + math.abs($level)}-#{$name}: #{$letter-spacing};
+				--cap-leading-trim-#{$sign + math.abs($level)}-#{$name}: #{$leading-trim}px;
 			}
 		}
 	}
@@ -107,11 +107,11 @@ $families: (
 			);
 			$font-weights: map.get($props, 'weights');
 
-			--cap-text-font-family-#{$name}: #{$font-family}, #{$font-family-fallback};
-			--cap-text-font-feature-settings-#{$name}: #{$font-feature-settings};
+			--cap-font-family-#{$name}: #{$font-family}, #{$font-family-fallback};
+			--cap-font-feature-settings-#{$name}: #{$font-feature-settings};
 
 			@each $weight, $value in $font-weights {
-				--cap-text-font-weight-#{$weight}-#{$name}: #{$value};
+				--cap-font-weight-#{$weight}-#{$name}: #{$value};
 			}
 		}
 	}
