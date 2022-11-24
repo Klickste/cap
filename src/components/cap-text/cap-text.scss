@@ -8,7 +8,7 @@
 	font-variation-settings: 'wght' var(--cap-text-font-weight);
 	font-style: var(--cap-text-font-style, normal);
 	letter-spacing: var(--cap-text-letter-spacing);
-	line-height: var(--cap-text-line-height);
+	line-height: calc(var(--cap-text-line-height) + var(--cap-text-leading));
 	padding-bottom: 1px;
 	padding-top: 1px;
 	-moz-osx-font-smoothing: grayscale;
@@ -24,11 +24,11 @@
 }
 
 :host::before {
-	margin-top: calc((var(--cap-text-leading-trim) + 1px) * -1);
+	margin-top: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
 }
 
 :host::after {
-	margin-bottom: calc((var(--cap-text-leading-trim) + 1px) * -1);
+	margin-bottom: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
 }
 
 /**
@@ -270,6 +270,30 @@
 	--cap-text-font-weight-sans: var(--cap-font-weight-heavy-sans);
 	--cap-text-font-weight-serif: var(--cap-font-weight-heavy-serif);
 	--cap-text-font-weight-mono: var(--cap-font-weight-heavy-mono);
+}
+
+/**
+ * Leading
+ */
+
+:host(.leading\3a tight) {
+	--cap-text-leading: var(--cap-leading-tight);
+}
+
+:host(.leading\3a narrow) {
+	--cap-text-leading: var(--cap-leading-narrow);
+}
+
+:host(.leading\3a compact) {
+	--cap-text-leading: var(--cap-leading-compact);
+}
+
+:host(.leading\3a loose) {
+	--cap-text-leading: var(--cap-leading-loose);
+}
+
+:host(.leading\3a open) {
+	--cap-text-leading: var(--cap-leading-open);
 }
 
 /**

@@ -6,7 +6,6 @@ export const config: Config = {
 	taskQueue: 'async',
 	plugins: [sass()],
 	globalStyle: 'src/global/global.scss',
-	// globalScript: 'src/global/global.ts',
 	outputTargets: [
 		{
 			type: 'www',

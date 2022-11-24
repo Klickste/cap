@@ -11,7 +11,7 @@
 		'weights': (
 			'soft': 400,
 			'strong': 500,
-			'bla': 600,
+			'heavy': 600,
 		),
 	),
 	$family-serif: (
@@ -45,6 +45,7 @@
 :root {
 	@include cap.levels;
 	@include cap.families;
+	@include cap.leadings;
 }
 
 /**

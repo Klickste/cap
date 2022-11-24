@@ -18,3 +18,4 @@ export type CapTextLevel =
 	| '+8'
 export type CapTextWeight = 'soft' | 'strong' | 'heavy'
 export type CapTextFamily = 'sans' | 'serif' | 'mono'
+export type CapTextLeading = 'tight' | 'narrow' | 'compact' | 'loose' | 'open'

@@ -1,5 +1,5 @@
 import { Component, Prop, Host, h } from '@stencil/core'
-import { CapTextLevel, CapTextWeight, CapTextFamily } from './../../types'
+import { CapTextLevel, CapTextWeight, CapTextFamily, CapTextLeading } from './../../types'
 
 @Component({
 	tag: 'cap-text',
@@ -42,12 +42,17 @@ export class CapText {
 	 */
 	@Prop() italic: boolean = false
 
+	/**
+	 * Description...
+	 */
+	@Prop() leading: CapTextLeading = 'compact'
+
 	render() {
 		return (
 			<Host
-				class={`level:${this.level} weight:${this.weight} family:${this.family} ${
-					this.ellipsis ? 'ellipsis' : ''
-				} ${this.italic ? 'italic' : ''}`}
+				class={`level:${this.level} weight:${this.weight} family:${this.family} leading:${
+					this.leading
+				} ${this.ellipsis ? 'ellipsis' : ''} ${this.italic ? 'italic' : ''}`}
 			>
 				<span id="content" data-before={this.contentBefore} data-after={this.contentAfter}>
 					<slot />

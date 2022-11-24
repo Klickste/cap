@@ -23,6 +23,18 @@ $families: (
 	'serif': $family-serif,
 	'mono': $family-mono,
 );
+$leading-tight: -4px !default;
+$leading-narrow: -2px !default;
+$leading-compact: 0px !default;
+$leading-loose: 2px !default;
+$leading-open: 4px !default;
+$leadings: (
+	'tight': $leading-tight,
+	'narrow': $leading-narrow,
+	'compact': $leading-compact,
+	'loose': $leading-loose,
+	'open': $leading-open,
+);
 
 /**
  * Functions
@@ -114,5 +126,11 @@ $families: (
 				--cap-font-weight-#{$weight}-#{$name}: #{$value};
 			}
 		}
+	}
+}
+
+@mixin leadings($leadings: $leadings) {
+	@each $name, $value in $leadings {
+		--cap-leading-#{$name}: #{$value};
 	}
 }
