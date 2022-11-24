@@ -62,6 +62,10 @@ $leadings: (
 	@return math.div($line-height - $text-height, 2);
 }
 
+@function get-text-height($line-height, $leading-trim) {
+	@return $line-height - (2 * $leading-trim);
+}
+
 /**
  * Mixins
  */
@@ -99,9 +103,11 @@ $leadings: (
 					normal
 				);
 				$leading-trim: get-leading-trim($font-size, $line-height, $upm, $cap-height);
+				$text-height: get-text-height($line-height, $leading-trim);
 
 				--cap-letter-spacing-#{$sign + math.abs($level)}-#{$name}: #{$letter-spacing};
 				--cap-leading-trim-#{$sign + math.abs($level)}-#{$name}: #{$leading-trim}px;
+				--cap-text-height-#{$sign + math.abs($level)}-#{$name}: #{$text-height}px;
 			}
 		}
 	}
