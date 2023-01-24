@@ -35,6 +35,50 @@
  * Level
  */
 
+:host(.level\3a \-12) {
+	 --cap-text-font-size: var(--cap-font-size-minus-12);
+	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-12-sans);
+	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-12-serif);
+	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-12-mono);
+	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-12-sans);
+	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-12-serif);
+	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-12-mono);
+	 --cap-text-line-height: var(--cap-line-height-minus-12);
+ }
+
+:host(.level\3a \-11) {
+	 --cap-text-font-size: var(--cap-font-size-minus-11);
+	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-11-sans);
+	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-11-serif);
+	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-11-mono);
+	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-11-sans);
+	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-11-serif);
+	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-11-mono);
+	 --cap-text-line-height: var(--cap-line-height-minus-11);
+ }
+
+:host(.level\3a \-10) {
+	 --cap-text-font-size: var(--cap-font-size-minus-10);
+	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-10-sans);
+	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-10-serif);
+	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-10-mono);
+	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-10-sans);
+	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-10-serif);
+	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-10-mono);
+	 --cap-text-line-height: var(--cap-line-height-minus-10);
+ }
+
+:host(.level\3a \-9) {
+	 --cap-text-font-size: var(--cap-font-size-minus-9);
+	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-9-sans);
+	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-9-serif);
+	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-9-mono);
+	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-9-sans);
+	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-9-serif);
+	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-9-mono);
+	 --cap-text-line-height: var(--cap-line-height-minus-9);
+ }
+
 :host(.level\3a \-8) {
 	--cap-text-font-size: var(--cap-font-size-minus-8);
 	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-8-sans);
@@ -220,6 +264,50 @@
 	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-8-serif);
 	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-8-mono);
 	--cap-text-line-height: var(--cap-line-height-plus-8);
+}
+
+:host(.level\3a \+9) {
+	--cap-text-font-size: var(--cap-font-size-plus-9);
+	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-9-sans);
+	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-9-serif);
+	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-9-mono);
+	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-9-sans);
+	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-9-serif);
+	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-9-mono);
+	--cap-text-line-height: var(--cap-line-height-plus-9);
+}
+
+:host(.level\3a \+10) {
+	--cap-text-font-size: var(--cap-font-size-plus-10);
+	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-10-sans);
+	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-10-serif);
+	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-10-mono);
+	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-10-sans);
+	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-10-serif);
+	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-10-mono);
+	--cap-text-line-height: var(--cap-line-height-plus-10);
+}
+
+:host(.level\3a \+11) {
+	--cap-text-font-size: var(--cap-font-size-plus-11);
+	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-11-sans);
+	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-11-serif);
+	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-11-mono);
+	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-11-sans);
+	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-11-serif);
+	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-11-mono);
+	--cap-text-line-height: var(--cap-line-height-plus-11);
+}
+
+:host(.level\3a \+12) {
+	--cap-text-font-size: var(--cap-font-size-plus-12);
+	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-12-sans);
+	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-12-serif);
+	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-12-mono);
+	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-12-sans);
+	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-12-serif);
+	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-12-mono);
+	--cap-text-line-height: var(--cap-line-height-plus-12);
 }
 
 /**
