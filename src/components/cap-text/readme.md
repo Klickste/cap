@@ -2,21 +2,20 @@
 
 <!-- Auto Generated Below -->
 
-
 ## Properties
 
-| Property        | Attribute        | Description    | Type                                                                                                                                  | Default     |
-| --------------- | ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `contentAfter`  | `content-after`  | Description... | `string`                                                                                                                              | `undefined` |
-| `contentBefore` | `content-before` | Description... | `string`                                                                                                                              | `undefined` |
-| `ellipsis`      | `ellipsis`       | Description... | `boolean`                                                                                                                             | `false`     |
-| `family`        | `family`         | Description... | `"mono" \| "sans" \| "serif"`                                                                                                         | `'sans'`    |
-| `italic`        | `italic`         | Description... | `boolean`                                                                                                                             | `false`     |
-| `leading`       | `leading`        | Description... | `"compact" \| "loose" \| "narrow" \| "open" \| "tight"`                                                                               | `'compact'` |
-| `level`         | `level`          | Description... | `"+1" \| "+2" \| "+3" \| "+4" \| "+5" \| "+6" \| "+7" \| "+8" \| "-1" \| "-2" \| "-3" \| "-4" \| "-5" \| "-6" \| "-7" \| "-8" \| "0"` | `'0'`       |
-| `weight`        | `weight`         | Description... | `"heavy" \| "soft" \| "strong"`                                                                                                       | `'soft'`    |
+| Property        | Attribute        | Description | Type                                                                                                                                                                                                        | Default     |
+| --------------- | ---------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `contentAfter`  | `content-after`  |             | `string`                                                                                                                                                                                                    | `undefined` |
+| `contentBefore` | `content-before` |             | `string`                                                                                                                                                                                                    | `undefined` |
+| `ellipsis`      | `ellipsis`       |             | `boolean`                                                                                                                                                                                                   | `false`     |
+| `family`        | `family`         |             | `"mono" \| "sans" \| "serif"`                                                                                                                                                                               | `'sans'`    |
+| `italic`        | `italic`         |             | `boolean`                                                                                                                                                                                                   | `false`     |
+| `leading`       | `leading`        |             | `"compact" \| "loose" \| "narrow" \| "open" \| "tight"`                                                                                                                                                     | `'compact'` |
+| `level`         | `level`          |             | `"-1" \| "0" \| "+1" \| "-12" \| "-11" \| "-10" \| "-9" \| "-8" \| "-7" \| "-6" \| "-5" \| "-4" \| "-3" \| "-2" \| "+2" \| "+3" \| "+4" \| "+5" \| "+6" \| "+7" \| "+8" \| "+9" \| "+10" \| "+11" \| "+12"` | `'0'`       |
+| `noWrap`        | `no-wrap`        |             | `boolean`                                                                                                                                                                                                   | `false`     |
+| `weight`        | `weight`         |             | `"heavy" \| "soft" \| "strong"`                                                                                                                                                                             | `'soft'`    |
 
+---
 
-----------------------------------------------
-
-
+©2023 cgoern

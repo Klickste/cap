@@ -1,11 +1,22 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:math';
+@use 'sass:map';
+@use './../../cap';
+
+// ==========================================================================
+// Rules
+// ==========================================================================
+
 :host {
 	display: block;
 	font-family: var(--cap-text-font-family);
 	font-feature-settings: var(--cap-text-font-feature-settings);
 	font-kerning: normal;
-	font-optical-sizing: auto;
 	font-size: var(--cap-text-font-size);
-	font-variation-settings: 'wght' var(--cap-text-font-weight);
+	font-variation-settings: 'wght' var(--cap-text-font-weight), 'opsz' var(--cap-text-font-optical-sizing);
 	font-style: var(--cap-text-font-style, normal);
 	letter-spacing: var(--cap-text-letter-spacing);
 	line-height: calc(var(--cap-text-line-height) + var(--cap-text-leading));
@@ -14,395 +25,134 @@
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: none;
+
+	// ==========================================================================
+	// Leading trim
+	// ==========================================================================
+
+	&::before,
+	&::after {
+		content: '';
+		display: block;
+		height: 0;
+	}
+
+	&::before {
+		margin-top: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
+	}
+
+	&::after {
+		margin-bottom: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
+	}
+
+	@at-root {
+		// ==========================================================================
+		// Misc
+		// ==========================================================================
+
+		#{&}([ellipsis]) {
+			--cap-text-content-overflow: hidden;
+			--cap-text-content-text-overflow: ellipsis;
+			--cap-text-content-white-space: nowrap;
+			--cap-text-content-width: 100%;
+			--cap-text-content-min-width: 0;
+		}
+
+		#{&}([no-wrap]) {
+			--cap-text-content-white-space: nowrap;
+			--cap-text-content-width: 100%;
+			--cap-text-content-min-width: 0;
+		}
+
+		#{&}([italic]) {
+			--cap-text-font-style: italic;
+		}
+
+		// ==========================================================================
+		// Levels
+		// ==========================================================================
+
+		@for $level from (cap.$levels-down * -1) through cap.$levels-up {
+			$sign: '';
+			$attribute: '0';
+
+			@if $level < 0 {
+				$sign: 'minus-';
+				$attribute: $level;
+			} @else if $level > 0 {
+				$sign: 'plus-';
+				$attribute: '+' + $level;
+			}
+
+			#{&}([level='#{$attribute}']) {
+				--cap-text-font-size: var(--cap-font-size-#{$sign + math.abs($level)});
+				--cap-text-font-optical-sizing: var(--cap-font-optical-sizing-#{$sign + math.abs($level)});
+				--cap-text-line-height: var(--cap-line-height-#{$sign + math.abs($level)});
+
+				@each $family in map.keys(cap.$families) {
+					--cap-text-leading-trim-#{$family}: var(--cap-leading-trim-#{$sign + math.abs($level)}-#{$family});
+					--cap-text-letter-spacing-#{$family}: var(--cap-letter-spacing-#{$sign + math.abs($level)}-#{$family});
+				}
+			}
+		}
+
+		// ==========================================================================
+		// Families
+		// ==========================================================================
+
+		@each $family in map.keys(cap.$families) {
+			#{&}([family='#{$family}']) {
+				--cap-text-font-family: var(--cap-font-family-#{$family});
+				--cap-text-font-feature-settings: var(--cap-font-feature-settings-#{$family});
+				--cap-text-leading-trim: var(--cap-text-leading-trim-#{$family});
+				--cap-text-letter-spacing: var(--cap-text-letter-spacing-#{$family});
+				--cap-text-font-weight: var(--cap-text-font-weight-#{$family});
+			}
+		}
+
+		// ==========================================================================
+		// Weights
+		// ==========================================================================
+
+		@each $weight in ('soft', 'strong', 'heavy') {
+			#{&}([weight='#{$weight}']) {
+				@each $family in map.keys(cap.$families) {
+					--cap-text-font-weight-#{$family}: var(--cap-font-weight-#{$weight}-#{$family});
+				}
+			}
+		}
+
+		// ==========================================================================
+		// Leadings
+		// ==========================================================================
+
+		@each $leading in map.keys(cap.$leadings) {
+			#{&}([leading='#{$leading}']) {
+				--cap-text-leading: var(--cap-leading-#{$leading});
+			}
+		}
+
+		// ==========================================================================
+		// Content before/after
+		// ==========================================================================
+
+		#{&}([content-before]) {
+			#content::before {
+				content: attr(data-before);
+			}
+		}
+
+		#{&}([content-after]) {
+			#content::after {
+				content: attr(data-after);
+			}
+		}
+	}
 }
 
-:host::before,
-:host::after {
-	content: '';
-	display: block;
-	height: 0;
-}
-
-:host::before {
-	margin-top: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
-}
-
-:host::after {
-	margin-bottom: calc((var(--cap-text-leading-trim) + 1px + (var(--cap-text-leading) / 2)) * -1);
-}
-
-/**
- * Level
- */
-
-:host(.level\3a \-12) {
-	 --cap-text-font-size: var(--cap-font-size-minus-12);
-	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-12-sans);
-	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-12-serif);
-	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-12-mono);
-	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-12-sans);
-	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-12-serif);
-	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-12-mono);
-	 --cap-text-line-height: var(--cap-line-height-minus-12);
- }
-
-:host(.level\3a \-11) {
-	 --cap-text-font-size: var(--cap-font-size-minus-11);
-	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-11-sans);
-	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-11-serif);
-	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-11-mono);
-	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-11-sans);
-	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-11-serif);
-	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-11-mono);
-	 --cap-text-line-height: var(--cap-line-height-minus-11);
- }
-
-:host(.level\3a \-10) {
-	 --cap-text-font-size: var(--cap-font-size-minus-10);
-	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-10-sans);
-	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-10-serif);
-	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-10-mono);
-	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-10-sans);
-	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-10-serif);
-	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-10-mono);
-	 --cap-text-line-height: var(--cap-line-height-minus-10);
- }
-
-:host(.level\3a \-9) {
-	 --cap-text-font-size: var(--cap-font-size-minus-9);
-	 --cap-text-leading-trim-sans: var(--cap-leading-trim-minus-9-sans);
-	 --cap-text-leading-trim-serif: var(--cap-leading-trim-minus-9-serif);
-	 --cap-text-leading-trim-mono: var(--cap-leading-trim-minus-9-mono);
-	 --cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-9-sans);
-	 --cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-9-serif);
-	 --cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-9-mono);
-	 --cap-text-line-height: var(--cap-line-height-minus-9);
- }
-
-:host(.level\3a \-8) {
-	--cap-text-font-size: var(--cap-font-size-minus-8);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-8-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-8-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-8-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-8-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-8-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-8-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-8);
-}
-
-:host(.level\3a \-7) {
-	--cap-text-font-size: var(--cap-font-size-minus-7);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-7-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-7-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-7-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-7-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-7-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-7-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-7);
-}
-
-:host(.level\3a \-6) {
-	--cap-text-font-size: var(--cap-font-size-minus-6);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-6-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-6-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-6-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-6-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-6-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-6-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-6);
-}
-
-:host(.level\3a \-5) {
-	--cap-text-font-size: var(--cap-font-size-minus-5);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-5-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-5-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-5-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-5-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-5-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-5-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-5);
-}
-
-:host(.level\3a \-4) {
-	--cap-text-font-size: var(--cap-font-size-minus-4);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-4-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-4-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-4-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-4-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-4-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-4-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-4);
-}
-
-:host(.level\3a \-3) {
-	--cap-text-font-size: var(--cap-font-size-minus-3);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-3-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-3-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-3-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-3-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-3-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-3-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-3);
-}
-
-:host(.level\3a \-2) {
-	--cap-text-font-size: var(--cap-font-size-minus-2);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-2-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-2-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-2-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-2-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-2-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-2-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-2);
-}
-
-:host(.level\3a \-1) {
-	--cap-text-font-size: var(--cap-font-size-minus-1);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-minus-1-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-minus-1-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-minus-1-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-minus-1-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-minus-1-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-minus-1-mono);
-	--cap-text-line-height: var(--cap-line-height-minus-1);
-}
-
-:host(.level\3a 0) {
-	--cap-text-font-size: var(--cap-font-size-0);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-0-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-0-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-0-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-0-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-0-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-0-mono);
-	--cap-text-line-height: var(--cap-line-height-0);
-}
-
-:host(.level\3a \+1) {
-	--cap-text-font-size: var(--cap-font-size-plus-1);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-1-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-1-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-1-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-1-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-1-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-1-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-1);
-}
-
-:host(.level\3a \+2) {
-	--cap-text-font-size: var(--cap-font-size-plus-2);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-2-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-2-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-2-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-2-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-2-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-2-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-2);
-}
-
-:host(.level\3a \+3) {
-	--cap-text-font-size: var(--cap-font-size-plus-3);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-3-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-3-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-3-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-3-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-3-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-3-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-3);
-}
-
-:host(.level\3a \+4) {
-	--cap-text-font-size: var(--cap-font-size-plus-4);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-4-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-4-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-4-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-4-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-4-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-4-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-4);
-}
-
-:host(.level\3a \+5) {
-	--cap-text-font-size: var(--cap-font-size-plus-5);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-5-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-5-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-5-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-5-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-5-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-5-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-5);
-}
-
-:host(.level\3a \+6) {
-	--cap-text-font-size: var(--cap-font-size-plus-6);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-6-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-6-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-6-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-6-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-6-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-6-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-6);
-}
-
-:host(.level\3a \+7) {
-	--cap-text-font-size: var(--cap-font-size-plus-7);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-7-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-7-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-7-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-7-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-7-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-7-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-7);
-}
-
-:host(.level\3a \+8) {
-	--cap-text-font-size: var(--cap-font-size-plus-8);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-8-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-8-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-8-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-8-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-8-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-8-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-8);
-}
-
-:host(.level\3a \+9) {
-	--cap-text-font-size: var(--cap-font-size-plus-9);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-9-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-9-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-9-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-9-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-9-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-9-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-9);
-}
-
-:host(.level\3a \+10) {
-	--cap-text-font-size: var(--cap-font-size-plus-10);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-10-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-10-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-10-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-10-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-10-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-10-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-10);
-}
-
-:host(.level\3a \+11) {
-	--cap-text-font-size: var(--cap-font-size-plus-11);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-11-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-11-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-11-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-11-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-11-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-11-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-11);
-}
-
-:host(.level\3a \+12) {
-	--cap-text-font-size: var(--cap-font-size-plus-12);
-	--cap-text-leading-trim-sans: var(--cap-leading-trim-plus-12-sans);
-	--cap-text-leading-trim-serif: var(--cap-leading-trim-plus-12-serif);
-	--cap-text-leading-trim-mono: var(--cap-leading-trim-plus-12-mono);
-	--cap-text-letter-spacing-sans: var(--cap-letter-spacing-plus-12-sans);
-	--cap-text-letter-spacing-serif: var(--cap-letter-spacing-plus-12-serif);
-	--cap-text-letter-spacing-mono: var(--cap-letter-spacing-plus-12-mono);
-	--cap-text-line-height: var(--cap-line-height-plus-12);
-}
-
-/**
- * Family
- */
-
-:host(.family\3a sans) {
-	--cap-text-font-family: var(--cap-font-family-sans);
-	--cap-text-font-feature-settings: var(--cap-font-feature-settings-sans);
-	--cap-text-leading-trim: var(--cap-text-leading-trim-sans);
-	--cap-text-letter-spacing: var(--cap-text-letter-spacing-sans);
-	--cap-text-font-weight: var(--cap-text-font-weight-sans);
-}
-
-:host(.family\3a serif) {
-	--cap-text-font-family: var(--cap-font-family-serif);
-	--cap-text-font-feature-settings: var(--cap-font-feature-settings-serif);
-	--cap-text-leading-trim: var(--cap-text-leading-trim-serif);
-	--cap-text-letter-spacing: var(--cap-text-letter-spacing-serif);
-	--cap-text-font-weight: var(--cap-text-font-weight-serif);
-}
-
-:host(.family\3a mono) {
-	--cap-text-font-family: var(--cap-font-family-mono);
-	--cap-text-font-feature-settings: var(--cap-font-feature-settings-mono);
-	--cap-text-leading-trim: var(--cap-text-leading-trim-mono);
-	--cap-text-letter-spacing: var(--cap-text-letter-spacing-mono);
-	--cap-text-font-weight: var(--cap-text-font-weight-mono);
-}
-
-/**
- * Weight
- */
-
-:host(.weight\3a soft) {
-	--cap-text-font-weight-sans: var(--cap-font-weight-soft-sans);
-	--cap-text-font-weight-serif: var(--cap-font-weight-soft-serif);
-	--cap-text-font-weight-mono: var(--cap-font-weight-soft-mono);
-}
-
-:host(.weight\3a strong) {
-	--cap-text-font-weight-sans: var(--cap-font-weight-strong-sans);
-	--cap-text-font-weight-serif: var(--cap-font-weight-strong-serif);
-	--cap-text-font-weight-mono: var(--cap-font-weight-strong-mono);
-}
-
-:host(.weight\3a heavy) {
-	--cap-text-font-weight-sans: var(--cap-font-weight-heavy-sans);
-	--cap-text-font-weight-serif: var(--cap-font-weight-heavy-serif);
-	--cap-text-font-weight-mono: var(--cap-font-weight-heavy-mono);
-}
-
-/**
- * Leading
- */
-
-:host(.leading\3a tight) {
-	--cap-text-leading: var(--cap-leading-tight);
-}
-
-:host(.leading\3a narrow) {
-	--cap-text-leading: var(--cap-leading-narrow);
-}
-
-:host(.leading\3a compact) {
-	--cap-text-leading: var(--cap-leading-compact);
-}
-
-:host(.leading\3a loose) {
-	--cap-text-leading: var(--cap-leading-loose);
-}
-
-:host(.leading\3a open) {
-	--cap-text-leading: var(--cap-leading-open);
-}
-
-/**
- * Ellipsis
- */
-
-:host(.ellipsis) {
-	--cap-text-content-overflow: hidden;
-	--cap-text-content-text-overflow: ellipsis;
-	--cap-text-content-white-space: nowrap;
-	--cap-text-content-width: 100%;
-	--cap-text-content-min-width: 0;
-}
-
-:host(.italic) {
-	--cap-text-font-style: italic;
-}
-
-/**
- * Content
- */
+// ==========================================================================
+// Content
+// ==========================================================================
 
 #content {
 	display: block;
@@ -413,21 +163,9 @@
 	overflow: var(--cap-text-content-overflow, visible);
 }
 
-/**
- * Content before/after
- */
-
-:host(.has\3a content-before) #content::before {
-	content: attr(data-before);
-}
-
-:host(.has\3a content-after) #content::after {
-	content: attr(data-after);
-}
-
-/**
- * Slots
- */
+// ==========================================================================
+// Slots
+// ==========================================================================
 
 ::slotted(a) {
 	color: var(--cap-text-anchor-color, blue);
@@ -436,4 +174,5 @@
 
 ::slotted(strong) {
 	font-variation-settings: 'wght' var(--cap-text-strong-font-weight, 700);
+	color: var(--cap-text-strong-color, inherit);
 }

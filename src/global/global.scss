@@ -1,6 +1,12 @@
-@use './../index' as cap with (
-	$levels-ups: 6,
-	$levels-downs: 2,
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use './../cap' with (
+	$levels-base: 17,
+	$levels-ratio: 1.2,
+	$levels-up: 6,
+	$levels-down: 2,
 	$family-sans: (
 		'font': '"Inter"',
 		'fallback': 'sans-serif',
@@ -19,12 +25,12 @@
 		'fallback': 'serif',
 		'upm': 2000,
 		'cap-height': 1486,
-		'spacing': 0.5,
+		'spacing': 0,
 		'features': '"liga"',
 		'weights': (
-			'soft': 300,
+			'soft': 400,
 			'strong': 600,
-			'heavy': 700,
+			'heavy': 800,
 		),
 	),
 	$family-mono: (
@@ -42,15 +48,15 @@
 	)
 );
 
+// ==========================================================================
+// Rules
+// ==========================================================================
+
 :root {
 	@include cap.levels;
 	@include cap.families;
 	@include cap.leadings;
 }
-
-/**
- * Fonts
- */
 
 @font-face {
 	font-display: swap;

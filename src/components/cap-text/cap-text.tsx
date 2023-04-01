@@ -1,5 +1,6 @@
-import { Component, Prop, Host, h } from '@stencil/core'
-import { CapTextLevel, CapTextWeight, CapTextFamily, CapTextLeading } from './../../types'
+import { Component, h, Host, Prop } from '@stencil/core'
+import { CapFamily, CapLeading, CapWeight } from './../../types'
+import { CapTextLevel } from './types'
 
 @Component({
 	tag: 'cap-text',
@@ -7,65 +8,24 @@ import { CapTextLevel, CapTextWeight, CapTextFamily, CapTextLeading } from './..
 	shadow: true,
 })
 export class CapText {
-	/**
-	 * Description...
-	 */
-	@Prop() level: CapTextLevel = '0'
-
-	/**
-	 * Description...
-	 */
-	@Prop() weight: CapTextWeight = 'soft'
-
-	/**
-	 * Description...
-	 */
-	@Prop() family: CapTextFamily = 'sans'
-
-	/**
-	 * Description...
-	 */
-	@Prop() contentBefore: string
-
-	/**
-	 * Description...
-	 */
-	@Prop() contentAfter: string
-
-	/**
-	 * Description...
-	 */
-	@Prop() ellipsis: boolean = false
-
-	/**
-	 * Description...
-	 */
-	@Prop() italic: boolean = false
-
-	/**
-	 * Description...
-	 */
-	@Prop() leading: CapTextLeading = 'compact'
+	@Prop({ reflect: true }) level: CapTextLevel = '0'
+	@Prop({ reflect: true }) weight: CapWeight = 'soft'
+	@Prop({ reflect: true }) family: CapFamily = 'sans'
+	@Prop({ reflect: true }) contentBefore: string
+	@Prop({ reflect: true }) contentAfter: string
+	@Prop({ reflect: true }) ellipsis: boolean = false
+	@Prop({ reflect: true }) noWrap: boolean = false
+	@Prop({ reflect: true }) italic: boolean = false
+	@Prop({ reflect: true }) leading: CapLeading = 'compact'
 
 	render() {
-		const hostClass = [
-			`level:${this.level}`,
-			`weight:${this.weight}`,
-			`family:${this.family}`,
-			`leading:${this.leading}`,
-			this.ellipsis ? 'ellipsis' : '',
-			this.italic ? 'italic' : '',
-			this.contentBefore ? 'has:content-before' : '',
-			this.contentAfter ? 'has:content-after' : '',
-		]
-
 		const contentAttributes = {
 			'data-before': this.contentBefore,
 			'data-after': this.contentAfter,
 		}
 
 		return (
-			<Host class={hostClass.join(' ')}>
+			<Host>
 				<span id="content" {...contentAttributes}>
 					<slot />
 				</span>
