@@ -5,44 +5,41 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CapTextFamily, CapTextLeading, CapTextLevel, CapTextWeight } from "./types";
+import { CapFamily, CapLeading, CapWeight } from "./types";
+import { CapRichTextLevel } from "./components/cap-rich-text/types";
+import { CapTextLevel } from "./components/cap-text/types";
+export { CapFamily, CapLeading, CapWeight } from "./types";
+export { CapRichTextLevel } from "./components/cap-rich-text/types";
+export { CapTextLevel } from "./components/cap-text/types";
 export namespace Components {
-    interface CapText {
-        /**
-          * Description...
-         */
-        "contentAfter": string;
-        /**
-          * Description...
-         */
-        "contentBefore": string;
-        /**
-          * Description...
-         */
-        "ellipsis": boolean;
-        /**
-          * Description...
-         */
-        "family": CapTextFamily;
-        /**
-          * Description...
-         */
+    interface CapRichText {
+        "bodyFamily": CapFamily;
+        "bodyWeight": CapWeight;
+        "headingFamily": CapFamily;
+        "headingWeight": CapWeight;
         "italic": boolean;
-        /**
-          * Description...
-         */
-        "leading": CapTextLeading;
-        /**
-          * Description...
-         */
+        "leading": CapLeading;
+        "level": CapRichTextLevel;
+    }
+    interface CapText {
+        "contentAfter": string;
+        "contentBefore": string;
+        "ellipsis": boolean;
+        "family": CapFamily;
+        "italic": boolean;
+        "leading": CapLeading;
         "level": CapTextLevel;
-        /**
-          * Description...
-         */
-        "weight": CapTextWeight;
+        "noWrap": boolean;
+        "weight": CapWeight;
     }
 }
 declare global {
+    interface HTMLCapRichTextElement extends Components.CapRichText, HTMLStencilElement {
+    }
+    var HTMLCapRichTextElement: {
+        prototype: HTMLCapRichTextElement;
+        new (): HTMLCapRichTextElement;
+    };
     interface HTMLCapTextElement extends Components.CapText, HTMLStencilElement {
     }
     var HTMLCapTextElement: {
@@ -50,45 +47,33 @@ declare global {
         new (): HTMLCapTextElement;
     };
     interface HTMLElementTagNameMap {
+        "cap-rich-text": HTMLCapRichTextElement;
         "cap-text": HTMLCapTextElement;
     }
 }
 declare namespace LocalJSX {
-    interface CapText {
-        /**
-          * Description...
-         */
-        "contentAfter"?: string;
-        /**
-          * Description...
-         */
-        "contentBefore"?: string;
-        /**
-          * Description...
-         */
-        "ellipsis"?: boolean;
-        /**
-          * Description...
-         */
-        "family"?: CapTextFamily;
-        /**
-          * Description...
-         */
+    interface CapRichText {
+        "bodyFamily"?: CapFamily;
+        "bodyWeight"?: CapWeight;
+        "headingFamily"?: CapFamily;
+        "headingWeight"?: CapWeight;
         "italic"?: boolean;
-        /**
-          * Description...
-         */
-        "leading"?: CapTextLeading;
-        /**
-          * Description...
-         */
+        "leading"?: CapLeading;
+        "level"?: CapRichTextLevel;
+    }
+    interface CapText {
+        "contentAfter"?: string;
+        "contentBefore"?: string;
+        "ellipsis"?: boolean;
+        "family"?: CapFamily;
+        "italic"?: boolean;
+        "leading"?: CapLeading;
         "level"?: CapTextLevel;
-        /**
-          * Description...
-         */
-        "weight"?: CapTextWeight;
+        "noWrap"?: boolean;
+        "weight"?: CapWeight;
     }
     interface IntrinsicElements {
+        "cap-rich-text": CapRichText;
         "cap-text": CapText;
     }
 }
@@ -96,6 +81,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cap-rich-text": LocalJSX.CapRichText & JSXBase.HTMLAttributes<HTMLCapRichTextElement>;
             "cap-text": LocalJSX.CapText & JSXBase.HTMLAttributes<HTMLCapTextElement>;
         }
     }
