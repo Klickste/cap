@@ -3,9 +3,9 @@ import { sass } from '@stencil/sass'
 
 export const config: Config = {
 	namespace: 'cap',
-	taskQueue: 'async',
 	plugins: [sass()],
 	globalStyle: 'src/global/global.scss',
+	sourceMap: false,
 	outputTargets: [
 		{
 			type: 'www',
@@ -13,11 +13,12 @@ export const config: Config = {
 		},
 		{
 			type: 'docs-readme',
-			footer: '',
+			footer: '©2023 cgoern',
 		},
 		{
 			type: 'dist',
 			esmLoaderPath: '../loader',
+			copy: [{ src: 'cap.scss', dest: 'cap.scss' }],
 		},
 		{
 			type: 'dist-custom-elements',

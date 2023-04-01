@@ -12,7 +12,7 @@
 	"module": "dist/index.js",
 	"es2015": "dist/esm/index.mjs",
 	"es2017": "dist/esm/index.mjs",
-	"types": "dist/types/components.d.ts",
+	"types": "dist/types/index.d.ts",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
 	"unpkg": "dist/cap/cap.esm.js",
@@ -27,15 +27,15 @@
 		"format": "prettier . --write"
 	},
 	"dependencies": {
-		"@stencil/core": "^2.19.3"
+		"@stencil/core": "^3.2.0"
 	},
 	"devDependencies": {
-		"@stencil/sass": "^2.0.0",
+		"@stencil/sass": "^3.0.0",
 		"fontkit": "^2.0.2",
-		"prettier": "^2.7.1"
+		"prettier": "^2.8.7"
 	},
 	"prettier": {
-		"printWidth": 100,
+		"printWidth": 120,
 		"semi": false,
 		"singleQuote": true
 	}
