@@ -1,12 +1,10 @@
 const fontkit = require('fontkit')
 const fonts = [
-  fontkit.openSync('assets/fonts/Inter-normal.var.woff2'),
-  fontkit.openSync('assets/fonts/Merriweather-normal.var.woff2'),
-  fontkit.openSync('assets/fonts/RobotoMono-normal.var.woff2'),
+	fontkit.openSync('src/assets/fonts/Inter.var.woff2'),
+	fontkit.openSync('src/assets/fonts/Merriweather.var.woff2'),
+	fontkit.openSync('src/assets/fonts/FiraCode.var.woff2'),
 ]
 
 fonts.map((font) => {
-  console.log(
-    `${font.fullName}\nUPM: ${font.unitsPerEm}\ncapHeight: ${font.capHeight}\nxHeight: ${font.xHeight}\n`
-  )
+	console.log(`${font.fullName}\nUPM: ${font.unitsPerEm}\ncapHeight: ${font.capHeight}\nxHeight: ${font.xHeight}\n`)
 })

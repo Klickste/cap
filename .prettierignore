@@ -1,2 +1,5 @@
-assets/style.css
+dist/
+loader/
 package-lock.json
+src/components.d.ts
+www/

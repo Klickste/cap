@@ -1,0 +1,135 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$levels-up: 12 !default;
+$levels-down: 12 !default;
+$levels-base: 14 !default;
+$levels-ratio: 1.2 !default;
+$family-sans: () !default;
+$family-serif: () !default;
+$family-mono: () !default;
+$families: (
+	'sans': $family-sans,
+	'serif': $family-serif,
+	'mono': $family-mono,
+);
+$leading-tight: -4px !default;
+$leading-narrow: -2px !default;
+$leading-compact: 0px !default;
+$leading-loose: 2px !default;
+$leading-open: 4px !default;
+$leadings: (
+	'tight': $leading-tight,
+	'narrow': $leading-narrow,
+	'compact': $leading-compact,
+	'loose': $leading-loose,
+	'open': $leading-open,
+);
+
+// ==========================================================================
+// Functions
+// ==========================================================================
+
+@function get-font-size($level: 0, $base: $levels-base, $ratio: $levels-ratio) {
+	@return math.round($base * math.pow($ratio, $level));
+}
+
+@function get-line-height($font-size) {
+	$ratio: 1.2 + 1.8 * math.pow(math.$e, -0.12 * $font-size);
+
+	@return math.round(math.div($font-size * $ratio, 2)) * 2;
+}
+
+@function get-letter-spacing($font-size, $spacing-factor: 1) {
+	$ratio: -0.0223 + 0.185 * math.pow(math.$e, -0.1745 * $font-size * $spacing-factor);
+
+	@return math.div(math.round($ratio * 1000), 1000);
+}
+
+@function get-leading-trim($font-size, $line-height, $upm, $cap-height) {
+	$text-height: 2 * math.round(math.div(math.div($cap-height, $upm) * $font-size, 2));
+
+	@return math.div($line-height - $text-height, 2);
+}
+
+@function get-text-height($line-height, $leading-trim) {
+	@return $line-height - (2 * $leading-trim);
+}
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+@mixin levels(
+	$base: $levels-base,
+	$ratio: $levels-ratio,
+	$ups: $levels-up,
+	$downs: $levels-down,
+	$families: $families
+) {
+	@for $level from ($downs * -1) through $ups {
+		$sign: '';
+
+		@if $level < 0 {
+			$sign: 'minus-';
+		} @else if $level > 0 {
+			$sign: 'plus-';
+		}
+
+		$font-size: get-font-size($level, $base, $ratio);
+		$line-height: get-line-height($font-size);
+
+		--cap-font-size-#{$sign + math.abs($level)}: #{$font-size}px;
+		--cap-font-optical-sizing-#{$sign + math.abs($level)}: #{$font-size};
+		--cap-line-height-#{$sign + math.abs($level)}: #{$line-height}px;
+
+		@each $name, $props in $families {
+			@if $props != () {
+				$upm: map.get($props, 'upm');
+				$cap-height: map.get($props, 'cap-height');
+				$spacing-factor: map.get($props, 'spacing');
+				$letter-spacing: if($spacing-factor != 0, get-letter-spacing($font-size, $spacing-factor) + 'em', normal);
+				$leading-trim: get-leading-trim($font-size, $line-height, $upm, $cap-height);
+				$text-height: get-text-height($line-height, $leading-trim);
+
+				--cap-letter-spacing-#{$sign + math.abs($level)}-#{$name}: #{$letter-spacing};
+				--cap-leading-trim-#{$sign + math.abs($level)}-#{$name}: #{$leading-trim}px;
+				--cap-text-height-#{$sign + math.abs($level)}-#{$name}: #{$text-height}px;
+			}
+		}
+	}
+}
+
+@mixin families($families: $families) {
+	@each $name, $props in $families {
+		@if $props != () {
+			$font-family: map.get($props, 'font');
+			$font-family-fallback: map.get($props, 'fallback');
+			$font-feature-settings: if(map.has-key($props, 'features'), map.get($props, 'features'), normal);
+			$font-weights: map.get($props, 'weights');
+
+			--cap-font-family-#{$name}: #{$font-family}, #{$font-family-fallback};
+			--cap-font-feature-settings-#{$name}: #{$font-feature-settings};
+
+			@each $weight, $value in $font-weights {
+				--cap-font-weight-#{$weight}-#{$name}: #{$value};
+			}
+		}
+	}
+}
+
+@mixin leadings($leadings: $leadings) {
+	@each $name, $value in $leadings {
+		--cap-leading-#{$name}: #{$value};
+	}
+}
