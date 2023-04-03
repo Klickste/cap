@@ -15,6 +15,8 @@ export namespace Components {
     interface CapRichText {
         "bodyFamily": CapFamily;
         "bodyWeight": CapWeight;
+        "captionFamily": CapFamily;
+        "captionWeight": CapWeight;
         "headingFamily": CapFamily;
         "headingWeight": CapWeight;
         "italic": boolean;
@@ -55,6 +57,8 @@ declare namespace LocalJSX {
     interface CapRichText {
         "bodyFamily"?: CapFamily;
         "bodyWeight"?: CapWeight;
+        "captionFamily"?: CapFamily;
+        "captionWeight"?: CapWeight;
         "headingFamily"?: CapFamily;
         "headingWeight"?: CapWeight;
         "italic"?: boolean;

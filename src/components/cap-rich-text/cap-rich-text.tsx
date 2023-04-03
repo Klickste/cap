@@ -9,8 +9,10 @@ import { CapRichTextLevel } from './types'
 export class CapRichText {
 	@Prop({ reflect: true }) headingFamily: CapFamily = 'sans'
 	@Prop({ reflect: true }) bodyFamily: CapFamily = 'serif'
+	@Prop({ reflect: true }) captionFamily: CapFamily = 'sans'
 	@Prop({ reflect: true }) headingWeight: CapWeight = 'heavy'
 	@Prop({ reflect: true }) bodyWeight: CapWeight = 'soft'
+	@Prop({ reflect: true }) captionWeight: CapWeight = 'strong'
 	@Prop({ reflect: true }) italic: boolean = false
 	@Prop({ reflect: true }) leading: CapLeading = 'open'
 	@Prop({ reflect: true }) level: CapRichTextLevel = '0'

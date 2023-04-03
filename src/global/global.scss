@@ -112,6 +112,9 @@ body {
 			box-shadow: inset 0 1px 0 0 rgb(255 0 0 / 50%), inset 0 -1px 0 0 rgb(255 0 0 / 50%);
 		}
 
+		--cap-rich-text-cite-color: gray;
+		--cap-rich-text-figcaption-color: gray;
+
 		@media (prefers-color-scheme: dark) {
 			--body-cap-debug-background: black;
 			--body-cap-debug-color: white;

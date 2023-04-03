@@ -29,7 +29,7 @@ cap-rich-text {
 
 	&[level='-1'] {
 		--cap-rich-text-body-font-size: var(--cap-font-size-minus-1);
-		--cap-rich-text-body-font-optical-sizing: var(--cap-font-font-optical-sizing-minus-1);
+		--cap-rich-text-body-font-optical-sizing: var(--cap-font-optical-sizing-minus-1);
 		--cap-rich-text-body-line-height: var(--cap-line-height-minus-1);
 		--cap-rich-text-body-letter-spacing-sans: var(--cap-letter-spacing-minus-1-sans);
 		--cap-rich-text-body-letter-spacing-serif: var(--cap-letter-spacing-minus-1-serif);
@@ -37,6 +37,15 @@ cap-rich-text {
 		--cap-rich-text-body-leading-trim-sans: var(--cap-leading-trim-minus-1-sans);
 		--cap-rich-text-body-leading-trim-serif: var(--cap-leading-trim-minus-1-serif);
 		--cap-rich-text-body-leading-trim-mono: var(--cap-leading-trim-minus-1-mono);
+		--cap-rich-text-caption-font-size: var(--cap-font-size-minus-2);
+		--cap-rich-text-caption-font-optical-sizing: var(--cap-font-optical-sizing-minus-2);
+		--cap-rich-text-caption-line-height: var(--cap-line-height-minus-2);
+		--cap-rich-text-caption-letter-spacing-sans: var(--cap-letter-spacing-minus-2-sans);
+		--cap-rich-text-caption-letter-spacing-serif: var(--cap-letter-spacing-minus-2-serif);
+		--cap-rich-text-caption-letter-spacing-mono: var(--cap-letter-spacing-minus-2-mono);
+		--cap-rich-text-caption-leading-trim-sans: var(--cap-leading-trim-minus-2-sans);
+		--cap-rich-text-caption-leading-trim-serif: var(--cap-leading-trim-minus-2-serif);
+		--cap-rich-text-caption-leading-trim-mono: var(--cap-leading-trim-minus-2-mono);
 		--cap-rich-text-heading-1-font-size: var(--cap-font-size-plus-3);
 		--cap-rich-text-heading-1-font-optical-sizing: var(--cap-font-optical-sizing-plus-3);
 		--cap-rich-text-heading-1-line-height: var(--cap-line-height-plus-3);
@@ -103,6 +112,15 @@ cap-rich-text {
 		--cap-rich-text-body-leading-trim-sans: var(--cap-leading-trim-0-sans);
 		--cap-rich-text-body-leading-trim-serif: var(--cap-leading-trim-0-serif);
 		--cap-rich-text-body-leading-trim-mono: var(--cap-leading-trim-0-mono);
+		--cap-rich-text-caption-font-size: var(--cap-font-size-minus-1);
+		--cap-rich-text-caption-font-optical-sizing: var(--cap-font-optical-sizing-minus-1);
+		--cap-rich-text-caption-line-height: var(--cap-line-height-minus-1);
+		--cap-rich-text-caption-letter-spacing-sans: var(--cap-letter-spacing-minus-1-sans);
+		--cap-rich-text-caption-letter-spacing-serif: var(--cap-letter-spacing-minus-1-serif);
+		--cap-rich-text-caption-letter-spacing-mono: var(--cap-letter-spacing-minus-1-mono);
+		--cap-rich-text-caption-leading-trim-sans: var(--cap-leading-trim-minus-1-sans);
+		--cap-rich-text-caption-leading-trim-serif: var(--cap-leading-trim-minus-1-serif);
+		--cap-rich-text-caption-leading-trim-mono: var(--cap-leading-trim-minus-1-mono);
 		--cap-rich-text-heading-1-font-size: var(--cap-font-size-plus-4);
 		--cap-rich-text-heading-1-font-optical-sizing: var(--cap-font-optical-sizing-plus-4);
 		--cap-rich-text-heading-1-line-height: var(--cap-line-height-plus-4);
@@ -169,6 +187,15 @@ cap-rich-text {
 		--cap-rich-text-body-leading-trim-sans: var(--cap-leading-trim-plus-1-sans);
 		--cap-rich-text-body-leading-trim-serif: var(--cap-leading-trim-plus-1-serif);
 		--cap-rich-text-body-leading-trim-mono: var(--cap-leading-trim-plus-1-mono);
+		--cap-rich-text-caption-font-size: var(--cap-font-size-0);
+		--cap-rich-text-caption-font-optical-sizing: var(--cap-font-optical-sizing-0);
+		--cap-rich-text-caption-line-height: var(--cap-line-height-0);
+		--cap-rich-text-caption-letter-spacing-sans: var(--cap-letter-spacing-0-sans);
+		--cap-rich-text-caption-letter-spacing-serif: var(--cap-letter-spacing-0-serif);
+		--cap-rich-text-caption-letter-spacing-mono: var(--cap-letter-spacing-0-mono);
+		--cap-rich-text-caption-leading-trim-sans: var(--cap-leading-trim-0-sans);
+		--cap-rich-text-caption-leading-trim-serif: var(--cap-leading-trim-0-serif);
+		--cap-rich-text-caption-leading-trim-mono: var(--cap-leading-trim-0-mono);
 		--cap-rich-text-heading-1-font-size: var(--cap-font-size-plus-5);
 		--cap-rich-text-heading-1-font-optical-sizing: var(--cap-font-optical-sizing-plus-5);
 		--cap-rich-text-heading-1-line-height: var(--cap-line-height-plus-5);
@@ -259,6 +286,16 @@ cap-rich-text {
 			--cap-rich-text-body-letter-spacing: var(--cap-rich-text-body-letter-spacing-#{$family});
 			--cap-rich-text-body-leading-trim: var(--cap-rich-text-body-leading-trim-#{$family});
 		}
+
+		&[caption-family='#{$family}'] {
+			--cap-rich-text-caption-font-family: var(--cap-font-family-#{$family});
+			--cap-rich-text-caption-font-feature-settings: var(--cap-font-feature-settings-#{$family});
+			--cap-rich-text-caption-font-weight-soft: var(--cap-font-weight-soft-#{$family});
+			--cap-rich-text-caption-font-weight-strong: var(--cap-font-weight-strong-#{$family});
+			--cap-rich-text-caption-font-weight-heavy: var(--cap-font-weight-heavy-#{$family});
+			--cap-rich-text-caption-letter-spacing: var(--cap-rich-text-caption-letter-spacing-#{$family});
+			--cap-rich-text-caption-leading-trim: var(--cap-rich-text-caption-leading-trim-#{$family});
+		}
 	}
 
 	// ==========================================================================
@@ -272,6 +309,10 @@ cap-rich-text {
 
 		&[body-weight='#{$weight}'] {
 			--cap-rich-text-body-font-weight: var(--cap-rich-text-body-font-weight-#{$weight});
+		}
+
+		&[caption-weight='#{$weight}'] {
+			--cap-rich-text-caption-font-weight: var(--cap-rich-text-caption-font-weight-#{$weight});
 		}
 	}
 
@@ -289,75 +330,88 @@ cap-rich-text {
 	// Blocks
 	// ==========================================================================
 
-	& > h1,
-	& > h2,
-	& > h3,
-	& > h4,
-	& > h5,
-	& > h6,
-	& > p,
-	& > ul,
-	& > ol {
+	> h1,
+	> h2,
+	> h3,
+	> h4,
+	> h5,
+	> h6,
+	> p,
+	> ul,
+	> ol,
+	> blockquote > p,
+	> blockquote > cite,
+	> figure > figcaption {
 		font-family: var(--cap-rich-text-block-font-family);
 		font-feature-settings: var(--cap-rich-text-block-font-feature-settings);
 		font-kerning: normal;
 		font-size: var(--cap-rich-text-block-font-size);
 		letter-spacing: var(--cap-rich-text-block-letter-spacing);
 		line-height: calc(var(--cap-rich-text-block-line-height) + var(--cap-rich-text-block-leading, 0px));
-		padding-top: calc(1px + var(--cap-rich-text-block-padding-top, 0px));
-		padding-bottom: calc(1px + var(--cap-rich-text-block-padding-bottom, 0px));
-		padding-left: var(--cap-rich-text-block-padding-left, 0px);
-		padding-right: var(--cap-rich-text-block-padding-right, 0px);
+		padding-top: 1px;
+		padding-bottom: 1px;
 		margin: 0;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
 		-webkit-text-size-adjust: none;
 	}
 
-	& > h1::before,
-	& > h1::after,
-	& > h2::before,
-	& > h2::after,
-	& > h3::before,
-	& > h3::after,
-	& > h4::before,
-	& > h4::after,
-	& > h5::before,
-	& > h5::after,
-	& > h6::before,
-	& > h6::after,
-	& > p::before,
-	& > p::after,
-	& > ul::before,
-	& > ul::after,
-	& > ol::before,
-	& > ol::after {
+	> h1::before,
+	> h1::after,
+	> h2::before,
+	> h2::after,
+	> h3::before,
+	> h3::after,
+	> h4::before,
+	> h4::after,
+	> h5::before,
+	> h5::after,
+	> h6::before,
+	> h6::after,
+	> p::before,
+	> p::after,
+	> ul::before,
+	> ul::after,
+	> ol::before,
+	> ol::after,
+	> blockquote > p::before,
+	> blockquote > p::after,
+	> blockquote > cite::before,
+	> blockquote > cite::after,
+	> figure > figcaption::before,
+	> figure > figcaption::after {
 		content: '';
 		display: block;
 		height: 0;
 	}
 
-	& > h1::before,
-	& > h2::before,
-	& > h3::before,
-	& > h4::before,
-	& > h5::before,
-	& > h6::before,
-	& > p::before,
-	& > ul::before,
-	& > ol::before {
+	> h1::before,
+	> h2::before,
+	> h3::before,
+	> h4::before,
+	> h5::before,
+	> h6::before,
+	> p::before,
+	> ul::before,
+	> ol::before,
+	> blockquote > p::before,
+	> blockquote > cite::before,
+	> figure > figcaption::before {
 		margin-top: calc((var(--cap-rich-text-block-leading-trim) + 1px + (var(--cap-rich-text-block-leading) / 2)) * -1);
 	}
 
-	& > h1::after,
-	& > h2::after,
-	& > h3::after,
-	& > h4::after,
-	& > h5::after,
-	& > h6::after,
-	& > p::after,
-	& > ul::after,
-	& > ol::after {
+	> h1::after,
+	> h2::after,
+	> h3::after,
+	> h4::after,
+	> h5::after,
+	> h6::after,
+	> p::after,
+	> ul::after,
+	> ol::after,
+	> blockquote > p::after,
+	> blockquote > cite::after,
+	> figure > figcaption::after {
 		margin-bottom: calc(
 			(var(--cap-rich-text-block-leading-trim) + 1px + (var(--cap-rich-text-block-leading) / 2)) * -1
 		);
@@ -367,12 +421,12 @@ cap-rich-text {
 	// Headings
 	// ==========================================================================
 
-	& > h1,
-	& > h2,
-	& > h3,
-	& > h4,
-	& > h5,
-	& > h6 {
+	> h1,
+	> h2,
+	> h3,
+	> h4,
+	> h5,
+	> h6 {
 		--cap-rich-text-block-font-family: var(--cap-rich-text-heading-font-family);
 		--cap-rich-text-block-font-feature-settings: var(--cap-rich-text-heading-font-feature-settings);
 		--cap-rich-text-block-font-size: var(--cap-rich-text-heading-font-size);
@@ -384,7 +438,7 @@ cap-rich-text {
 		--cap-rich-text-child-hyphens: var(--cap-rich-text-heading-hyphens, auto);
 	}
 
-	& > h1 {
+	> h1 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-1-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-1-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-1-line-height);
@@ -392,7 +446,7 @@ cap-rich-text {
 		--cap-rich-text-heading-leading-trim: var(--cap-rich-text-heading-1-leading-trim);
 	}
 
-	& > h2 {
+	> h2 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-2-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-2-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-2-line-height);
@@ -400,7 +454,7 @@ cap-rich-text {
 		--cap-rich-text-heading-leading-trim: var(--cap-rich-text-heading-2-leading-trim);
 	}
 
-	& > h3 {
+	> h3 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-3-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-3-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-3-line-height);
@@ -408,7 +462,7 @@ cap-rich-text {
 		--cap-rich-text-heading-leading-trim: var(--cap-rich-text-heading-3-leading-trim);
 	}
 
-	& > h4 {
+	> h4 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-4-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-4-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-4-line-height);
@@ -416,7 +470,7 @@ cap-rich-text {
 		--cap-rich-text-heading-leading-trim: var(--cap-rich-text-heading-4-leading-trim);
 	}
 
-	& > h5 {
+	> h5 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-5-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-5-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-5-line-height);
@@ -424,7 +478,7 @@ cap-rich-text {
 		--cap-rich-text-heading-leading-trim: var(--cap-rich-text-heading-5-leading-trim);
 	}
 
-	& > h6 {
+	> h6 {
 		--cap-rich-text-heading-font-size: var(--cap-rich-text-heading-6-font-size);
 		--cap-rich-text-heading-font-optical-sizing: var(--cap-rich-text-heading-6-font-optical-sizing);
 		--cap-rich-text-heading-line-height: var(--cap-rich-text-heading-6-line-height);
@@ -436,9 +490,10 @@ cap-rich-text {
 	// Body
 	// ==========================================================================
 
-	& > p,
-	& > ul,
-	& > ol {
+	> p,
+	> ul,
+	> ol,
+	> blockquote > p {
 		--cap-rich-text-block-font-family: var(--cap-rich-text-body-font-family);
 		--cap-rich-text-block-font-feature-settings: var(--cap-rich-text-body-font-feature-settings);
 		--cap-rich-text-block-font-size: var(--cap-rich-text-body-font-size);
@@ -451,10 +506,27 @@ cap-rich-text {
 	}
 
 	// ==========================================================================
+	// Caption
+	// ==========================================================================
+
+	> blockquote > cite,
+	> figure > figcaption {
+		--cap-rich-text-block-font-family: var(--cap-rich-text-caption-font-family);
+		--cap-rich-text-block-font-feature-settings: var(--cap-rich-text-caption-font-feature-settings);
+		--cap-rich-text-block-font-size: var(--cap-rich-text-caption-font-size);
+		--cap-rich-text-block-leading-trim: var(--cap-rich-text-caption-leading-trim);
+		--cap-rich-text-block-letter-spacing: var(--cap-rich-text-caption-letter-spacing);
+		--cap-rich-text-block-line-height: var(--cap-rich-text-caption-line-height);
+		--cap-rich-text-child-font-optical-sizing: var(--cap-rich-text-caption-font-optical-sizing);
+		--cap-rich-text-child-font-weight: var(--cap-rich-text-caption-font-weight);
+		--cap-rich-text-child-hyphens: var(--cap-rich-text-caption-hyphens, auto);
+	}
+
+	// ==========================================================================
 	// Children
 	// ==========================================================================
 
-	& * {
+	* {
 		font-variation-settings: 'wght' var(--cap-rich-text-child-font-weight),
 			'opsz' var(--cap-rich-text-child-font-optical-sizing);
 		font-style: var(--cap-rich-text-child-font-style, normal);
@@ -464,9 +536,10 @@ cap-rich-text {
 		-webkit-hyphens: var(--cap-rich-text-child-hyphens, auto);
 		hyphens: var(--cap-rich-text-child-hyphens, auto);
 		overflow-wrap: var(--cap-rich-text-child-overflow-wrap, normal);
+		margin: var(--cap-rich-text-child-margin, 0);
 	}
 
-	& a {
+	a {
 		--cap-rich-text-child-overflow-wrap: break-word;
 		--cap-rich-text-child-color: var(--cap-rich-text-anchor-color, blue);
 		--cap-rich-text-child-border-bottom: var(--cap-rich-text-anchor-border-bottom-width, 1px) solid
@@ -483,18 +556,47 @@ cap-rich-text {
 		}
 	}
 
-	& strong {
+	strong {
 		--cap-rich-text-child-font-weight: var(
 			--cap-rich-text-strong-font-weight,
 			var(--cap-rich-text-body-font-weight-heavy)
 		);
 	}
 
-	& em {
+	em {
 		--cap-rich-text-child-font-style: italic;
 	}
 
-	& s {
+	s {
 		--cap-rich-text-child-text-decoration: line-through;
+	}
+
+	> blockquote {
+		padding: var(--cap-rich-text-blockquote-padding, 0);
+		display: flex;
+		flex-direction: column;
+		gap: var(--cap-rich-text-blockquote-gap, 1rem);
+		background: var(--cap-rich-text-blockquote-background, transparent);
+		box-shadow: var(--cap-rich-text-blockquote-box-shadow, none);
+	}
+
+	cite {
+		--cap-rich-text-child-color: var(--cap-rich-text-cite-color, inherit);
+	}
+
+	> figure {
+		display: flex;
+		flex-direction: column;
+		gap: var(--cap-rich-text-figure-gap, 1rem);
+	}
+
+	figcaption {
+		--cap-rich-text-child-color: var(--cap-rich-text-figcaption-color, inherit);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		display: block;
 	}
 }
