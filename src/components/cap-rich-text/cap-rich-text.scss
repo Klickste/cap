@@ -348,8 +348,10 @@ cap-rich-text {
 		font-size: var(--cap-rich-text-block-font-size);
 		letter-spacing: var(--cap-rich-text-block-letter-spacing);
 		line-height: calc(var(--cap-rich-text-block-line-height) + var(--cap-rich-text-block-leading, 0px));
-		padding-top: 1px;
-		padding-bottom: 1px;
+		padding-top: calc(1px + var(--cap-rich-text-block-padding-top, 0px));
+		padding-bottom: calc(1px + var(--cap-rich-text-block-padding-bottom, 0px));
+		padding-left: var(--cap-rich-text-block-padding-left, 0px);
+		padding-right: var(--cap-rich-text-block-padding-right, 0px);
 		margin: 0;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
@@ -580,7 +582,11 @@ cap-rich-text {
 		box-shadow: var(--cap-rich-text-blockquote-box-shadow, none);
 	}
 
-	cite {
+	> blockquote > p {
+		--cap-rich-text-child-font-style: var(--cap-rich-text-blockquote-paragraph-font-style, italic);
+	}
+
+	> blockquote > cite {
 		--cap-rich-text-child-color: var(--cap-rich-text-cite-color, inherit);
 	}
 
@@ -590,13 +596,14 @@ cap-rich-text {
 		gap: var(--cap-rich-text-figure-gap, 1rem);
 	}
 
-	figcaption {
+	> figure > figcaption {
 		--cap-rich-text-child-color: var(--cap-rich-text-figcaption-color, inherit);
 	}
 
-	img {
+	> figure > img {
 		max-width: 100%;
 		height: auto;
 		display: block;
+		border-radius: var(--cap-rich-text-image-border-radius, 0);
 	}
 }
