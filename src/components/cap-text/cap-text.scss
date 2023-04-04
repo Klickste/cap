@@ -163,6 +163,13 @@
 	overflow: var(--cap-text-content-overflow, visible);
 }
 
+#inline {
+	border-top: var(--cap-text-inline-border-top, 0);
+	border-bottom: var(--cap-text-inline-border-bottom, 0);
+	border-left: var(--cap-text-inline-border-left, 0);
+	border-right: var(--cap-text-inline-border-right, 0);
+}
+
 // ==========================================================================
 // Slots
 // ==========================================================================

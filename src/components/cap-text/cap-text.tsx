@@ -26,9 +26,11 @@ export class CapText {
 
 		return (
 			<Host>
-				<span id="content" {...contentAttributes}>
-					<slot />
-				</span>
+				<div id="content" {...contentAttributes}>
+					<span id="inline">
+						<slot />
+					</span>
+				</div>
 			</Host>
 		)
 	}
