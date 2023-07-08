@@ -27,12 +27,12 @@
 		"format": "prettier . --write"
 	},
 	"dependencies": {
-		"@stencil/core": "^3.2.0"
+		"@stencil/core": "^4.0.1"
 	},
 	"devDependencies": {
-		"@stencil/sass": "^3.0.0",
+		"@stencil/sass": "^3.0.4",
 		"fontkit": "^2.0.2",
-		"prettier": "^2.8.7"
+		"prettier": "^3.0.0"
 	},
 	"prettier": {
 		"printWidth": 120,

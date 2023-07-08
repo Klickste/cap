@@ -529,7 +529,8 @@ cap-rich-text {
 	// ==========================================================================
 
 	* {
-		font-variation-settings: 'wght' var(--cap-rich-text-child-font-weight),
+		font-variation-settings:
+			'wght' var(--cap-rich-text-child-font-weight),
 			'opsz' var(--cap-rich-text-child-font-optical-sizing);
 		font-style: var(--cap-rich-text-child-font-style, normal);
 		color: var(--cap-rich-text-child-color, inherit);

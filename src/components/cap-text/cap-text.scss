@@ -16,7 +16,9 @@
 	font-feature-settings: var(--cap-text-font-feature-settings);
 	font-kerning: normal;
 	font-size: var(--cap-text-font-size);
-	font-variation-settings: 'wght' var(--cap-text-font-weight), 'opsz' var(--cap-text-font-optical-sizing);
+	font-variation-settings:
+		'wght' var(--cap-text-font-weight),
+		'opsz' var(--cap-text-font-optical-sizing);
 	font-style: var(--cap-text-font-style, normal);
 	letter-spacing: var(--cap-text-letter-spacing);
 	line-height: calc(var(--cap-text-line-height) + var(--cap-text-leading));
