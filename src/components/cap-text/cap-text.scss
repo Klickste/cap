@@ -178,7 +178,11 @@
 
 ::slotted(a) {
 	color: var(--cap-text-anchor-color, blue);
-	text-decoration: var(--cap-text-anchor-text-decoration, underline);
+	text-decoration-line: var(--cap-text-anchor-text-decoration-line, underline);
+	text-decoration-color: var(--cap-text-anchor-text-decoration-color, currentColor);
+	text-decoration-style: var(--cap-text-anchor-text-decoration-style, solid);
+	text-decoration-thickness: var(--cap-text-anchor-text-decoration-thickness, auto);
+	text-underline-offset: var(--cap-text-anchor-text-underline-offset, auto);
 }
 
 ::slotted(strong) {
