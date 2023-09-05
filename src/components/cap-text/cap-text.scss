@@ -139,13 +139,13 @@
 		// ==========================================================================
 
 		#{&}([content-before]) {
-			#content::before {
+			.content::before {
 				content: attr(data-before);
 			}
 		}
 
 		#{&}([content-after]) {
-			#content::after {
+			.content::after {
 				content: attr(data-after);
 			}
 		}
@@ -156,7 +156,7 @@
 // Content
 // ==========================================================================
 
-#content {
+.content {
 	display: block;
 	text-overflow: var(--cap-text-content-text-overflow, clip);
 	white-space: var(--cap-text-content-white-space, normal);
@@ -165,7 +165,7 @@
 	overflow: var(--cap-text-content-overflow, visible);
 }
 
-#inline {
+.inline {
 	border-top: var(--cap-text-inline-border-top, 0);
 	border-bottom: var(--cap-text-inline-border-bottom, 0);
 	border-left: var(--cap-text-inline-border-left, 0);
