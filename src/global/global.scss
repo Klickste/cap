@@ -3,10 +3,10 @@
 // ==========================================================================
 
 @use './../cap' with (
-	$levels-base: 17,
+	$levels-base: 16,
 	$levels-ratio: 1.2,
 	$levels-up: 6,
-	$levels-down: 2,
+	$levels-down: 1,
 	$family-sans: (
 		'font': '"Inter"',
 		'fallback': 'sans-serif',
@@ -98,28 +98,13 @@
 	src: url('./../assets/fonts/FiraCode.var.woff2') format('woff2-variations');
 }
 
+:root {
+	--cap-text-anchor-hover-text-decoration-thickness: 10px;
+	--cap-text-anchor-hover-color: red;
+}
+
 body {
-	&.cap-debug {
-		margin: 0;
-		padding: 48px 24px;
-		display: flex;
-		flex-direction: column;
-		gap: 48px;
-		background: var(--body-cap-debug-background, white);
-		color: var(--body-cap-debug-color, black);
-
-		cap-text {
-			box-shadow:
-				inset 0 1px 0 0 rgb(255 0 0 / 50%),
-				inset 0 -1px 0 0 rgb(255 0 0 / 50%);
-		}
-
-		--cap-rich-text-cite-color: gray;
-		--cap-rich-text-figcaption-color: gray;
-
-		@media (prefers-color-scheme: dark) {
-			--body-cap-debug-background: black;
-			--body-cap-debug-color: white;
-		}
-	}
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }

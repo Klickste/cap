@@ -177,12 +177,23 @@
 // ==========================================================================
 
 ::slotted(a) {
-	color: var(--cap-text-anchor-color, blue);
+	color: var(--cap-text-anchor-color, currentColor);
 	text-decoration-line: var(--cap-text-anchor-text-decoration-line, underline);
 	text-decoration-color: var(--cap-text-anchor-text-decoration-color, currentColor);
 	text-decoration-style: var(--cap-text-anchor-text-decoration-style, solid);
 	text-decoration-thickness: var(--cap-text-anchor-text-decoration-thickness, auto);
 	text-underline-offset: var(--cap-text-anchor-text-underline-offset, auto);
+}
+
+@media (hover: hover) {
+	::slotted(a:hover) {
+		--cap-text-anchor-color: var(--cap-text-anchor-hover-color, currentColor);
+		--cap-text-anchor-text-decoration-line: var(--cap-text-anchor-hover-text-decoration-line, underline);
+		--cap-text-anchor-text-decoration-color: var(--cap-text-anchor-hover-text-decoration-color, currentColor);
+		--cap-text-anchor-text-decoration-style: var(--cap-text-anchor-hover-text-decoration-style, solid);
+		--cap-text-anchor-text-decoration-thickness: var(--cap-text-anchor-hover-text-decoration-thickness, auto);
+		--cap-text-anchor-text-underline-offset: var(--cap-text-anchor-hover-text-underline-offset, auto);
+	}
 }
 
 ::slotted(strong) {
