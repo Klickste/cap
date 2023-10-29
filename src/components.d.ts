@@ -12,6 +12,11 @@ export { CapFamily, CapLeading, CapWeight } from "./types";
 export { CapRichTextLevel } from "./components/cap-rich-text/types";
 export { CapTextLevel } from "./components/cap-text/types";
 export namespace Components {
+    interface CapMediaQuery {
+        "condition": string;
+        "property": string;
+        "value"?: string;
+    }
     interface CapRichText {
         "bodyFamily": CapFamily;
         "bodyWeight": CapWeight;
@@ -36,6 +41,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCapMediaQueryElement extends Components.CapMediaQuery, HTMLStencilElement {
+    }
+    var HTMLCapMediaQueryElement: {
+        prototype: HTMLCapMediaQueryElement;
+        new (): HTMLCapMediaQueryElement;
+    };
     interface HTMLCapRichTextElement extends Components.CapRichText, HTMLStencilElement {
     }
     var HTMLCapRichTextElement: {
@@ -49,11 +60,17 @@ declare global {
         new (): HTMLCapTextElement;
     };
     interface HTMLElementTagNameMap {
+        "cap-media-query": HTMLCapMediaQueryElement;
         "cap-rich-text": HTMLCapRichTextElement;
         "cap-text": HTMLCapTextElement;
     }
 }
 declare namespace LocalJSX {
+    interface CapMediaQuery {
+        "condition": string;
+        "property": string;
+        "value"?: string;
+    }
     interface CapRichText {
         "bodyFamily"?: CapFamily;
         "bodyWeight"?: CapWeight;
@@ -77,6 +94,7 @@ declare namespace LocalJSX {
         "weight"?: CapWeight;
     }
     interface IntrinsicElements {
+        "cap-media-query": CapMediaQuery;
         "cap-rich-text": CapRichText;
         "cap-text": CapText;
     }
@@ -85,6 +103,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cap-media-query": LocalJSX.CapMediaQuery & JSXBase.HTMLAttributes<HTMLCapMediaQueryElement>;
             "cap-rich-text": LocalJSX.CapRichText & JSXBase.HTMLAttributes<HTMLCapRichTextElement>;
             "cap-text": LocalJSX.CapText & JSXBase.HTMLAttributes<HTMLCapTextElement>;
         }

@@ -58,6 +58,8 @@
 	@include cap.leadings;
 }
 
+@include cap.definitions;
+
 @font-face {
 	font-display: swap;
 	font-family: 'Inter';

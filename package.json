@@ -24,11 +24,12 @@
 		"metrics": "node tools/metrics.js",
 		"build": "stencil build --docs",
 		"start": "stencil build --dev --watch --serve",
+		"generate": "stencil generate",
 		"format": "prettier . --write"
 	},
 	"devDependencies": {
-		"@stencil/core": "^4.2.1",
-		"@stencil/sass": "^3.0.5",
+		"@stencil/core": "^4.6.0",
+		"@stencil/sass": "^3.0.7",
 		"fontkit": "^2.0.2",
 		"prettier": "^3.0.3"
 	},

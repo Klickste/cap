@@ -133,3 +133,13 @@ $leadings: (
 		--cap-leading-#{$name}: #{$value};
 	}
 }
+
+@mixin definitions() {
+	cap-text,
+	cap-rich-text,
+	cap-media-query {
+		&:not(:defined) {
+			visibility: hidden;
+		}
+	}
+}
