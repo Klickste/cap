@@ -1,6 +1,6 @@
 {
 	"name": "@klickste/cap",
-	"version": "5.0.9",
+	"version": "6.0.0-beta.1",
 	"description": "Adaptive typography for the web.",
 	"license": "MIT",
 	"author": "klickste",
@@ -8,34 +8,27 @@
 		"type": "git",
 		"url": "https://github.com/klickste/cap.git"
 	},
-	"main": "dist/index.cjs.js",
-	"module": "dist/index.js",
-	"es2015": "dist/esm/index.mjs",
-	"es2017": "dist/esm/index.mjs",
-	"types": "dist/types/components.d.ts",
-	"collection": "dist/collection/collection-manifest.json",
-	"collection:main": "dist/collection/index.js",
-	"unpkg": "dist/cap/cap.esm.js",
 	"files": [
-		"dist/",
-		"loader/"
+		"dist"
 	],
-	"scripts": {
-		"metrics": "node tools/metrics.js",
-		"build": "stencil build --docs",
-		"start": "stencil build --dev --watch --serve",
-		"generate": "stencil generate",
-		"format": "prettier . --write"
+	"module": "./dist/cap.js",
+	"exports": {
+		".": {
+			"import": "./dist/low.js"
+		}
 	},
-	"devDependencies": {
-		"@stencil/core": "^4.6.0",
-		"@stencil/sass": "^3.0.7",
-		"fontkit": "^2.0.2",
-		"prettier": "^3.0.3"
+	"scripts": {
+		"start": "vite --host",
+		"build": "vite build",
+		"format": "prettier . --write"
 	},
 	"prettier": {
 		"printWidth": 120,
 		"semi": false,
 		"singleQuote": true
+	},
+	"devDependencies": {
+		"prettier": "^3.0.3",
+		"vite": "^4.5.0"
 	}
 }
