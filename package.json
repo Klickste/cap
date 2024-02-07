@@ -28,10 +28,10 @@
 		"format": "prettier . --write"
 	},
 	"devDependencies": {
-		"@stencil/core": "^4.6.0",
-		"@stencil/sass": "^3.0.7",
+		"@stencil/core": "^4.12.1",
+		"@stencil/sass": "^3.0.9",
 		"fontkit": "^2.0.2",
-		"prettier": "^3.0.3"
+		"prettier": "^3.2.5"
 	},
 	"prettier": {
 		"printWidth": 120,
