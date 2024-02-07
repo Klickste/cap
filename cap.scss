@@ -1,0 +1,58 @@
+// ==========================================================================
+// Modules
+// ==========================================================================
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$levels-up: 6 !default;
+$levels-down: 2 !default;
+$levels-base: 14 !default;
+$levels-ratio: 1.2 !default;
+
+// ==========================================================================
+// Functions
+// ==========================================================================
+
+@function get-sign($level) {
+	$sign: '';
+
+	@if $level < 0 {
+		$sign: 'minus-';
+	} @else if $level > 0 {
+		$sign: 'plus-';
+	}
+
+	@return $sign;
+}
+
+@function get-font-size($level) {
+	@return math.round($levels-base * math.pow($levels-ratio, $level));
+}
+
+@function get-line-height($font-size) {
+	$ratio: 1.2 + 1.8 * math.pow(math.$e, -0.12 * $font-size);
+
+	@return math.round(math.div($font-size * $ratio, 2)) * 2;
+}
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+@mixin levels() {
+	@for $level from ($levels-down * -1) through $levels-up {
+		$sign: get-sign($level);
+		$font-size: get-font-size($level);
+		$line-height: get-line-height($font-size);
+
+		--cap-font-size-#{$sign + math.abs($level)}: #{$font-size}px;
+		--cap-line-height-#{$sign + math.abs($level)}: #{$line-height}px;
+	}
+}

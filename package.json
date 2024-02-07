@@ -9,26 +9,29 @@
 		"url": "https://github.com/klickste/cap.git"
 	},
 	"files": [
-		"dist"
+		"dist/",
+		"cap.scss"
 	],
-	"module": "./dist/cap.js",
-	"exports": {
-		".": {
-			"import": "./dist/low.js"
-		}
+	"devDependencies": {
+		"concurrently": "^8.2.2",
+		"esbuild": "^0.19.5",
+		"prettier": "^3.0.3",
+		"sass": "^1.70.0"
 	},
 	"scripts": {
-		"start": "vite --host",
-		"build": "vite build",
+		"sass:dev": "sass www/style.scss www/style.css --no-source-map --load-path=./",
+		"sass:prod": "sass www/style.scss www/style.css --style=compressed --no-source-map --load-path=./",
+		"sass:watch": "sass www/style.scss www/style.css --watch --no-source-map --load-path=./",
+		"js:dev": "esbuild cap.js --bundle --outfile=dist/cap.js",
+		"js:prod": "esbuild cap.js --bundle --minify --outfile=dist/cap.js",
+		"js:serve": "esbuild cap.js --bundle --watch --outfile=www/cap.js --servedir=www",
+		"start": "concurrently \"npm run js:serve\" \"npm run js:watch\" \"npm run sass:watch\"",
+		"build": "node tools/build.mjs",
 		"format": "prettier . --write"
 	},
 	"prettier": {
 		"printWidth": 120,
 		"semi": false,
 		"singleQuote": true
-	},
-	"devDependencies": {
-		"prettier": "^3.0.3",
-		"vite": "^4.5.0"
 	}
 }
