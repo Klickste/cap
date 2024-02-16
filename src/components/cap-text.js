@@ -135,6 +135,24 @@ styles.replaceSync(`
 		content: attr(data-after);
 	}
 
+	:host([ellipsis]) {
+		--cap-text-inner-overflow: hidden;
+		--cap-text-inner-text-overflow: ellipsis;
+		--cap-text-inner-white-space: nowrap;
+		--cap-text-inner-width: 100%;
+		--cap-text-inner-min-width: 0;
+	}
+
+	:host([no-wrap]) {
+		--cap-text-inner-white-space: nowrap;
+		--cap-text-inner-width: 100%;
+		--cap-text-inner-min-width: 0;
+	}
+
+	#{&}([italic]) {
+		--cap-text-font-style: italic;
+	}
+
 	.inner {
 		text-overflow: var(--cap-text-inner-text-overflow, clip);
 		white-space: var(--cap-text-inner-white-space, normal);
