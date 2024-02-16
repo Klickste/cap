@@ -1,11 +1,12 @@
-import * as esbuild from 'esbuild'
+import esbuild from 'esbuild'
+import { minifyTemplates, writeFiles } from 'esbuild-minify-templates'
 
 await esbuild.build({
-  entryPoints: ['cap.js'],
-  bundle: true,
-  outfile: 'dist/cap.js',
-  target: 'es2015',
-  format: 'esm',
-  minify: true,
-  minifySyntax: true,
-}).catch(() => process.exit(1));
+	entryPoints: ['src/cap.js'],
+	outfile: 'dist/cap.min.js',
+	plugins: [minifyTemplates(), writeFiles()],
+	bundle: true,
+	sourcemap: false,
+	minify: true,
+	write: false,
+})

@@ -1,6 +1,6 @@
 {
 	"name": "@klickste/cap",
-	"version": "6.0.0-beta.1",
+	"version": "5.0.10",
 	"description": "Adaptive typography for the web.",
 	"license": "MIT",
 	"author": "klickste",
@@ -12,20 +12,10 @@
 		"dist/",
 		"cap.scss"
 	],
-	"devDependencies": {
-		"concurrently": "^8.2.2",
-		"esbuild": "^0.19.5",
-		"prettier": "^3.0.3",
-		"sass": "^1.70.0"
-	},
 	"scripts": {
-		"sass:dev": "sass www/style.scss www/style.css --no-source-map --load-path=./",
-		"sass:prod": "sass www/style.scss www/style.css --style=compressed --no-source-map --load-path=./",
-		"sass:watch": "sass www/style.scss www/style.css --watch --no-source-map --load-path=./",
-		"js:dev": "esbuild cap.js --bundle --outfile=dist/cap.js",
-		"js:prod": "esbuild cap.js --bundle --minify --outfile=dist/cap.js",
-		"js:serve": "esbuild cap.js --bundle --watch --outfile=www/cap.js --servedir=www",
-		"start": "concurrently \"npm run js:serve\" \"npm run js:watch\" \"npm run sass:watch\"",
+		"sass": "sass cap.test.scss www/style.css --watch --no-source-map",
+		"js": "esbuild src/cap.js --bundle --watch --outdir=www --servedir=www",
+		"start": "concurrently \"npm run js\" \"npm run sass\"",
 		"build": "node tools/build.mjs",
 		"format": "prettier . --write"
 	},
@@ -33,5 +23,12 @@
 		"printWidth": 120,
 		"semi": false,
 		"singleQuote": true
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.2",
+		"esbuild": "^0.20.0",
+		"esbuild-minify-templates": "^0.11.0",
+		"prettier": "^3.2.5",
+		"sass": "^1.70.0"
 	}
 }
