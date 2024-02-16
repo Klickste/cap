@@ -1,0 +1,111 @@
+/**
+ * Modules
+ */
+
+@use 'cap' with (
+	$levels-up: 12,
+	$font-families: (
+		(
+			'key': 'sans',
+			'name': 'Inter',
+			'fallback': sans-serif,
+			'features': (
+				'calt',
+				'liga',
+				'ss03',
+				'zero',
+				'cv05',
+				'cv10',
+				'ss01',
+			),
+			'spacing': 1
+		),
+		(
+			'key': 'serif',
+			'name': 'Merriweather',
+			'fallback': serif,
+			'features': (
+				'liga',
+			),
+			'spacing': 1.5
+		),
+	),
+	// $font-families: (
+	// 	'name': 'Inter',
+	// 	'fallback': sans-serif,
+	// 	'upm': 2048,
+	// 	'cap-height': 1490,
+	// 	'features': (
+	// 		'calt',
+	// 		'liga',
+	// 		'ss03',
+	// 		'zero',
+	// 		'cv05',
+	// 		'cv10',
+	// 		'ss01',
+	// 	),
+	// 	'spacing': 1,
+	// )
+);
+
+/**
+ * Fonts
+ */
+
+@font-face {
+	font-display: 'swap';
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('./fonts/Inter.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: 'swap';
+	font-family: 'Inter';
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('./fonts/Inter-Italic.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: 'swap';
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('./fonts/Merriweather.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: 'swap';
+	font-family: 'Merriweather';
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('./fonts/Merriweather-Italic.woff2') format('woff2');
+}
+
+:root {
+	--cap-text-anchor-color: oklch(50% 0.114 240);
+	--cap-text-anchor-color-hover: oklch(60% 0.114 240);
+	--cap-text-anchor-text-decoration-thickness: 0.06em;
+	--cap-text-anchor-text-underline-offset: 0.1em;
+	--cap-text-anchor-text-decoration-line-hover: none;
+
+	@include cap.levels();
+	@include cap.families();
+}
+
+body {
+	margin: 64px;
+	display: flex;
+	flex-direction: column;
+	gap: 72px;
+}
+
+cap-text:not(:defined) {
+	visibility: hidden;
+}

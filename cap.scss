@@ -1,0 +1,121 @@
+/**
+ * Modules
+ */
+
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+/**
+ * Variables
+ */
+
+$levels-up: 6 !default;
+$levels-down: 2 !default;
+$levels-base: 16 !default;
+$levels-ratio: 1.125 !default;
+$font-families: null !default;
+
+/**
+ * Functions
+ */
+
+@function get-font-size($level, $base: $levels-base, $ratio: $levels-ratio) {
+	@return math.round($base * math.pow($ratio, $level));
+}
+
+@function get-line-height($font-size) {
+	$ratio: 1.2 + 2.5 * math.pow(math.$e, -0.12 * $font-size);
+
+	@return math.round(math.div($font-size * $ratio, 2)) * 2;
+}
+
+@function get-sign($number) {
+	$sign: '';
+
+	@if $number < 0 {
+		$sign: 'minus-';
+	} @else if $number > 0 {
+		$sign: 'plus-';
+	}
+
+	@return $sign;
+}
+
+/**
+ * Mixins
+ */
+
+@mixin levels($base: $levels-base, $ratio: $levels-ratio) {
+	@for $level from ($levels-down * -1) through $levels-up {
+		$sign: get-sign($level);
+		$level-declarative: $sign + math.abs($level);
+		$font-size: get-font-size($level, $base, $ratio);
+		$line-height: get-line-height($font-size);
+
+		--cap-font-size-#{$level-declarative}: #{$font-size}px;
+		--cap-line-height-#{$level-declarative}: #{$line-height}px;
+	}
+
+	--cap-leading-trim: calc(((1lh - 1cap) / -2) - 1px);
+}
+
+@mixin families() {
+	@if $font-families {
+		@if meta.type-of($font-families) == 'list' {
+			@each $family in $font-families {
+				$key: map.get($family, 'key');
+				$name: map.get($family, 'name');
+				$fallback: map.get($family, 'fallback');
+				$weights: map.get($family, 'weights');
+				$spacing: map.get($family, 'spacing');
+
+				--cap-font-family-#{$key}: #{'"' + $name + '"', $fallback};
+				--cap-letter-spacing-factor-#{$key}: #{$spacing};
+
+				@if map.has-key($family, 'features') {
+					$features: map.get($family, 'features');
+					$feature-settings: '';
+
+					@for $index from 1 through list.length($features) {
+						$feature: nth($features, $index);
+						$is-last: if($index == list.length($features), true, false);
+						$feature-settings: $feature-settings + '"' + $feature + '"' + ' 1' + if($is-last, '', ',');
+					}
+
+					@each $weight, $value in $weights {
+						--cap-font-weight-#{$weight}-#{$key}: #{$value};
+					}
+
+					--cap-font-feature-settings-#{$key}: #{$feature-settings};
+				}
+			}
+		} @else if meta.type-of($font-families) == 'map' {
+			$name: map.get($font-families, 'name');
+			$fallback: map.get($font-families, 'fallback');
+			$weights: map.get($font-families, 'weights');
+			$spacing: map.get($font-families, 'spacing');
+
+			--cap-font-family: #{'"' + $name + '"', $fallback};
+			--cap-letter-spacing-factor: #{$spacing};
+
+			@if map.has-key($font-families, 'features') {
+				$features: map.get($font-families, 'features');
+				$feature-settings: '';
+
+				@for $index from 1 through list.length($features) {
+					$feature: nth($features, $index);
+					$is-last: if($index == list.length($features), true, false);
+					$feature-settings: $feature-settings + '"' + $feature + '"' + ' 1' + if($is-last, '', ',');
+				}
+
+				@each $weight, $value in $weights {
+					--cap-font-weight-#{$weight}: #{$value};
+				}
+
+				--cap-font-feature-settings: #{$feature-settings};
+			}
+		}
+	}
+}
