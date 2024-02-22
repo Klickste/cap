@@ -5,12 +5,25 @@ styles.replaceSync(`
 	:host {
 		display: block;
 		font-family: var(--cap-text-font-family, var(--cap-font-family, var(--cap-font-family-sans)));
-		font-feature-settings: var(--cap-text-font-feature-settings, var(--cap-font-feature-settings, var(--cap-font-feature-settings-sans)));
+		font-feature-settings: var(
+			--cap-text-font-feature-settings,
+			var(--cap-font-feature-settings, var(--cap-font-feature-settings-sans))
+		);
 		font-optical-sizing: auto;
 		font-size: var(--cap-text-font-size, var(--cap-font-size-0));
 		font-style: var(--cap-text-font-style, normal);
 		font-weight: var(--cap-text-font-weight, 400);
-		letter-spacing: calc(((12px * var(--cap-text-letter-spacing-factor, var(--cap-letter-spacing-factor, var(--cap-letter-spacing-factor-sans)))) - 1em) * 0.03);
+		letter-spacing: calc(
+			(
+					(
+							12px *
+								var(
+									--cap-text-letter-spacing-factor,
+									var(--cap-letter-spacing-factor, var(--cap-letter-spacing-factor-sans))
+								)
+						) - 1em
+				) * 0.03
+		);
 		line-height: var(--cap-text-line-height, var(--cap-line-height-0));
 		padding-bottom: 1px;
 		padding-top: 1px;
@@ -114,7 +127,7 @@ styles.replaceSync(`
 
 	:host::before,
 	:host::after {
-		content: '';
+		content: "";
 		display: block;
 		height: 0;
 	}
@@ -136,29 +149,57 @@ styles.replaceSync(`
 	}
 
 	:host([ellipsis]) {
-		--cap-text-inner-overflow: hidden;
-		--cap-text-inner-text-overflow: ellipsis;
-		--cap-text-inner-white-space: nowrap;
-		--cap-text-inner-width: 100%;
-		--cap-text-inner-min-width: 0;
+		--cap-text-content-overflow: hidden;
+		--cap-text-content-text-overflow: ellipsis;
+		--cap-text-content-white-space: nowrap;
+		--cap-text-content-width: 100%;
+		--cap-text-content-min-width: 0;
 	}
 
 	:host([no-wrap]) {
-		--cap-text-inner-white-space: nowrap;
-		--cap-text-inner-width: 100%;
-		--cap-text-inner-min-width: 0;
+		--cap-text-content-white-space: nowrap;
+		--cap-text-content-width: 100%;
+		--cap-text-content-min-width: 0;
 	}
 
-	#{&}([italic]) {
+	:host([italic]) {
 		--cap-text-font-style: italic;
 	}
 
+	:host(:has([slot="leading"])),
+	:host(:has([slot="trailing"])) {
+		--cap-text-inner-grid-template-rows: 1lh 1fr;
+		--cap-text-content-grid-row: span 2;
+	}
+
+	:host(:has([slot="leading"])) {
+		--cap-text-inner-grid-template-columns: auto 1fr;
+	}
+
+	:host(:has([slot="trailing"])) {
+		--cap-text-inner-grid-template-columns: 1fr auto;
+	}
+
+	:host(:has([slot="leading"]):has([slot="trailing"])) {
+		--cap-text-inner-grid-template-columns: auto 1fr auto;
+	}
+
 	.inner {
-		text-overflow: var(--cap-text-inner-text-overflow, clip);
-		white-space: var(--cap-text-inner-white-space, normal);
-		width: var(--cap-text-inner-width, auto);
-		min-width: var(--cap-text-inner-min-width, auto);
-		overflow: var(--cap-text-inner-overflow, visible);
+		display: grid;
+		grid-template-rows: var(--cap-text-inner-grid-template-rows, auto);
+		grid-template-columns: var(--cap-text-inner-grid-template-columns, auto);
+		column-gap: var(--cap-text-inner-column-gap, 0px);
+		align-items: var(--cap-text-inner-align-items, center);
+	}
+
+	.content {
+		display: block;
+		text-overflow: var(--cap-text-content-text-overflow, clip);
+		white-space: var(--cap-text-content-white-space, normal);
+		width: var(--cap-text-content-width, auto);
+		min-width: var(--cap-text-content-min-width, auto);
+		overflow: var(--cap-text-content-overflow, visible);
+		grid-row: var(--cap-text-content-grid-row, auto);
 	}
 
 	::slotted(a) {
@@ -188,7 +229,9 @@ styles.replaceSync(`
 
 template.innerHTML = `
 	<div class="inner">
-		<slot>Text</slot>
+		<slot name="leading"></slot>
+		<div class="content"><slot>Text</slot></div>
+		<slot name="trailing"></slot>
 	</div>`
 
 class CapText extends HTMLElement {

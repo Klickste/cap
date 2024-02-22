@@ -4,6 +4,7 @@
 
 @use 'cap' with (
 	$levels-up: 12,
+	$levels-base: 12,
 	$font-families: (
 		(
 			'key': 'sans',
@@ -94,6 +95,8 @@
 	--cap-text-anchor-text-decoration-thickness: 0.06em;
 	--cap-text-anchor-text-underline-offset: 0.1em;
 	--cap-text-anchor-text-decoration-line-hover: none;
+	--cap-text-inner-column-gap: 0.5em;
+	--cap-text-strong-font-weight: 900;
 
 	@include cap.levels();
 	@include cap.families();
@@ -103,9 +106,16 @@ body {
 	margin: 64px;
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	gap: 72px;
 }
 
 cap-text:not(:defined) {
 	visibility: hidden;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	background: oklch(50% 0.114 240);
 }
