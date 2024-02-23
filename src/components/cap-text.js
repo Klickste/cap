@@ -140,11 +140,11 @@ styles.replaceSync(`
 		margin-bottom: var(--cap-leading-trim);
 	}
 
-	:host([content-before]) .inner::before {
+	:host([content-before]) .content::before {
 		content: attr(data-before);
 	}
 
-	:host([content-after]) .inner::after {
+	:host([content-after]) .content::after {
 		content: attr(data-after);
 	}
 
@@ -243,14 +243,14 @@ class CapText extends HTMLElement {
 	connectedCallback() {
 		this.shadowRoot.appendChild(template.content.cloneNode(true))
 
-		const inner = this.shadowRoot.querySelector('.inner')
+		const content = this.shadowRoot.querySelector('.content')
 
 		if (this.hasAttribute('content-before')) {
-			inner.setAttribute('data-before', this.getAttribute('content-before'))
+			content.setAttribute('data-before', this.getAttribute('content-before'))
 		}
 
 		if (this.hasAttribute('content-after')) {
-			inner.setAttribute('data-after', this.getAttribute('content-after'))
+			content.setAttribute('data-after', this.getAttribute('content-after'))
 		}
 	}
 }
