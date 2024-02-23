@@ -166,21 +166,21 @@ styles.replaceSync(`
 		--cap-text-font-style: italic;
 	}
 
-	:host(:has([slot="leading"])),
-	:host(:has([slot="trailing"])) {
+	:host([has-leading]),
+	:host([has-trailing]) {
 		--cap-text-inner-grid-template-rows: 1lh 1fr;
 		--cap-text-content-grid-row: span 2;
 	}
 
-	:host(:has([slot="leading"])) {
+	:host([has-leading]) {
 		--cap-text-inner-grid-template-columns: auto 1fr;
 	}
 
-	:host(:has([slot="trailing"])) {
+	:host([has-trailing]) {
 		--cap-text-inner-grid-template-columns: 1fr auto;
 	}
 
-	:host(:has([slot="leading"]):has([slot="trailing"])) {
+	:host([has-leading][has-trailing]) {
 		--cap-text-inner-grid-template-columns: auto 1fr auto;
 	}
 
