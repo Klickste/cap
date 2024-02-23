@@ -4,7 +4,7 @@
 
 @use 'cap' with (
 	$levels-up: 12,
-	$levels-base: 12,
+	$levels-base: 16,
 	$font-families: (
 		(
 			'key': 'sans',
@@ -98,6 +98,8 @@
 	--cap-text-inner-column-gap: 0.5em;
 	--cap-text-strong-font-weight: 900;
 
+	--cap-rich-text-row-gap: 32px;
+
 	@include cap.levels();
 	@include cap.families();
 }
@@ -118,4 +120,8 @@ cap-text:not(:defined) {
 	width: 24px;
 	height: 24px;
 	background: oklch(50% 0.114 240);
+}
+
+cap-rich-text a {
+	color: red;
 }

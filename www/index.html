@@ -6,10 +6,36 @@
 		<meta name="description" content="cap test site." />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<script src="cap.js"></script>
 		<title>cap</title>
 	</head>
 	<body>
+		<!-- Text -->
+		<cap-rich-text>
+			<h1>The quick brown fox jumps over the lazy dog.</h1>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+			<ul>
+				<li>Laudantium sint dolorem sequi inventore aut perferendis</li>
+				<li>Laudantium sint <a href="#">dolorem sequi inventore</a> aut perferendis</li>
+				<li>Laudantium sint dolorem sequi inventore aut perferendis</li>
+			</ul>
+			<ol>
+				<li>Laudantium sint dolorem sequi inventore aut perferendis</li>
+				<li>Laudantium sint dolorem sequi inventore aut perferendis</li>
+				<li>Laudantium sint dolorem sequi inventore aut perferendis</li>
+			</ol>
+			<small>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</small>
+			<h2>The quick brown fox jumps over the lazy dog.</h2>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+			<h3>The quick brown fox jumps over the lazy dog.</h3>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+			<h4>The quick brown fox jumps over the lazy dog.</h4>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+			<h5>The quick brown fox jumps over the lazy dog.</h5>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+			<h6>The quick brown fox jumps over the lazy dog.</h6>
+			<p>Laudantium sint dolorem sequi inventore aut perferendis. Porro alias modi dolores quisquam qui. Eum et et voluptatibus. Vero voluptates amet itaque explicabo rerum. Perspiciatis ducimus et quia eligendi ex est doloremque tenetur.</p>
+		</cap-rich-text>
+		<!-- Text -->
 		<cap-text level="-2" family="sans"><div class="icon" slot="leading"></div>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.</cap-text>
 		<cap-text level="-2" family="sans">The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
 		<cap-text level="-2" family="sans"><div class="icon" slot="leading"></div>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
@@ -130,5 +156,6 @@
 		<cap-text level="+12" family="serif">The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
 		<cap-text level="+12" family="serif"><div class="icon" slot="leading"></div>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
 		<cap-text level="+12" family="serif">The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.</cap-text>
+		<script src="cap.js" defer></script>
 	</body>
 </html>
