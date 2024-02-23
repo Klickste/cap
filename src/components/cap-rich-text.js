@@ -3,9 +3,9 @@ const styles = new CSSStyleSheet()
 
 styles.replaceSync(`
 	:host {
-		display: grid;
-		grid-template-columns: 1fr;
-		row-gap: var(--cap-rich-text-row-gap, 0px);
+		display: flex;
+		flex-direction: column;
+		gap: var(--cap-rich-text-gap, 0px);
 		font-family: var(--cap-rich-text-font-family, var(--cap-font-family, var(--cap-font-family-sans)));
 		font-feature-settings: var(
 			--cap-rich-text-font-feature-settings,

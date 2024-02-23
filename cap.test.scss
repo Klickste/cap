@@ -98,7 +98,7 @@
 	--cap-text-inner-column-gap: 0.5em;
 	--cap-text-strong-font-weight: 900;
 
-	--cap-rich-text-row-gap: 32px;
+	--cap-rich-text-gap: 32px;
 
 	@include cap.levels();
 	@include cap.families();
