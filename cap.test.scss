@@ -108,7 +108,7 @@ body {
 	margin: 64px;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	// align-items: flex-start;
 	gap: 72px;
 }
 
@@ -124,4 +124,8 @@ cap-text:not(:defined) {
 
 cap-rich-text a {
 	color: red;
+}
+
+cap-text {
+	background: rgba(0, 0, 0, 0.1);
 }

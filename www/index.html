@@ -9,6 +9,12 @@
 		<title>cap</title>
 	</head>
 	<body>
+		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px">
+			<cap-text no-wrap>Laudantium sint dolorem sequi</cap-text>
+			<cap-text no-wrap>Laudantium sint dolorem sequi</cap-text>
+			<cap-text no-wrap>Laudantium sint dolorem sequi</cap-text>
+			<cap-text no-wrap>Laudantium sint dolorem sequi</cap-text>
+		</div>
 		<!-- Text -->
 		<cap-rich-text>
 			<h1>The quick brown fox jumps over the lazy dog.</h1>
@@ -156,7 +162,7 @@
 		<cap-text has-leading level="+12" family="serif"><div class="icon" slot="leading"></div>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.</cap-text>
 		<cap-text has-trailing level="+12" family="serif">The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
 		<cap-text has-leading has-trailing level="+12" family="serif"><div class="icon" slot="leading"></div>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.<div class="icon" slot="trailing"></div></cap-text>
-		<cap-text level="+12" family="serif">The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.</cap-text>
+		<cap-text level="+12" family="serif" ellipsis>The quick brown <a href="#">fox jumps over</a> the <strong>lazy</strong> dog.</cap-text>
 		<script src="cap.js" defer></script>
 	</body>
 </html>

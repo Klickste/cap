@@ -152,14 +152,14 @@ styles.replaceSync(`
 		--cap-text-content-overflow: hidden;
 		--cap-text-content-text-overflow: ellipsis;
 		--cap-text-content-white-space: nowrap;
-		--cap-text-content-width: 100%;
-		--cap-text-content-min-width: 0;
+		--cap-text-inner-width: 100%;
+		--cap-text-inner-min-width: 0;
 	}
 
 	:host([no-wrap]) {
 		--cap-text-content-white-space: nowrap;
-		--cap-text-content-width: 100%;
-		--cap-text-content-min-width: 0;
+		--cap-text-inner-width: 100%;
+		--cap-text-inner-min-width: 0;
 	}
 
 	:host([italic]) {
@@ -190,16 +190,16 @@ styles.replaceSync(`
 		grid-template-columns: var(--cap-text-inner-grid-template-columns, auto);
 		column-gap: var(--cap-text-inner-column-gap, 0px);
 		align-items: var(--cap-text-inner-align-items, center);
+		width: var(--cap-text-inner-width, auto);
+		min-width: var(--cap-text-inner-min-width, auto);
 	}
 
 	.content {
 		display: block;
 		text-overflow: var(--cap-text-content-text-overflow, clip);
 		white-space: var(--cap-text-content-white-space, normal);
-		width: var(--cap-text-content-width, auto);
-		min-width: var(--cap-text-content-min-width, auto);
-		overflow: var(--cap-text-content-overflow, visible);
 		grid-row: var(--cap-text-content-grid-row, auto);
+		overflow: var(--cap-text-content-overflow, visible);
 	}
 
 	::slotted(a) {
