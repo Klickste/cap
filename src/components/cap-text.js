@@ -166,6 +166,10 @@ styles.replaceSync(`
 		--cap-text-font-style: italic;
 	}
 
+	:host([hyphens]) {
+		--cap-text-content-hyphens: auto;
+	}
+
 	:host([has-leading]),
 	:host([has-trailing]) {
 		--cap-text-inner-grid-template-rows: 1lh 1fr;
@@ -200,6 +204,7 @@ styles.replaceSync(`
 		white-space: var(--cap-text-content-white-space, normal);
 		grid-row: var(--cap-text-content-grid-row, auto);
 		overflow: var(--cap-text-content-overflow, visible);
+		hyphens: var(--cap-text-content-hyphens, manual);
 	}
 
 	::slotted(a) {
