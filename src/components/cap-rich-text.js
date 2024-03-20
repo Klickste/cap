@@ -122,9 +122,7 @@ styles.replaceSync(`
 		font-size: var(--cap-font-size-minus-1);
 		line-height: var(--cap-line-height-minus-1);
 		font-weight: var(--cap-rich-text-small-font-weight, 400);
-	}
-
-	`)
+	}`)
 
 template.innerHTML = `
 	<slot>Rich Text</slot>`

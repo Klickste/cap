@@ -91,6 +91,7 @@
 
 :root {
 	--cap-text-anchor-color: oklch(50% 0.114 240);
+	--cap-text-anchor-font-weight: 900;
 	--cap-text-anchor-color-hover: oklch(60% 0.114 240);
 	--cap-text-anchor-text-decoration-thickness: 0.06em;
 	--cap-text-anchor-text-underline-offset: 0.1em;
@@ -124,6 +125,7 @@ cap-text:not(:defined) {
 
 cap-rich-text a {
 	color: red;
+	font-weight: 800;
 }
 
 cap-text {

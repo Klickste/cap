@@ -207,8 +207,14 @@ styles.replaceSync(`
 		hyphens: var(--cap-text-content-hyphens, manual);
 	}
 
+	::slotted(strong) {
+		font-weight: var(--cap-text-strong-font-weight, 700);
+		color: var(--cap-text-strong-color, inherit);
+	}
+
 	::slotted(a) {
 		color: var(--cap-text-anchor-color, currentColor);
+		font-weight: var(--cap-text-anchor-font-weight, inherit);
 		text-decoration-line: var(--cap-text-anchor-text-decoration-line, underline);
 		text-decoration-color: var(--cap-text-anchor-text-decoration-color, currentColor);
 		text-decoration-style: var(--cap-text-anchor-text-decoration-style, solid);
@@ -225,11 +231,6 @@ styles.replaceSync(`
 			--cap-text-anchor-text-decoration-thickness: var(--cap-text-anchor-text-decoration-thickness-hover, auto);
 			--cap-text-anchor-text-underline-offset: var(--cap-text-anchor-text-underline-offset-hover, auto);
 		}
-	}
-
-	::slotted(strong) {
-		font-weight: var(--cap-text-strong-font-weight, 700);
-		color: var(--cap-text-strong-color, inherit);
 	}`)
 
 template.innerHTML = `
